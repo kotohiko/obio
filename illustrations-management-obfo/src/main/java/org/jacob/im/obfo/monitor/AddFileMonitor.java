@@ -91,7 +91,8 @@ public class AddFileMonitor {
             bw.write(date + " INFO [Client] - " + "New files added: " + fileWithAbsPath.getFileName()
                     + "; Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
-            System.out.println("找不到日志文件，请检查文件名或路径是否配置正确。");
+            System.out.println("The log file cannot be found. Please check if the file name "
+                    + "or path is configured correctly.");
         }
     }
 

@@ -34,8 +34,8 @@ public final class IFPEntranceController {
             while ((fileName = in.readLine()) != null) {
                 String retUrl = FilenameSwitcher.parseFileName(fileName);
                 if (retUrl.isBlank()) {
-                    System.out.println("The return URL value is blank, please verify that there are no errors or" +
-                            " illegal characters in the input contents.");
+                    System.out.println("The return URL value is blank, please verify that there are no errors or "
+                            + "illegal characters in the input contents.");
                     endLinePrintAndReboot();
                 } else {
                     openUriByBrowser(retUrl);
@@ -53,15 +53,15 @@ public final class IFPEntranceController {
      * 支持解析以后直接通过浏览器来打开
      */
     private static void openUriByBrowser(String out) {
-        System.out.println("Parsed successfully! The returned URL is: " + out + ". Your default browser will open" +
-                " this URL automatically.");
+        System.out.println("Parsed successfully! The returned URL is: " + out + ". Your default browser will open"
+                + " this URL automatically.");
         Desktop desktop = Desktop.getDesktop();
         try {
             URI uri = new URI(out);
             desktop.browse(uri);
         } catch (URISyntaxException | IOException e) {
-            System.out.println("An error occurred in the URL syntax, or the URL is null. Please verify that " +
-                    "there are no errors or illegal characters in the input contents.");
+            System.out.println("An error occurred in the URL syntax, or the URL is null. Please verify that "
+                    + "there are no errors or illegal characters in the input contents.");
         }
         endLinePrintAndReboot();
     }

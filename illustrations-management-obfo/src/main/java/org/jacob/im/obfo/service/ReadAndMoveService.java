@@ -35,8 +35,8 @@ public class ReadAndMoveService {
                 Map<String, String> pathsData = yaml.load(loadYamlFile());
                 String defaultSourcePath = pathsData.get("Default source path");
                 if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
-                    System.out.println("Failed to get the source path. Please check if the source path mapping" +
-                            " in the YAML file matches the actual local path.");
+                    System.out.println("Failed to get the source path. Please check if the source path mapping "
+                            + "in the YAML file matches the actual local path.");
                 } else {
                     filesMoving(defaultSourcePath, pathsData, targetPathKey);
                 }
@@ -57,8 +57,8 @@ public class ReadAndMoveService {
         try {
             ymlFileStream = new FileInputStream(OBFOConstants.ILLUSTRATIONS_CONF_YML_PATH);
         } catch (FileNotFoundException e) {
-            System.out.println("The Yaml file does not exist. Please check if the arguments" +
-                    " passed to the FileInputStream object constructor match the actual path.");
+            System.out.println("The Yaml file does not exist. Please check if the arguments"
+                    + " passed to the FileInputStream object constructor match the actual path.");
             endLinePrintAndReboot();
         }
         return ymlFileStream;
@@ -125,10 +125,11 @@ public class ReadAndMoveService {
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_LOG_PATH, true))) {
             String date = LocalDate.now().toString();
-            bw.write(date + " INFO [Client] - File(s) has/have been moved;" +
-                    " Remaining unclassified images: " + fileCount + "\n");
+            bw.write(date + " INFO [Client] - File(s) has/have been moved; "
+                    + "Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
-            System.out.println("找不到日志文件，请检查文件名或路径是否配置正确。");
+            System.out.println("The log file cannot be found. Please check if the file name "
+                    + "or path is configured correctly.");
         }
     }
 
