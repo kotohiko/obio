@@ -1,6 +1,6 @@
-package org.jacob.im.ifp.entrance;
+package org.jacob.im.ifp.controller;
 
-import org.jacob.im.common.IMCommonEntrance;
+import org.jacob.im.common.IMCommonConsoleInputReader;
 import org.jacob.im.ifp.constants.IFPConstants;
 import org.jacob.im.ifp.service.FilenameSwitcher;
 
@@ -28,7 +28,7 @@ public final class IFPEntranceController {
      * 交互逻辑
      */
     public static void getFilename() {
-        try (BufferedReader in = IMCommonEntrance.imCommonEntrance()) {
+        try (BufferedReader in = IMCommonConsoleInputReader.consoleReader()) {
             String fileName;
             System.out.print("Please enter your filename: ");
             while ((fileName = in.readLine()) != null) {
@@ -67,7 +67,7 @@ public final class IFPEntranceController {
     }
 
     private static void endLinePrintAndReboot() {
-        System.out.println(IFPConstants.END_LINE);
+        System.out.println(IFPConstants.DIVIDING_LINE);
         getFilename();
     }
 }

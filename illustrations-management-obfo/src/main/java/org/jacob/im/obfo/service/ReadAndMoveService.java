@@ -1,6 +1,6 @@
 package org.jacob.im.obfo.service;
 
-import org.jacob.im.common.IMCommonEntrance;
+import org.jacob.im.common.IMCommonConsoleInputReader;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.yaml.snakeyaml.Yaml;
 
@@ -23,7 +23,7 @@ public class ReadAndMoveService {
      */
     public static void serviceMainPart() {
         System.out.println(OBFOConstants.WELCOME_LINE);
-        try (BufferedReader in = IMCommonEntrance.imCommonEntrance()) {
+        try (BufferedReader in = IMCommonConsoleInputReader.consoleReader()) {
             String targetPathKey;
             Yaml yaml = new Yaml();
             while (true) {
@@ -106,7 +106,7 @@ public class ReadAndMoveService {
         } else {
             movingTheFiles(sourcePath, targetPathStr);
         }
-        System.out.println(OBFOConstants.END_LINE);
+        System.out.println(OBFOConstants.DIVIDING_LINE);
     }
 
     /**
@@ -134,7 +134,7 @@ public class ReadAndMoveService {
     }
 
     private static void endLinePrintAndReboot() {
-        System.out.println(OBFOConstants.END_LINE);
+        System.out.println(OBFOConstants.DIVIDING_LINE);
         serviceMainPart();
     }
 }

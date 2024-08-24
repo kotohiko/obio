@@ -13,7 +13,7 @@ public class IFPConstants {
      * 8 位 PID 正则
      */
     public static final String PIXIV_PATTERN_2 = "^\\d{8}_p\\d{1,2}$";
-    public static final String END_LINE =
+    public static final String DIVIDING_LINE =
             "------------------------------------------------------------------------------------END LINE" +
                     "------------------------------------------------------------------------------------";
 

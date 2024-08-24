@@ -16,7 +16,7 @@ public class OBFOConstants {
             = "illustrations-management-obfo/src/main/resources/mmd-paths-conf.yaml";
     public static final String WELCOME_LINE = "****************************************************" +
             "   Welcome to One-Button Files Organizer   ****************************************************";
-    public static final String END_LINE = "---------------------------------------------------" +
+    public static final String DIVIDING_LINE = "---------------------------------------------------" +
             "END LINE---------------------------------------------------";
 
     private OBFOConstants() {
