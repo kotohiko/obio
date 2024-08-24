@@ -17,24 +17,24 @@
     </modules>
 
     <properties>
-
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- 版本统一管理 -->
         <snakeyaml.version>2.2</snakeyaml.version>
-        <spring-tx.version>6.1.12</spring-tx.version>
-
+        <jython-standalone.version>2.7.4</jython-standalone.version>
     </properties>
 
     <dependencies>
+
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeyaml.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>

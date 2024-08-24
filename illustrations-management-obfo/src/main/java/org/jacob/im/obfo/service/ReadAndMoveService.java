@@ -72,6 +72,7 @@ public class ReadAndMoveService {
      */
     private static void movingTheFiles(Path sourcePath, String targetPathStr) {
         Path targetPath = Paths.get(targetPathStr);
+        boolean hasFiles = false;
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
             for (Path filePath : directoryStream) {
                 // 忽略目录，只处理文件
@@ -82,7 +83,12 @@ public class ReadAndMoveService {
                     Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
                     System.out.println("File has been moved: " + filePath + " -> " + targetFilePath);
                     logWriter();
+                    hasFiles = true; // 标记找到文件
                 }
+            }
+            // 遍历完成后检查是否找到文件
+            if (!hasFiles) {
+                System.out.println("No files found in the source directory: " + sourcePath);
             }
         } catch (IOException e) {
             System.out.println("Failed to move files. Please verify that the target path is valid.");
@@ -106,7 +112,7 @@ public class ReadAndMoveService {
         } else {
             movingTheFiles(sourcePath, targetPathStr);
         }
-        System.out.println(OBFOConstants.DIVIDING_LINE);
+        System.out.println(OBFOConstants.SEPARATOR_LINE);
     }
 
     /**
@@ -134,7 +140,7 @@ public class ReadAndMoveService {
     }
 
     private static void endLinePrintAndReboot() {
-        System.out.println(OBFOConstants.DIVIDING_LINE);
+        System.out.println(OBFOConstants.SEPARATOR_LINE);
         serviceMainPart();
     }
 }

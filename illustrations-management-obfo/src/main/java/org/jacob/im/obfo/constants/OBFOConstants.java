@@ -10,14 +10,17 @@ public class OBFOConstants {
             = "illustrations-management-obfo/src/main/resources/illustrations-paths-conf.yaml";
     public static final String UNCLASSIFIED_REMAINING_IMAGES_LOG_PATH
             = "illustrations-management-obfo/src/main/resources/unclassified-remaining-images.log";
+    public static final String MY_GALLERY_PATH = "S:\\Gallery";
     public static final String UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH
             = "S:\\Gallery\\#####未分类缓冲池";
+    public static final String PATH_COLLECTION_TXT
+            = "illustrations-management-obfo/src/main/resources/path-collection.txt";
     public static final String MMD_CONF_YML_PATH
             = "illustrations-management-obfo/src/main/resources/mmd-paths-conf.yaml";
     public static final String WELCOME_LINE = "****************************************************" +
             "   Welcome to One-Button Files Organizer   ****************************************************";
-    public static final String DIVIDING_LINE = "---------------------------------------------------" +
-            "END LINE---------------------------------------------------";
+    public static final String SEPARATOR_LINE = "---------------------------------------------------" +
+            "SEPARATOR LINE---------------------------------------------------";
 
     private OBFOConstants() {
     }

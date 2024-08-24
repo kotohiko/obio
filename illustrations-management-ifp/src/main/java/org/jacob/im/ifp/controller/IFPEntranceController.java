@@ -67,7 +67,7 @@ public final class IFPEntranceController {
     }
 
     private static void endLinePrintAndReboot() {
-        System.out.println(IFPConstants.DIVIDING_LINE);
+        System.out.println(IFPConstants.SEPARATOR_LINE);
         getFilename();
     }
 }
