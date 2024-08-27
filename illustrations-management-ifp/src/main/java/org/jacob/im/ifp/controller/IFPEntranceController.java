@@ -1,7 +1,7 @@
 package org.jacob.im.ifp.controller;
 
 import org.jacob.im.common.IMCommonConsoleInputReader;
-import org.jacob.im.ifp.constants.IFPConstants;
+import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.ifp.service.FilenameSwitcher;
 
 import java.awt.*;
@@ -67,7 +67,7 @@ public final class IFPEntranceController {
     }
 
     private static void endLinePrintAndReboot() {
-        System.out.println(IFPConstants.SEPARATOR_LINE);
+        System.out.println(IMCommonConstants.SEPARATOR_LINE);
         getFilename();
     }
 }

@@ -20,13 +20,13 @@ import java.util.concurrent.TimeUnit;
  * @author Jacob Suen
  * @since 16:29 Aug 18, 2024
  */
-public class AddFileMonitor {
+public class AddingFileOperMonitor {
 
     private final WatchService watcher;
     private final Path dir;
     private final ExecutorService executor;
 
-    public AddFileMonitor(Path dir, int numberOfThreads) {
+    public AddingFileOperMonitor(Path dir, int numberOfThreads) {
         try {
             this.watcher = FileSystems.getDefault().newWatchService();
             this.dir = dir;

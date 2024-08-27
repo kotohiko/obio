@@ -1,7 +1,7 @@
 package org.jacob.im.obfo;
 
 import org.jacob.im.obfo.constants.OBFOConstants;
-import org.jacob.im.obfo.monitor.AddFileMonitor;
+import org.jacob.im.obfo.monitor.AddingFileOperMonitor;
 import org.jacob.im.obfo.service.ReadAndMoveService;
 
 import java.nio.file.Paths;
@@ -12,7 +12,9 @@ import java.nio.file.Paths;
  */
 public final class OneButtonApplication {
     public static void main(String[] args) {
-        new AddFileMonitor(Paths.get(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH), 5);
+        AddingFileOperMonitor addFileMonitor = new AddingFileOperMonitor(Paths
+                .get(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH), 5);
+        System.out.println("[Monitor service] " + addFileMonitor + " has started");
         ReadAndMoveService.serviceMainPart();
     }
 }

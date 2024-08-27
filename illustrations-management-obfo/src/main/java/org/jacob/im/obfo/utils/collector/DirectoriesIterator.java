@@ -1,4 +1,4 @@
-package org.jacob.im.obfo.collector;
+package org.jacob.im.obfo.utils.collector;
 
 import org.jacob.im.obfo.constants.OBFOConstants;
 

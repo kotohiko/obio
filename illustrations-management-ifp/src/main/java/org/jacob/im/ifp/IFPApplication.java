@@ -10,9 +10,8 @@ import org.jacob.im.ifp.controller.IFPEntranceController;
  */
 public final class IFPApplication {
     public static void main(String[] args) {
-        System.out.println("************************************************************************************" +
-                "   Welcome to Illustrations Filename Parser   *************************************************" +
-                "***********************************");
+        System.out.println("*************************************************   Welcome to Illustrations Filename Parser"
+                + "   *************************************************");
         IFPEntranceController.getFilename();
     }
 }

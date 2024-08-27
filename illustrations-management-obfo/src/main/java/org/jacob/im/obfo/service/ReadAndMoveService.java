@@ -1,6 +1,7 @@
 package org.jacob.im.obfo.service;
 
 import org.jacob.im.common.IMCommonConsoleInputReader;
+import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.yaml.snakeyaml.Yaml;
 
@@ -112,7 +113,7 @@ public class ReadAndMoveService {
         } else {
             movingTheFiles(sourcePath, targetPathStr);
         }
-        System.out.println(OBFOConstants.SEPARATOR_LINE);
+        System.out.println(IMCommonConstants.SEPARATOR_LINE);
     }
 
     /**
@@ -140,7 +141,7 @@ public class ReadAndMoveService {
     }
 
     private static void endLinePrintAndReboot() {
-        System.out.println(OBFOConstants.SEPARATOR_LINE);
+        System.out.println(IMCommonConstants.SEPARATOR_LINE);
         serviceMainPart();
     }
 }
