@@ -1,4 +1,4 @@
-package org.jacob.im.obfo.utils.collector;
+package org.jacob.im.obfo.starter;
 
 import java.io.File;
 
