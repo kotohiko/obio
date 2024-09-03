@@ -76,7 +76,7 @@ public class ReadAndMoveService {
         boolean hasFiles = false;
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
             for (Path filePath : directoryStream) {
-                // 忽略目录，只处理文件
+                // Ignore directories and process only files.
                 if (Files.isRegularFile(filePath)) {
                     // 构建目标路径
                     Path targetFilePath = targetPath.resolve(filePath.getFileName());
@@ -84,7 +84,8 @@ public class ReadAndMoveService {
                     Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
                     System.out.println("File has been moved: " + filePath + " -> " + targetFilePath);
                     logWriter();
-                    hasFiles = true; // 标记找到文件
+                    // Signal that the files have been found
+                    hasFiles = true;
                 }
             }
             // 遍历完成后检查是否找到文件
@@ -97,7 +98,7 @@ public class ReadAndMoveService {
     }
 
     /**
-     * 移动文件逻辑
+     * Moving files service.
      *
      * @param defaultSourcePath 默认源路径
      * @param pathsData         路径映射数据
@@ -105,7 +106,7 @@ public class ReadAndMoveService {
      */
     private static void filesMoving(String defaultSourcePath,
                                     Map<String, String> pathsData, String targetPathCode) {
-        // Define source path and target path.
+        // Define source path and target path
         Path sourcePath = Paths.get(defaultSourcePath);
         String targetPathStr = pathsData.get(targetPathCode);
         if (targetPathStr == null) {
@@ -128,7 +129,7 @@ public class ReadAndMoveService {
                 ++fileCount;
             }
         }
-        // 记录文件数量及日期到文件
+        // Record the file count and date in the log file
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_LOG_PATH, true))) {
             String date = LocalDate.now().toString();

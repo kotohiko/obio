@@ -1,6 +1,10 @@
 package org.jacob.im.obfo.starter;
 
+import org.jacob.im.common.IMCommonConsoleInputReader;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * @author Jacob Suen
@@ -9,15 +13,17 @@ import java.io.File;
 public class NumberOfFilesUnderADirectoryIterator {
 
     public static void main(String[] args) {
-        // 替换为你想要列出文件的路径
-        var path = "S:\\Gallery\\【二次元】Anime World／二次元世界／アニメの世界\\#Genshin Impact／#原神／#原神（げんしん）／#원신";
-        var directory = new File(path);
-
-        if (directory.exists() && directory.isDirectory()) {
-            int fileCount = listAllFiles(directory);
-            System.out.println("文件总数: " + fileCount);
-        } else {
-            System.out.println("指定的路径不存在或不是一个目录");
+        // Input your path here
+        try (BufferedReader in = IMCommonConsoleInputReader.consoleReader()) {
+            var directory = new File(in.readLine());
+            if (directory.exists() && directory.isDirectory()) {
+                int fileCount = listAllFiles(directory);
+                System.out.println("Total files: " + fileCount);
+            } else {
+                System.out.println("The specified path does not exist or is not a directory.");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

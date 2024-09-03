@@ -14,12 +14,12 @@ import java.util.List;
  * @author Jacob Suen
  * @since 12:49 Aug 24, 2024
  */
-public class NumberOfDirectoriesUnderADirectoryIterator {
+public class DirectoryPrinter {
 
     public static void main(String[] args) {
         List<String> subdirectories = new ArrayList<>();
         printSubdirectories(OBFOConstants.MY_GALLERY_PATH, subdirectories);
-        // 将结果写入文件
+        // Write the results into a file
         writeToFile(subdirectories);
     }
 
@@ -34,7 +34,7 @@ public class NumberOfDirectoriesUnderADirectoryIterator {
     }
 
     private static void traverseDirectory(File directory, List<String> subdirectories) {
-        // 获取目录下的所有文件和子目录
+        // Get all files and subdirectories in the directory
         var files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
@@ -55,7 +55,7 @@ public class NumberOfDirectoriesUnderADirectoryIterator {
                 writer.println(subdirectory);
             }
         } catch (IOException e) {
-            System.out.println("出现了异常");
+            System.out.println("An IO exception occurred.");
         }
     }
 }
