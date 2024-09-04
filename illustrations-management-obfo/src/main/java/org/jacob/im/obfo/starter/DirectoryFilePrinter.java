@@ -11,6 +11,7 @@ import java.io.IOException;
  * this class clearly lists all filenames, so it cannot be replaced.
  *
  * @author Jacob Suen
+ * @apiNote Please note that this class runs independently.
  * @since 22:08 Sep 01, 2024
  */
 public class DirectoryFilePrinter {

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * @author Jacob Suen
+ * @apiNote Please note that this class runs independently.
  * @since 12:49 Aug 24, 2024
  */
 public class DirectoryPrinter {
