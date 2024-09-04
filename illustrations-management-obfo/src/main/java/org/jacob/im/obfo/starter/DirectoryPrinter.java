@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Jacob Suen
- * @apiNote Please note that this class runs independently.
+ * @apiNote Please note that this class runs independently in this project.
  * @since 12:49 Aug 24, 2024
  */
 public class DirectoryPrinter {
@@ -25,8 +25,7 @@ public class DirectoryPrinter {
         // Write the results into a file
         writeToFile(subdirectories);
         if (EXCEPTION_FLAG != Boolean.FALSE) {
-            System.out.println("The program has completed, " +
-                    "the newest path data has been updated in the path-collection.txt file.");
+            System.out.println("The program has completed, " + "the newest path data has been updated in the path-collection.txt file.");
         }
     }
 

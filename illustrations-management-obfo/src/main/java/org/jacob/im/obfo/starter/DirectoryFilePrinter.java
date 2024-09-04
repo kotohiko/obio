@@ -11,7 +11,7 @@ import java.io.IOException;
  * this class clearly lists all filenames, so it cannot be replaced.
  *
  * @author Jacob Suen
- * @apiNote Please note that this class runs independently.
+ * @apiNote Please note that this class runs independently in this project.
  * @since 22:08 Sep 01, 2024
  */
 public class DirectoryFilePrinter {
@@ -21,7 +21,7 @@ public class DirectoryFilePrinter {
         try (BufferedReader in = IMCommonConsoleInputReader.consoleReader()) {
             var directory = new File(in.readLine());
             if (directory.exists() && directory.isDirectory()) {
-                int fileCount = listAllFiles(directory);
+                var fileCount = listAllFiles(directory);
                 System.out.println("Total files: " + fileCount);
             } else {
                 System.out.println("The specified path does not exist or is not a directory.");
