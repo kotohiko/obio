@@ -45,10 +45,10 @@ public class AddingFileOperMonitor {
         try {
             while (true) {
                 // 阻塞等待事件发生
-                WatchKey key = watcher.take();
+                var key = watcher.take();
                 // Submit a task for each event in the thread pool.
                 executor.submit(() -> {
-                    List<WatchEvent<?>> events = key.pollEvents();
+                    var events = key.pollEvents();
                     for (WatchEvent<?> event : events) {
                         WatchEvent.Kind<?> kind = event.kind();
                         if (kind == StandardWatchEventKinds.OVERFLOW) {
@@ -56,14 +56,14 @@ public class AddingFileOperMonitor {
                         }
 
                         @SuppressWarnings("unchecked")
-                        WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                        Path filename = dir.resolve(ev.context());
+                        var ev = (WatchEvent<Path>) event;
+                        var filename = dir.resolve(ev.context());
                         // 处理文件
                         processFile(filename);
                     }
                 });
                 // 重置key
-                boolean valid = key.reset();
+                var valid = key.reset();
                 if (!valid) {
                     break;
                 }
@@ -76,8 +76,8 @@ public class AddingFileOperMonitor {
     }
 
     private void processFile(Path fileWithAbsPath) {
-        File folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
-        int fileCount = 0;
+        var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
+        var fileCount = 0;
         // Iterate through all files in the directory
         for (File allFiles : Objects.requireNonNull(folder.listFiles())) {
             if (allFiles.isFile()) {
@@ -87,7 +87,7 @@ public class AddingFileOperMonitor {
         // Write the number of files and date to log file.
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_LOG_PATH, true))) {
-            String date = LocalDate.now().toString();
+            var date = LocalDate.now().toString();
             bw.write(date + " INFO [Client] - " + "New files added: " + fileWithAbsPath.getFileName()
                     + "; Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {

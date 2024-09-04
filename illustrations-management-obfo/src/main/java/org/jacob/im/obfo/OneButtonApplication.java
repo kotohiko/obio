@@ -9,7 +9,7 @@ import org.jacob.im.obfo.service.ReadAndMoveService;
  */
 public final class OneButtonApplication {
     public static void main(String[] args) {
-        String addFileMonitor = MonitorStarter.monitorStarter();
+        var addFileMonitor = MonitorStarter.monitorStarter();
         System.out.println("[Monitor service] " + addFileMonitor + " has started");
         ReadAndMoveService.serviceMainPart();
     }
