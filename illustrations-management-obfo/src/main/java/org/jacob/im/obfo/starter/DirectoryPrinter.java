@@ -16,11 +16,17 @@ import java.util.List;
  */
 public class DirectoryPrinter {
 
+    private static Boolean EXCEPTION_FLAG = Boolean.TRUE;
+
     public static void main(String[] args) {
         List<String> subdirectories = new ArrayList<>();
         printSubdirectories(OBFOConstants.MY_GALLERY_PATH, subdirectories);
         // Write the results into a file
         writeToFile(subdirectories);
+        if (EXCEPTION_FLAG != Boolean.FALSE) {
+            System.out.println("The program has completed, " +
+                    "the newest path data has been updated in the path-collection.txt file.");
+        }
     }
 
     public static void printSubdirectories(String directory, List<String> subdirectories) {
@@ -49,13 +55,13 @@ public class DirectoryPrinter {
 
     private static void writeToFile(List<String> subdirectories) {
         var outputPath = Paths.get(OBFOConstants.PATH_COLLECTION_TXT);
-
         try (PrintWriter writer = new PrintWriter(new FileWriter(outputPath.toFile()))) {
             for (String subdirectory : subdirectories) {
                 writer.println(subdirectory);
             }
         } catch (IOException e) {
             System.out.println("An IO exception occurred.");
+            EXCEPTION_FLAG = Boolean.TRUE;
         }
     }
 }
