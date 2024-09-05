@@ -14,6 +14,10 @@ public final class FilenameParser {
     private FilenameParser() {
     }
 
+    private static StringBuilder getStringBuilder(String string) {
+        return new StringBuilder(string);
+    }
+
     /**
      * <a href="https://www.pixiv.net/">Pixiv</a> URL-like filename parser.
      *
@@ -36,7 +40,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     public static String twitterParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         if (str.contains("twitter")) {
             sb.insert(19, "/");
@@ -66,7 +70,7 @@ public final class FilenameParser {
      */
     @SuppressWarnings("unused")
     public static String yandeParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(16, "/");
         sb.insert(21, "/");
@@ -81,7 +85,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     public static String miyousheParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(24, "/");
         if (str.contains("ys")) {
@@ -102,7 +106,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     public static String danbooruParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(26, "/");
         sb.insert(32, "/");
@@ -116,7 +120,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     public static String bilibiliIllustrationsParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         if (str.contains("opus")) {
             sb.insert(24, "/");
@@ -138,7 +142,7 @@ public final class FilenameParser {
      */
     @SuppressWarnings("unused")
     public static String bilibiliVideosParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(sb.indexOf("video"), "/");
         sb.insert(sb.indexOf("video") + 5, "/");
@@ -169,7 +173,7 @@ public final class FilenameParser {
      */
     @SuppressWarnings("unused")
     public static String alphacodersParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(sb.indexOf("com") + 3, "/");
         sb.insert(sb.indexOf("i="), "?");
@@ -184,7 +188,7 @@ public final class FilenameParser {
      */
     @SuppressWarnings("unused")
     public static String youtubeParser(String str) {
-        var sb = new StringBuilder(str);
+        var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(sb.indexOf("youtu.be") + 8, "/");
         return sb.toString();

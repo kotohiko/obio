@@ -12,7 +12,7 @@ import java.nio.file.Paths;
  */
 public class MonitorStarter {
     public static String monitorStarter() {
-        AddingFileOperMonitor addFileMonitor = new AddingFileOperMonitor(Paths
+        NewFilesAddedWatcher addFileMonitor = new NewFilesAddedWatcher(Paths
                 .get(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH), 5);
         return addFileMonitor.toString();
     }

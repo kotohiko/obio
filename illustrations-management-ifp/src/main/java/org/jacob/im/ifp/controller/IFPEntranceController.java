@@ -53,8 +53,8 @@ public final class IFPEntranceController {
      * 支持解析以后直接通过浏览器来打开
      */
     private static void openUriByBrowser(String out) {
-        System.out.println("Parsed successfully! The returned URL is: " + out + ". Your default browser will open"
-                + " this URL automatically.");
+        System.out.println("Parsed successfully! The returned URL is: " + out
+                + ". Your default browser will open" + " this URL automatically.");
         Desktop desktop = Desktop.getDesktop();
         try {
             URI uri = new URI(out);

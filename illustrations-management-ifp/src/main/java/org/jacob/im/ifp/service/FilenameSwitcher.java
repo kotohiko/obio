@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Get input contents from console/front-end.
+ * Get input contents from client (console or front-end).
  *
  * @author Jacob Suen
  * @since Oct 2, 2023

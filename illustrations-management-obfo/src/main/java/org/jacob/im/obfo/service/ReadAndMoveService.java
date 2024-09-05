@@ -66,43 +66,11 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Run the file moving logic
-     *
-     * @param sourcePath    Source path
-     * @param targetPathStr Target path string
-     */
-    private static void movingTheFiles(Path sourcePath, String targetPathStr) {
-        Path targetPath = Paths.get(targetPathStr);
-        boolean hasFiles = false;
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
-            for (Path filePath : directoryStream) {
-                // Ignore directories and process only files.
-                if (Files.isRegularFile(filePath)) {
-                    // 构建目标路径
-                    Path targetFilePath = targetPath.resolve(filePath.getFileName());
-                    // 移动文件
-                    Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println("File has been moved: " + filePath + " -> " + targetFilePath);
-                    logWriter();
-                    // Signal that the files have been found
-                    hasFiles = true;
-                }
-            }
-            // 遍历完成后检查是否找到文件
-            if (!hasFiles) {
-                System.out.println("No files found in the source directory: " + sourcePath);
-            }
-        } catch (IOException e) {
-            System.out.println("Failed to move files. Please verify that the target path is valid.");
-        }
-    }
-
-    /**
      * Moving files service.
      *
-     * @param defaultSourcePath 默认源路径
-     * @param pathsData         路径映射数据
-     * @param targetPathCode    目标路径键
+     * @param defaultSourcePath The default source path
+     * @param pathsData         Path mapping data
+     * @param targetPathCode    Code of the target path
      */
     private static void filesMoving(String defaultSourcePath,
                                     Map<String, String> pathsData, String targetPathCode) {
@@ -112,9 +80,59 @@ public class ReadAndMoveService {
         if (targetPathStr == null) {
             System.out.println("The entered path code does not match any valid path. Please check and correct it.");
         } else {
-            movingTheFiles(sourcePath, targetPathStr);
+            checkBeforeMove(sourcePath, targetPathStr);
         }
         System.out.println(IMCommonConstants.SEPARATOR_LINE);
+    }
+
+    /**
+     * Necessary validation before and after moving files.
+     *
+     * @param sourcePath    The source path
+     * @param targetPathStr The target path string
+     */
+    private static void checkBeforeMove(Path sourcePath, String targetPathStr) {
+        Path targetPath = Paths.get(targetPathStr);
+        boolean hasFiles = false;
+        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
+            for (Path filePath : directoryStream) {
+                // Ignore directories and process only files.
+                if (Files.isRegularFile(filePath)) {
+                    hasFiles = moveTheFiles(targetPath, filePath);
+                }
+            }
+            // 遍历完成后检查是否找到文件
+            if (!hasFiles) {
+                System.out.println("No files found in the source directory: " + sourcePath);
+            }
+        } catch (IOException e) {
+            System.out.println("An IOException occurred while creating source path stream, "
+                    + "please identify and rectify the source of the problem.");
+        }
+    }
+
+    /**
+     * Run the file moving logic
+     *
+     * @param targetPath The target path
+     * @param filePath   The path of file
+     * @return whether the process for moving files was executed correctly.
+     * {@code true} for yes and {@code false} for no.
+     */
+    private static boolean moveTheFiles(Path targetPath, Path filePath) {
+        // 构建目标路径
+        Path targetFilePath = targetPath.resolve(filePath.getFileName());
+        // 移动文件
+        try {
+            Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("File has been moved: " + filePath + " -> " + targetFilePath);
+            logWriter();
+            // Signal that the files have been found
+            return true;
+        } catch (IOException e) {
+            System.out.println("Failed to move files. Please verify that the target path is valid.");
+            return false;
+        }
     }
 
     /**

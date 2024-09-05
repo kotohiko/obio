@@ -8,25 +8,36 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
- * Add file monitor.
+ * A monitor that watches for changes and events related to files.
  *
  * @author Jacob Suen
  * @since 16:29 Aug 18, 2024
  */
-public class AddingFileOperMonitor {
+public class NewFilesAddedWatcher {
 
+    /**
+     * A watch service that <em>watches</em> registered objects for changes and events.
+     */
     private final WatchService watcher;
+
+    /**
+     * An object that may be used to locate a file in a file system.
+     * It will typically represent a system dependent file path.
+     */
     private final Path dir;
+
+    /**
+     * An {@link Executor} that provides methods to manage termination and
+     * methods that can produce a {@link Future} for tracking progress of
+     * one or more asynchronous tasks.
+     */
     private final ExecutorService executor;
 
-    public AddingFileOperMonitor(Path dir, int numberOfThreads) {
+    public NewFilesAddedWatcher(Path dir, int numberOfThreads) {
         try {
             this.watcher = FileSystems.getDefault().newWatchService();
             this.dir = dir;
@@ -37,6 +48,7 @@ public class AddingFileOperMonitor {
             // Submit a task to start monitoring
             executor.submit(this::startWatching);
         } catch (IOException e) {
+            System.out.println("An IOException has occurred. Please identify and rectify the source of the problem.");
             throw new RuntimeException(e);
         }
     }
@@ -69,7 +81,8 @@ public class AddingFileOperMonitor {
                 }
             }
         } catch (InterruptedException e) {
-            System.out.println("遇到了中断异常");
+            System.out.println("An InterruptedException occurred."
+                    + " Please identify and rectify the source of the problem.");
             // 可能需要优雅地关闭线程池
             shutdown();
         }
@@ -96,7 +109,9 @@ public class AddingFileOperMonitor {
         }
     }
 
-    // 优雅地关闭线程池
+    /**
+     * Shut down the thread pool gracefully.
+     */
     public void shutdown() {
         executor.shutdown();
         try {
