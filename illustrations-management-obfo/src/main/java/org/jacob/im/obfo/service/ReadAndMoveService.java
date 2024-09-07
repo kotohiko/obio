@@ -3,6 +3,7 @@ package org.jacob.im.obfo.service;
 import org.jacob.im.common.IMCommonConsoleInputReader;
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
@@ -39,7 +40,7 @@ public class ReadAndMoveService {
                     System.out.println("Failed to get the source path. Please check if the source path mapping "
                             + "in the YAML file matches the actual local path.");
                 } else {
-                    filesMoving(defaultSourcePath, pathsData, targetPathKey);
+                    filesMove(defaultSourcePath, pathsData, targetPathKey);
                 }
             }
         } catch (IOException e) {
@@ -72,8 +73,8 @@ public class ReadAndMoveService {
      * @param pathsData         Path mapping data
      * @param targetPathCode    Code of the target path
      */
-    private static void filesMoving(String defaultSourcePath,
-                                    Map<String, String> pathsData, String targetPathCode) {
+    private static void filesMove(String defaultSourcePath,
+                                  Map<String, String> pathsData, String targetPathCode) {
         // Define source path and target path
         Path sourcePath = Paths.get(defaultSourcePath);
         String targetPathStr = pathsData.get(targetPathCode);
@@ -93,16 +94,16 @@ public class ReadAndMoveService {
      */
     private static void checkBeforeMove(Path sourcePath, String targetPathStr) {
         Path targetPath = Paths.get(targetPathStr);
-        boolean hasFiles = false;
+        FilesMoveOperStatusEnums statusEnums = FilesMoveOperStatusEnums.NO_FILES;
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
             for (Path filePath : directoryStream) {
                 // Ignore directories and process only files.
                 if (Files.isRegularFile(filePath)) {
-                    hasFiles = moveTheFiles(targetPath, filePath);
+                    statusEnums = moveTheFiles(targetPath, filePath);
                 }
             }
             // 遍历完成后检查是否找到文件
-            if (!hasFiles) {
+            if (statusEnums.equals(FilesMoveOperStatusEnums.NO_FILES)) {
                 System.out.println("No files found in the source directory: " + sourcePath);
             }
         } catch (IOException e) {
@@ -119,7 +120,7 @@ public class ReadAndMoveService {
      * @return whether the process for moving files was executed correctly.
      * {@code true} for yes and {@code false} for no.
      */
-    private static boolean moveTheFiles(Path targetPath, Path filePath) {
+    private static FilesMoveOperStatusEnums moveTheFiles(Path targetPath, Path filePath) {
         // 构建目标路径
         Path targetFilePath = targetPath.resolve(filePath.getFileName());
         // 移动文件
@@ -128,10 +129,10 @@ public class ReadAndMoveService {
             System.out.println("File has been moved: " + filePath + " -> " + targetFilePath);
             logWriter();
             // Signal that the files have been found
-            return true;
+            return FilesMoveOperStatusEnums.HAS_FILES;
         } catch (IOException e) {
             System.out.println("Failed to move files. Please verify that the target path is valid.");
-            return false;
+            return FilesMoveOperStatusEnums.TARGET_PATH_INVALID;
         }
     }
 
