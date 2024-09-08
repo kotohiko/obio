@@ -1,13 +1,11 @@
-package org.jacob.im.obfo.monitor;
+package org.jacob.im.obfo.monitor.core;
 
 import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.log.OBFOLogWriter;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.concurrent.*;
 
@@ -37,6 +35,12 @@ public class NewFilesAddedWatcher {
      */
     private final ExecutorService executor;
 
+    /**
+     * Constructor of {@link NewFilesAddedWatcher}.
+     *
+     * @param dir             The directory that needs to be monitored
+     * @param numberOfThreads Number of threads
+     */
     public NewFilesAddedWatcher(Path dir, int numberOfThreads) {
         try {
             this.watcher = FileSystems.getDefault().newWatchService();
@@ -53,6 +57,9 @@ public class NewFilesAddedWatcher {
         }
     }
 
+    /**
+     *
+     */
     private void startWatching() {
         try {
             while (true) {
@@ -70,7 +77,6 @@ public class NewFilesAddedWatcher {
                         @SuppressWarnings("unchecked")
                         var ev = (WatchEvent<Path>) event;
                         var filename = dir.resolve(ev.context());
-                        // 处理文件
                         processFile(filename);
                     }
                 });
@@ -83,11 +89,16 @@ public class NewFilesAddedWatcher {
         } catch (InterruptedException e) {
             System.out.println("An InterruptedException occurred."
                     + " Please identify and rectify the source of the problem.");
-            // 可能需要优雅地关闭线程池
+            // May need to gracefully shut down the thread pool.
             shutdown();
         }
     }
 
+    /**
+     * Record the total of files
+     *
+     * @param fileWithAbsPath Files with absolute path
+     */
     private void processFile(Path fileWithAbsPath) {
         var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
         var fileCount = 0;
@@ -97,16 +108,7 @@ public class NewFilesAddedWatcher {
                 ++fileCount;
             }
         }
-        // Write the number of files and date to log file.
-        try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_LOG_PATH, true))) {
-            var date = LocalDate.now().toString();
-            bw.write(date + " INFO [Client] - " + "New files added: " + fileWithAbsPath.getFileName()
-                    + "; Remaining unclassified images: " + fileCount + "\n");
-        } catch (IOException e) {
-            System.out.println("The log file cannot be found. Please check if the file name "
-                    + "or path is configured correctly.");
-        }
+        OBFOLogWriter.filesAddedLogWriter(fileWithAbsPath, fileCount);
     }
 
     /**

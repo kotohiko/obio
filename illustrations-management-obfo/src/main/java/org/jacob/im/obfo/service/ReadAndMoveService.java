@@ -4,11 +4,11 @@ import org.jacob.im.common.IMCommonConsoleInputReader;
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
+import org.jacob.im.obfo.log.OBFOLogWriter;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.nio.file.*;
-import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
 
@@ -102,7 +102,7 @@ public class ReadAndMoveService {
                     statusEnums = moveTheFiles(targetPath, filePath);
                 }
             }
-            // 遍历完成后检查是否找到文件
+            // Check whether the file is found after traversal is completed.
             if (statusEnums.equals(FilesMoveOperStatusEnums.NO_FILES)) {
                 System.out.println("No files found in the source directory: " + sourcePath);
             }
@@ -113,7 +113,7 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Run the file moving logic
+     * Move the files.
      *
      * @param targetPath The target path
      * @param filePath   The path of file
@@ -121,13 +121,12 @@ public class ReadAndMoveService {
      * {@code true} for yes and {@code false} for no.
      */
     private static FilesMoveOperStatusEnums moveTheFiles(Path targetPath, Path filePath) {
-        // 构建目标路径
+        // Construct the target path
         Path targetFilePath = targetPath.resolve(filePath.getFileName());
-        // 移动文件
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
             System.out.println("File has been moved: " + filePath + " -> " + targetFilePath);
-            logWriter();
+            countTheNumberOfFiles();
             // Signal that the files have been found
             return FilesMoveOperStatusEnums.HAS_FILES;
         } catch (IOException e) {
@@ -137,27 +136,18 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Log writer
+     * Count the number of files, and write the result into the log.
      */
-    private static void logWriter() {
+    private static void countTheNumberOfFiles() {
         File folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
         int fileCount = 0;
-        // 遍历文件夹中的所有文件
+        // Traverse all the files under the specified directory.
         for (File file : Objects.requireNonNull(folder.listFiles())) {
             if (file.isFile()) {
                 ++fileCount;
             }
         }
-        // Record the file count and date in the log file
-        try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_LOG_PATH, true))) {
-            String date = LocalDate.now().toString();
-            bw.write(date + " INFO [Client] - File(s) has/have been moved; "
-                    + "Remaining unclassified images: " + fileCount + "\n");
-        } catch (IOException e) {
-            System.out.println("The log file cannot be found. Please check if the file name "
-                    + "or path is configured correctly.");
-        }
+        OBFOLogWriter.filesMoveLogWriter(fileCount);
     }
 
     private static void endLinePrintAndReboot() {

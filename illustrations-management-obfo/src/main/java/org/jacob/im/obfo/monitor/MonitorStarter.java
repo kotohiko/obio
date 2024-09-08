@@ -1,6 +1,7 @@
 package org.jacob.im.obfo.monitor;
 
 import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.monitor.core.NewFilesAddedWatcher;
 
 import java.nio.file.Paths;
 

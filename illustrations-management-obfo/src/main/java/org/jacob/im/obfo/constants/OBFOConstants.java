@@ -10,7 +10,7 @@ public class OBFOConstants {
 
     public static final String ILLUSTRATIONS_CONF_YML_PATH
             = "illustrations-management-obfo/src/main/resources/illustrations-paths-conf.yaml";
-    public static final String UNCLASSIFIED_REMAINING_IMAGES_LOG_PATH
+    public static final String PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG
             = "illustrations-management-obfo/src/main/resources/unclassified-remaining-images.log";
     public static final String MY_GALLERY_PATH = "S:\\Gallery";
     public static final String UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH
