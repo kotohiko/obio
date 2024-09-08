@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 /**
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 17:14 Sep 08, 2024
  */
 public class OBFOLogWriter {

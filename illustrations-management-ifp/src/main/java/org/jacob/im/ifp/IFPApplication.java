@@ -5,7 +5,7 @@ import org.jacob.im.ifp.controller.IFPEntranceController;
 /**
  * Main class that launches the application.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since Oct 25, 2023
  */
 public final class IFPApplication {

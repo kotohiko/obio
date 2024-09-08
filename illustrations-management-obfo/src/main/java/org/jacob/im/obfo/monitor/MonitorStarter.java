@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 /**
  * Adding files operation monitor.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 10:16 Sep 03, 2024
  */
 public class MonitorStarter {

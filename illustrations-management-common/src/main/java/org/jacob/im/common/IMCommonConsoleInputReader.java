@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 12:12 Aug 07, 2024
  */
 public class IMCommonConsoleInputReader {

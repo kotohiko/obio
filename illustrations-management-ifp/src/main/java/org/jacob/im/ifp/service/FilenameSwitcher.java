@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Get input contents from client (console or front-end).
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since Oct 2, 2023
  */
 public final class FilenameSwitcher {

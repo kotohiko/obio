@@ -3,7 +3,7 @@ package org.jacob.im.ifp.service;
 /**
  * Core class for parsing filenames.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since Oct 29, 2023
  */
 public final class FilenameParser {

@@ -10,7 +10,7 @@ import java.io.IOException;
  * Although Windows allows user to view the number of files in a folder directly through its properties,
  * this class clearly lists all filenames, so it cannot be replaced.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @apiNote Please note that this class runs independently in this project.
  * @since 22:08 Sep 01, 2024
  */

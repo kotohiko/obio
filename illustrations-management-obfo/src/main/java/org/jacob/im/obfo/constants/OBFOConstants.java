@@ -3,7 +3,7 @@ package org.jacob.im.obfo.constants;
 /**
  * One-Button Files Organizer constants class
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 13:53 Aug 03, 2024
  */
 public class OBFOConstants {

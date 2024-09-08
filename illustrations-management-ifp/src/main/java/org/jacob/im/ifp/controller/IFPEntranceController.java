@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 /**
  * Entrance of parsing filename to URL.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since Oct 2, 2023
  */
 public final class IFPEntranceController {

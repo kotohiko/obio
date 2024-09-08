@@ -12,7 +12,7 @@ import java.util.concurrent.*;
 /**
  * A monitor that watches for changes and events related to files.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 16:29 Aug 18, 2024
  */
 public class NewFilesAddedWatcher {

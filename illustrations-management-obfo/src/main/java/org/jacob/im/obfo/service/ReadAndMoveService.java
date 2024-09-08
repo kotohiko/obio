@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Main class that reading and moving files.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 07:26 Aug 02, 2024
  */
 public class ReadAndMoveService {

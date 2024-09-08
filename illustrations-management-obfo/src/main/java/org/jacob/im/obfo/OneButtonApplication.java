@@ -4,7 +4,7 @@ import org.jacob.im.obfo.monitor.MonitorStarter;
 import org.jacob.im.obfo.service.ReadAndMoveService;
 
 /**
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 07:26 Aug 02, 2024
  */
 public final class OneButtonApplication {

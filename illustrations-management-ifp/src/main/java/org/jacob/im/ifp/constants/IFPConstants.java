@@ -3,7 +3,7 @@ package org.jacob.im.ifp.constants;
 /**
  * IFP constants class.
  *
- * @author Jacob Suen
+ * @author Kotohiko
  * @since 12:04 Aug 21, 2024
  */
 public class IFPConstants {
