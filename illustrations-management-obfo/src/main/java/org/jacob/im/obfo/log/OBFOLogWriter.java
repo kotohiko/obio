@@ -1,6 +1,6 @@
 package org.jacob.im.obfo.log;
 
-import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.IMCommonApi;
 import org.jacob.im.obfo.constants.OBFOConstants;
 
 import java.io.BufferedWriter;
@@ -21,8 +21,8 @@ public class OBFOLogWriter {
         // Write the number of files and date to log file.
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG, Boolean.TRUE))) {
-            bw.write(IMCommonConstants.NOW_DATE_TIME + " INFO [Client] - "
-                    + "New files added: "
+            bw.write(IMCommonApi.getRealTime()
+                    + " INFO [Client] - New files added: "
                     + fileWithAbsPath.getFileName()
                     + "; Remaining unclassified images: "
                     + fileCount + "\n");
@@ -35,7 +35,7 @@ public class OBFOLogWriter {
         // Record the file count and date in the log file.
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG, Boolean.TRUE))) {
-            bw.write(IMCommonConstants.NOW_DATE_TIME
+            bw.write(IMCommonApi.getRealTime()
                     + " INFO [Client] - File(s) has/have been moved; "
                     + "Remaining unclassified images: "
                     + fileCount + "\n");
