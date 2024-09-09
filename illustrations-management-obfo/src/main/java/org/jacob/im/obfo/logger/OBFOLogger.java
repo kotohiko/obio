@@ -1,4 +1,4 @@
-package org.jacob.im.obfo.log;
+package org.jacob.im.obfo.logger;
 
 import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.constants.OBFOConstants;
@@ -12,7 +12,7 @@ import java.nio.file.Path;
  * @author Kotohiko
  * @since 17:14 Sep 08, 2024
  */
-public class OBFOLogWriter {
+public class OBFOLogger {
 
     private static final String LOG_FILE_EXCEPTION = "The log file cannot be found,"
             + " please check if the file name or path is configured correctly.";

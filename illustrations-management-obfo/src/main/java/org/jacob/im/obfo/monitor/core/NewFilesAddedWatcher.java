@@ -1,7 +1,7 @@
 package org.jacob.im.obfo.monitor.core;
 
 import org.jacob.im.obfo.constants.OBFOConstants;
-import org.jacob.im.obfo.log.OBFOLogWriter;
+import org.jacob.im.obfo.logger.OBFOLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,12 @@ public class NewFilesAddedWatcher {
     private final ExecutorService executor;
 
     /**
-     * Constructor of {@link NewFilesAddedWatcher}.
+     * Constructor of {@link NewFilesAddedWatcher}.<p>
+     * This will submit the {@link NewFilesAddedWatcher#startWatching()} method of the current object
+     * as a task to the executor thread pool for asynchronous execution. This task will be executed
+     * on a thread in the thread pool without blocking the current thread.<p>
+     * If you don't understand the new writing style:{@code executor.submit(this::startWatching);},
+     * you can refer to the old writing style:{@code executor.submit(() -> startWatching());}
      *
      * @param dir             The directory that needs to be monitored
      * @param numberOfThreads Number of threads
@@ -49,7 +54,6 @@ public class NewFilesAddedWatcher {
             this.executor = Executors.newFixedThreadPool(numberOfThreads);
             // Start monitoring the directory upon initialization
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
-            // Submit a task to start monitoring
             executor.submit(this::startWatching);
         } catch (IOException e) {
             System.out.println("An IOException has occurred. Please identify and rectify the source of the problem.");
@@ -58,12 +62,12 @@ public class NewFilesAddedWatcher {
     }
 
     /**
-     *
+     * Monitor core logic
      */
     private void startWatching() {
         try {
             while (true) {
-                // 阻塞等待事件发生
+                // Block and wait for event occurs
                 var key = watcher.take();
                 // Submit a task for each event in the thread pool.
                 executor.submit(() -> {
@@ -80,7 +84,7 @@ public class NewFilesAddedWatcher {
                         processFile(filename);
                     }
                 });
-                // 重置key
+                // Reset the key
                 var valid = key.reset();
                 if (!valid) {
                     break;
@@ -108,7 +112,7 @@ public class NewFilesAddedWatcher {
                 ++fileCount;
             }
         }
-        OBFOLogWriter.filesAddedLogWriter(fileWithAbsPath, fileCount);
+        OBFOLogger.filesAddedLogWriter(fileWithAbsPath, fileCount);
     }
 
     /**

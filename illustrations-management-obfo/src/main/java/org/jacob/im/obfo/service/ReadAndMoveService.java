@@ -4,7 +4,7 @@ import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
-import org.jacob.im.obfo.log.OBFOLogWriter;
+import org.jacob.im.obfo.logger.OBFOLogger;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
@@ -147,7 +147,7 @@ public class ReadAndMoveService {
                 ++fileCount;
             }
         }
-        OBFOLogWriter.filesMoveLogWriter(fileCount);
+        OBFOLogger.filesMoveLogWriter(fileCount);
     }
 
     private static void endLinePrintAndReboot() {
