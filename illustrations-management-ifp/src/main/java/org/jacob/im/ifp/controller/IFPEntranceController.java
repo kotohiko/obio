@@ -1,7 +1,7 @@
 package org.jacob.im.ifp.controller;
 
-import org.jacob.im.common.IMCommonConsoleInputReader;
 import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.ifp.service.FilenameSwitcher;
 
 import java.awt.*;
@@ -25,10 +25,10 @@ public final class IFPEntranceController {
     }
 
     /**
-     * 交互逻辑
+     * Get the filename and process the core logic.
      */
     public static void getFilename() {
-        try (BufferedReader in = IMCommonConsoleInputReader.consoleReader()) {
+        try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String fileName;
             System.out.print("Please enter your filename: ");
             while ((fileName = in.readLine()) != null) {
@@ -50,7 +50,7 @@ public final class IFPEntranceController {
     }
 
     /**
-     * 支持解析以后直接通过浏览器来打开
+     * Supports opening directly through the browser after parsing.
      */
     private static void openUriByBrowser(String out) {
         System.out.println("Parsed successfully! The returned URL is: " + out

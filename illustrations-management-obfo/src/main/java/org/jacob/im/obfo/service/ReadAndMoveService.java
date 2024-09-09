@@ -1,6 +1,6 @@
 package org.jacob.im.obfo.service;
 
-import org.jacob.im.common.IMCommonConsoleInputReader;
+import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
@@ -25,7 +25,7 @@ public class ReadAndMoveService {
      */
     public static void serviceMainPart() {
         System.out.println(OBFOConstants.WELCOME_LINE);
-        try (BufferedReader in = IMCommonConsoleInputReader.consoleReader()) {
+        try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String targetPathKey;
             Yaml yaml = new Yaml();
             while (true) {
@@ -33,7 +33,7 @@ public class ReadAndMoveService {
                 if ((targetPathKey = in.readLine()) == null) {
                     break;
                 }
-                // Load a Yaml file into a Java object.
+                // Load a YAML file into a Java object.
                 Map<String, String> pathsData = yaml.load(loadYamlFile());
                 String defaultSourcePath = pathsData.get("Default source path");
                 if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
@@ -50,9 +50,9 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Loading the yml file.
+     * Loading the YAML file.
      *
-     * @return Yaml file stream
+     * @return YAML file stream
      */
     private static FileInputStream loadYamlFile() {
         FileInputStream ymlFileStream = null;

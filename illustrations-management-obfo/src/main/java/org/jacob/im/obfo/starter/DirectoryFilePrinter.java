@@ -1,6 +1,6 @@
 package org.jacob.im.obfo.starter;
 
-import org.jacob.im.common.IMCommonConsoleInputReader;
+import org.jacob.im.common.helper.IMCommonHelper;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +18,7 @@ public class DirectoryFilePrinter {
 
     public static void main(String[] args) {
         // Input your path here
-        try (BufferedReader in = IMCommonConsoleInputReader.consoleReader()) {
+        try (BufferedReader in = IMCommonHelper.consoleReader()) {
             var directory = new File(in.readLine());
             if (directory.exists() && directory.isDirectory()) {
                 var fileCount = listAllFiles(directory);
