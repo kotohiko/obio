@@ -1,6 +1,5 @@
 package org.jacob.im.obfo.monitor.core;
 
-import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.logger.OBFOLogger;
 
@@ -12,6 +11,7 @@ import java.lang.management.ThreadMXBean;
 import java.nio.file.*;
 import java.util.Objects;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A monitor that watches for changes and events related to files.
@@ -21,23 +21,28 @@ import java.util.concurrent.*;
  */
 public class NewFilesAddedWatcher {
 
+    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
     private static final String SERVER_LOG_INFO = "[Server] [Monitor service]";
 
     /**
      * A watch service that <em>watches</em> registered objects for changes and events.
      */
     private final WatchService watcher;
+
     /**
      * An object that may be used to locate a file in a file system.
      * It will typically represent a system dependent file path.
      */
     private final Path dir;
+
     /**
      * An {@link Executor} that provides methods to manage termination and
      * methods that can produce a {@link Future} for tracking progress of
      * one or more asynchronous tasks.
      */
     private final ExecutorService executor;
+
+    private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
 
     /**
      * Constructor of {@link NewFilesAddedWatcher}.<p>
@@ -55,7 +60,12 @@ public class NewFilesAddedWatcher {
             this.watcher = FileSystems.getDefault().newWatchService();
             this.dir = dir;
             // Create a fixed-size thread pool
-            this.executor = Executors.newFixedThreadPool(numberOfThreads);
+            this.executor = Executors.newFixedThreadPool(numberOfThreads, r -> {
+                Thread t = new Thread(r, WATCHER_THREAD_NAME + "-" + THREAD_ID_SEQ.incrementAndGet());
+                // 设置为守护线程
+                t.setDaemon(true);
+                return t;
+            });
             // Start monitoring the directory upon initialization
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
             executor.submit(this::startWatching);
@@ -126,20 +136,18 @@ public class NewFilesAddedWatcher {
         long totalMemory = runtime.totalMemory();
         long freeMemory = runtime.freeMemory();
         long usedMemory = totalMemory - freeMemory;
-        System.out.println(IMCommonHelper.getRealTime()  + " " + SERVER_LOG_INFO
-                + " Total Memory: " + totalMemory / 1024 / 1024 + " MB");
+        System.out.println("Total Memory: " + totalMemory / 1024 / 1024 + " MB");
         System.out.println("Free Memory: " + freeMemory / 1024 / 1024 + " MB");
         System.out.println("Used Memory: " + usedMemory / 1024 / 1024 + " MB");
 
-        // Print thread information
+        // Print thread information related to Watcher threads
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
         long[] threadIds = threadMXBean.getAllThreadIds();
-        System.out.println("Number of Threads: " + threadIds.length);
-
-        // Optionally print detailed thread info
+        System.out.println("Watcher Threads:");
         for (long id : threadIds) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
-            System.out.println("Thread Name: " + threadInfo.getThreadName() + ", State: " + threadInfo.getThreadState());
+            System.out.println("Thread Name: " + threadInfo.getThreadName()
+                    + ", State: " + threadInfo.getThreadState());
         }
     }
 
