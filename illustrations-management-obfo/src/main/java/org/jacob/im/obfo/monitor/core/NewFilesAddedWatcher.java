@@ -1,5 +1,6 @@
 package org.jacob.im.obfo.monitor.core;
 
+import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.logger.OBFOLogger;
 
@@ -21,9 +22,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class NewFilesAddedWatcher {
 
-    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
-    private static final String SERVER_LOG_INFO = "[Server] [Monitor service]";
-
     /**
      * A watch service that <em>watches</em> registered objects for changes and events.
      */
@@ -42,6 +40,14 @@ public class NewFilesAddedWatcher {
      */
     private final ExecutorService executor;
 
+    /**
+     * Name of this class.
+     */
+    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
+    /**
+     * Log information constant.
+     */
+    private static final String SERVER_LOG_INFO = "INFO [Server] [Monitor service]";
     private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
 
     /**
@@ -133,20 +139,25 @@ public class NewFilesAddedWatcher {
     private void printPerformanceInfo() {
         // Print memory usage
         Runtime runtime = Runtime.getRuntime();
+        // The total amount of memory in the Java virtual machine
         long totalMemory = runtime.totalMemory();
+        // The amount of free memory in the Java Virtual Machine
         long freeMemory = runtime.freeMemory();
         long usedMemory = totalMemory - freeMemory;
-        System.out.println("Total Memory: " + totalMemory / 1024 / 1024 + " MB");
-        System.out.println("Free Memory: " + freeMemory / 1024 / 1024 + " MB");
-        System.out.println("Used Memory: " + usedMemory / 1024 / 1024 + " MB");
+        System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
+                + " Total Heap memory: " + totalMemory / 1024 / 1024 + " MB");
+        System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
+                + " Heap free memory: " + freeMemory / 1024 / 1024 + " MB");
+        System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
+                + " Heap used memory: " + usedMemory / 1024 / 1024 + " MB");
 
         // Print thread information related to Watcher threads
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
         long[] threadIds = threadMXBean.getAllThreadIds();
-        System.out.println("Watcher Threads:");
         for (long id : threadIds) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
-            System.out.println("Thread Name: " + threadInfo.getThreadName()
+            System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
+                    + " Thread Name: " + threadInfo.getThreadName()
                     + ", State: " + threadInfo.getThreadState());
         }
     }
