@@ -41,13 +41,18 @@ public class NewFilesAddedWatcher {
     private final ExecutorService executor;
 
     /**
-     * Name of this class.
+     * Used to identify the thread, and is also the name of the class that created this thread.
      */
     private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
+
     /**
      * Log information constant.
      */
     private static final String SERVER_LOG_INFO = "INFO [Server] [Monitor service]";
+
+    /**
+     * To avoid thread safety issues, atomic classes are used here.
+     */
     private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
 
     /**
@@ -68,14 +73,15 @@ public class NewFilesAddedWatcher {
             // Create a fixed-size thread pool
             this.executor = Executors.newFixedThreadPool(numberOfThreads, r -> {
                 Thread t = new Thread(r, WATCHER_THREAD_NAME + "-" + THREAD_ID_SEQ.incrementAndGet());
-                // 设置为守护线程
+                // Set the current thread as a daemon thread
                 t.setDaemon(true);
                 return t;
             });
             // Start monitoring the directory upon initialization
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
             executor.submit(this::startWatching);
-            printPerformanceInfo();
+            printMemoryInfo();
+            printThreadsInfo();
         } catch (IOException e) {
             System.out.println("An IOException has occurred. Please identify and rectify the source of the problem.");
             throw new RuntimeException(e);
@@ -136,7 +142,10 @@ public class NewFilesAddedWatcher {
         OBFOLogger.filesAddedLogWriter(fileWithAbsPath, fileCount);
     }
 
-    private void printPerformanceInfo() {
+    /**
+     * Print memory information.
+     */
+    private void printMemoryInfo() {
         // Print memory usage
         Runtime runtime = Runtime.getRuntime();
         // The total amount of memory in the Java virtual machine
@@ -150,7 +159,12 @@ public class NewFilesAddedWatcher {
                 + " Heap free memory: " + freeMemory / 1024 / 1024 + " MB");
         System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
                 + " Heap used memory: " + usedMemory / 1024 / 1024 + " MB");
+    }
 
+    /**
+     * Print threads information.
+     */
+    private void printThreadsInfo() {
         // Print thread information related to Watcher threads
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
         long[] threadIds = threadMXBean.getAllThreadIds();

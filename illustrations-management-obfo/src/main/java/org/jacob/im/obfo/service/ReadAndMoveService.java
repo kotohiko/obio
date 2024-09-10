@@ -1,7 +1,7 @@
 package org.jacob.im.obfo.service;
 
-import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
 import org.jacob.im.obfo.logger.OBFOLogger;
@@ -24,7 +24,7 @@ public class ReadAndMoveService {
      * Main Execution Method
      */
     public static void serviceMainPart() {
-        System.out.println(OBFOConstants.WELCOME_LINE);
+        System.out.print(OBFOConstants.WELCOME_LINE);
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String targetPathKey;
             Yaml yaml = new Yaml();
@@ -50,7 +50,7 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Loading the YAML file.
+     * Load the YAML file.
      *
      * @return YAML file stream
      */
@@ -107,8 +107,8 @@ public class ReadAndMoveService {
                 System.out.println("No files found in the source directory: " + sourcePath);
             }
         } catch (IOException e) {
-            System.out.println("An IOException occurred while creating source path stream, "
-                    + "please identify and rectify the source of the problem.");
+            System.out.println("An IOException occurred while creating source path stream. "
+                    + "The source path might not exist, or there could be other problems");
         }
     }
 

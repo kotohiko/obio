@@ -20,8 +20,11 @@ public class OBFOConstants {
     public static final String MMD_CONF_YML_PATH
             = "illustrations-management-obfo/src/main/resources/mmd-paths-conf.yaml";
     public static final String WELCOME_LINE
-            = "****************************************************"
-            + "   Welcome to One-Button Files Organizer   ****************************************************";
+            = """
+            ***********************************************************************************************************
+            ********************************   Welcome to One-Button Files Organizer   ********************************
+            ***********************************************************************************************************
+            """;
 
     private OBFOConstants() {
     }
