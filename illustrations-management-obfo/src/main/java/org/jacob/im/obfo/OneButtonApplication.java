@@ -1,5 +1,6 @@
 package org.jacob.im.obfo;
 
+import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.monitor.MonitorStarter;
 import org.jacob.im.obfo.service.ReadAndMoveService;
 
@@ -10,7 +11,9 @@ import org.jacob.im.obfo.service.ReadAndMoveService;
 public final class OneButtonApplication {
     public static void main(String[] args) {
         var addFileMonitor = MonitorStarter.monitorStarter();
-        System.out.println("[Monitor service] " + addFileMonitor + " has started");
+        System.out.println(IMCommonHelper.getRealTime()
+                + " INFO [Server] [Monitor service] "
+                + addFileMonitor + " has started");
         ReadAndMoveService.serviceMainPart();
     }
 }

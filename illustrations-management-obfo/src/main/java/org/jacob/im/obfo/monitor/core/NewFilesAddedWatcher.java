@@ -1,10 +1,14 @@
 package org.jacob.im.obfo.monitor.core;
 
+import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.logger.OBFOLogger;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
 import java.nio.file.*;
 import java.util.Objects;
 import java.util.concurrent.*;
@@ -17,17 +21,17 @@ import java.util.concurrent.*;
  */
 public class NewFilesAddedWatcher {
 
+    private static final String SERVER_LOG_INFO = "[Server] [Monitor service]";
+
     /**
      * A watch service that <em>watches</em> registered objects for changes and events.
      */
     private final WatchService watcher;
-
     /**
      * An object that may be used to locate a file in a file system.
      * It will typically represent a system dependent file path.
      */
     private final Path dir;
-
     /**
      * An {@link Executor} that provides methods to manage termination and
      * methods that can produce a {@link Future} for tracking progress of
@@ -55,6 +59,7 @@ public class NewFilesAddedWatcher {
             // Start monitoring the directory upon initialization
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
             executor.submit(this::startWatching);
+            printPerformanceInfo();
         } catch (IOException e) {
             System.out.println("An IOException has occurred. Please identify and rectify the source of the problem.");
             throw new RuntimeException(e);
@@ -113,6 +118,29 @@ public class NewFilesAddedWatcher {
             }
         }
         OBFOLogger.filesAddedLogWriter(fileWithAbsPath, fileCount);
+    }
+
+    private void printPerformanceInfo() {
+        // Print memory usage
+        Runtime runtime = Runtime.getRuntime();
+        long totalMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+        long usedMemory = totalMemory - freeMemory;
+        System.out.println(IMCommonHelper.getRealTime()  + " " + SERVER_LOG_INFO
+                + " Total Memory: " + totalMemory / 1024 / 1024 + " MB");
+        System.out.println("Free Memory: " + freeMemory / 1024 / 1024 + " MB");
+        System.out.println("Used Memory: " + usedMemory / 1024 / 1024 + " MB");
+
+        // Print thread information
+        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+        long[] threadIds = threadMXBean.getAllThreadIds();
+        System.out.println("Number of Threads: " + threadIds.length);
+
+        // Optionally print detailed thread info
+        for (long id : threadIds) {
+            ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
+            System.out.println("Thread Name: " + threadInfo.getThreadName() + ", State: " + threadInfo.getThreadState());
+        }
     }
 
     /**

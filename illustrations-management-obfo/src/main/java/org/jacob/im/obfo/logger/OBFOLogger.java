@@ -22,10 +22,8 @@ public class OBFOLogger {
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG, Boolean.TRUE))) {
             bw.write(IMCommonHelper.getRealTime()
-                    + " INFO [Client] - New files added: "
-                    + fileWithAbsPath.getFileName()
-                    + "; Remaining unclassified images: "
-                    + fileCount + "\n");
+                    + " INFO [Client] - New files added: " + fileWithAbsPath.getFileName()
+                    + "; Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
             System.out.println(LOG_FILE_EXCEPTION);
         }
@@ -37,8 +35,7 @@ public class OBFOLogger {
                 new FileWriter(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG, Boolean.TRUE))) {
             bw.write(IMCommonHelper.getRealTime()
                     + " INFO [Client] - File(s) has/have been moved; "
-                    + "Remaining unclassified images: "
-                    + fileCount + "\n");
+                    + "Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
             System.out.println(LOG_FILE_EXCEPTION);
         }
