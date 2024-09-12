@@ -1,0 +1,12 @@
+# illustrations-management-common
+ResManager_0: "The YAML file does not exist. Please check if the arguments passed to the FileInputStream object constructor match the actual path."
+# illustrations-management-ifp
+IFPEntranceController_0: "The return URL value is blank, please verify that there are no errors or illegal characters in the input contents."
+IFPEntranceController_1: "Please enter your filename: "
+IFPEntranceController_2: "Parsed successfully! The returned URL is: {0}. Your default browser will open this URL automatically."
+IFPEntranceController_3: "An error occurred in the URL syntax, or the URL is null. Please verify that there are no errors or illegal characters in the input contents."
+IFPEntranceController_4: "Failed to obtain input contents. Please verify and try again."
+# illustrations-management-obfo
+ReadAndMoveController_0: "Please enter your target path code: "
+ReadAndMoveController_1: "Failed to get the source path. Please check if the source path mapping in the YAML file matches the actual local path."
+ReadAndMoveController_2: "Cannot read your input contents, please check and try again."

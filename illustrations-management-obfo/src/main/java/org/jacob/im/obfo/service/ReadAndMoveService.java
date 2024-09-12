@@ -3,6 +3,7 @@ package org.jacob.im.obfo.service;
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.controller.ReadAndMoveController;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
 import org.jacob.im.obfo.logger.OBFOLogger;
 import org.yaml.snakeyaml.Yaml;
@@ -21,40 +22,11 @@ import java.util.Objects;
 public class ReadAndMoveService {
 
     /**
-     * Main Execution Method
-     */
-    public static void serviceMainPart() {
-        System.out.print(OBFOConstants.WELCOME_LINE);
-        try (BufferedReader in = IMCommonHelper.consoleReader()) {
-            String targetPathKey;
-            Yaml yaml = new Yaml();
-            while (true) {
-                System.out.print("Please enter your target path code: ");
-                if ((targetPathKey = in.readLine()) == null) {
-                    break;
-                }
-                // Load a YAML file into a Java object.
-                Map<String, String> pathsData = yaml.load(loadYamlFile());
-                String defaultSourcePath = pathsData.get("Default source path");
-                if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
-                    System.out.println("Failed to get the source path. Please check if the source path mapping "
-                            + "in the YAML file matches the actual local path.");
-                } else {
-                    filesMove(defaultSourcePath, pathsData, targetPathKey);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Cannot read your input contents, please check and try again.");
-        }
-        endLinePrintAndReboot();
-    }
-
-    /**
      * Load the YAML file.
      *
      * @return YAML file stream
      */
-    private static FileInputStream loadYamlFile() {
+    public static FileInputStream loadYamlFile() {
         FileInputStream ymlFileStream = null;
         try {
             ymlFileStream = new FileInputStream(OBFOConstants.ILLUSTRATIONS_CONF_YML_PATH);
@@ -73,7 +45,7 @@ public class ReadAndMoveService {
      * @param pathsData         Path mapping data
      * @param targetPathCode    Code of the target path
      */
-    private static void filesMove(String defaultSourcePath,
+    public static void filesMove(String defaultSourcePath,
                                   Map<String, String> pathsData, String targetPathCode) {
         // Define source path and target path
         Path sourcePath = Paths.get(defaultSourcePath);
@@ -150,8 +122,8 @@ public class ReadAndMoveService {
         OBFOLogger.filesMoveLogWriter(fileCount);
     }
 
-    private static void endLinePrintAndReboot() {
+    public static void endLinePrintAndReboot() {
         System.out.println(IMCommonConstants.SEPARATOR_LINE);
-        serviceMainPart();
+        ReadAndMoveController.mainPart();
     }
 }

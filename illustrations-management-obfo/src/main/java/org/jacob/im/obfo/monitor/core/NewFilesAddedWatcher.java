@@ -68,7 +68,9 @@ public class NewFilesAddedWatcher {
      */
     public NewFilesAddedWatcher(Path dir, int numberOfThreads) {
         try {
-            this.watcher = FileSystems.getDefault().newWatchService();
+            this.watcher = FileSystems.getDefault()
+                    // Constructs a new WatchService optional operation.
+                    .newWatchService();
             this.dir = dir;
             // Create a fixed-size thread pool
             this.executor = Executors.newFixedThreadPool(numberOfThreads, r -> {

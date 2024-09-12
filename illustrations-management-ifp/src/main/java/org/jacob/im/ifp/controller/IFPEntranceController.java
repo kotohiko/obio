@@ -2,6 +2,7 @@ package org.jacob.im.ifp.controller;
 
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.common.helper.IMCommonHelper;
+import org.jacob.im.common.response.ResManager;
 import org.jacob.im.ifp.service.FilenameSwitcher;
 
 import java.awt.*;
@@ -30,21 +31,20 @@ public final class IFPEntranceController {
     public static void getFilename() {
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String fileName;
-            System.out.print("Please enter your filename: ");
+            System.out.print(ResManager.loadResString("IFPEntranceController_1"));
             while ((fileName = in.readLine()) != null) {
                 String retUrl = FilenameSwitcher.parseFileName(fileName);
                 if (retUrl.isBlank()) {
-                    System.out.println("The return URL value is blank, please verify that there are no errors or "
-                            + "illegal characters in the input contents.");
+                    System.out.println(ResManager.loadResString("IFPEntranceController_0"));
                     endLinePrintAndReboot();
                 } else {
                     openUriByBrowser(retUrl);
                     endLinePrintAndReboot();
-                    System.out.print("Please enter your filename: ");
+                    System.out.print(ResManager.loadResString("IFPEntranceController_1"));
                 }
             }
         } catch (IOException e) {
-            System.out.println("发生了错误");
+            System.out.println(ResManager.loadResString("IFPEntranceController_4"));
         }
         endLinePrintAndReboot();
     }
@@ -53,15 +53,13 @@ public final class IFPEntranceController {
      * Supports opening directly through the browser after parsing.
      */
     private static void openUriByBrowser(String out) {
-        System.out.println("Parsed successfully! The returned URL is: " + out
-                + ". Your default browser will open" + " this URL automatically.");
+        System.out.println(ResManager.loadResString("IFPEntranceController_2", out));
         Desktop desktop = Desktop.getDesktop();
         try {
             URI uri = new URI(out);
             desktop.browse(uri);
         } catch (URISyntaxException | IOException e) {
-            System.out.println("An error occurred in the URL syntax, or the URL is null. Please verify that "
-                    + "there are no errors or illegal characters in the input contents.");
+            System.out.println(ResManager.loadResString("IFPEntranceController_3"));
         }
         endLinePrintAndReboot();
     }
