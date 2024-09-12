@@ -89,7 +89,7 @@ public class NewFilesAddedWatcher {
     }
 
     /**
-     * Monitor core logic
+     * Monitor core logic.
      */
     private void startWatching() {
         try {
@@ -126,7 +126,7 @@ public class NewFilesAddedWatcher {
     }
 
     /**
-     * Record the total of files
+     * Record the total of files.
      *
      * @param fileWithAbsPath Files with absolute path
      */
