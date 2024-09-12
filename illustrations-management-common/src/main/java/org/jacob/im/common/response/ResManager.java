@@ -24,7 +24,7 @@ public class ResManager {
         String msg = pathsData.get(msgKey);
         // 处理占位符
         if (placeholder.length > 0) {
-            for (int i = 0; i < placeholder.length; i++) {
+            for (var i = 0; i < placeholder.length; ++i) {
                 msg = msg.replace("{" + i + "}", placeholder[i]);
             }
         }

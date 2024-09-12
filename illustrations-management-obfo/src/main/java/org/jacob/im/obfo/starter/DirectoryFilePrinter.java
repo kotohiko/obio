@@ -1,6 +1,7 @@
 package org.jacob.im.obfo.starter;
 
 import org.jacob.im.common.helper.IMCommonHelper;
+import org.jacob.im.common.response.ResManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +25,7 @@ public class DirectoryFilePrinter {
                 var fileCount = listAllFiles(directory);
                 System.out.println("Total files: " + fileCount);
             } else {
-                System.out.println("The specified path does not exist or is not a directory.");
+                System.out.println(ResManager.loadResString("DirectoryFilePrinter_0"));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,14 +1,15 @@
 package org.jacob.im.obfo.service;
 
 import org.jacob.im.common.constants.IMCommonConstants;
-import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
 import org.jacob.im.obfo.logger.OBFOLogger;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.*;
 import java.util.Map;
 import java.util.Objects;
@@ -46,7 +47,7 @@ public class ReadAndMoveService {
      * @param targetPathCode    Code of the target path
      */
     public static void filesMove(String defaultSourcePath,
-                                  Map<String, String> pathsData, String targetPathCode) {
+                                 Map<String, String> pathsData, String targetPathCode) {
         // Define source path and target path
         Path sourcePath = Paths.get(defaultSourcePath);
         String targetPathStr = pathsData.get(targetPathCode);

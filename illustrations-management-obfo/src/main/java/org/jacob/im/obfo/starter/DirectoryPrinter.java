@@ -1,5 +1,6 @@
 package org.jacob.im.obfo.starter;
 
+import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
 
 import java.io.File;
@@ -29,10 +30,9 @@ public class DirectoryPrinter {
         // Write the results into a file
         writeToFile(subdirectories);
         if (EXCEPTION_FLAG != Boolean.FALSE) {
-            System.out.println("The program has completed, "
-                    + "the newest path data has been updated in the path-collection.txt file.");
+            System.out.println(ResManager.loadResString("DirectoryPrinter_0"));
         } else {
-            System.out.println("The program did not execute correctly, please check and try again.");
+            System.out.println(ResManager.loadResString("DirectoryPrinter_1"));
         }
     }
 
@@ -44,7 +44,7 @@ public class DirectoryPrinter {
     private static void printSubdirectories(List<String> subdirectories) {
         var rootDir = new File(OBFOConstants.MY_GALLERY_PATH);
         if (!rootDir.exists() || !rootDir.isDirectory()) {
-            System.out.println("Directory does not exist or is not a directory: " + OBFOConstants.MY_GALLERY_PATH);
+            System.out.println(ResManager.loadResString("DirectoryPrinter_2", OBFOConstants.MY_GALLERY_PATH));
             return;
         }
         traverseDirectory(rootDir, subdirectories);
@@ -83,9 +83,7 @@ public class DirectoryPrinter {
         } catch (IOException e) {
             // This exception description comes from the JavaDoc for the
             // java.io.FileWriter constructor FileWriter(java.io.File)
-            System.out.println("An IO exception occurred. This file may exists but is a directory"
-                    + " rather than a regular file, does not exist but cannot be created, "
-                    + "or cannot be opened for any other reason.");
+            System.out.println(ResManager.loadResString("DirectoryPrinter_3"));
             EXCEPTION_FLAG = Boolean.TRUE;
         }
     }

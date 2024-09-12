@@ -1,6 +1,7 @@
 package org.jacob.im.obfo.monitor.core;
 
 import org.jacob.im.common.helper.IMCommonHelper;
+import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.logger.OBFOLogger;
 
@@ -23,6 +24,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class NewFilesAddedWatcher {
 
     /**
+     * Used to identify the thread, and is also the name of the class that created this thread.
+     */
+    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
+
+    /**
+     * Log information constant.
+     */
+    private static final String SERVER_LOG_INFO = "INFO [Server] [Monitor service]";
+
+    /**
+     * To avoid thread safety issues, atomic classes are used here.
+     */
+    private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
+
+    /**
      * A watch service that <em>watches</em> registered objects for changes and events.
      */
     private final WatchService watcher;
@@ -39,21 +55,6 @@ public class NewFilesAddedWatcher {
      * one or more asynchronous tasks.
      */
     private final ExecutorService executor;
-
-    /**
-     * Used to identify the thread, and is also the name of the class that created this thread.
-     */
-    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
-
-    /**
-     * Log information constant.
-     */
-    private static final String SERVER_LOG_INFO = "INFO [Server] [Monitor service]";
-
-    /**
-     * To avoid thread safety issues, atomic classes are used here.
-     */
-    private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
 
     /**
      * Constructor of {@link NewFilesAddedWatcher}.<p>
@@ -85,7 +86,7 @@ public class NewFilesAddedWatcher {
             printMemoryInfo();
             printThreadsInfo();
         } catch (IOException e) {
-            System.out.println("An IOException has occurred. Please identify and rectify the source of the problem.");
+            System.out.println(ResManager.loadResString("NewFilesAddedWatcher_1"));
             throw new RuntimeException(e);
         }
     }
@@ -120,8 +121,7 @@ public class NewFilesAddedWatcher {
                 }
             }
         } catch (InterruptedException e) {
-            System.out.println("An InterruptedException occurred."
-                    + " Please identify and rectify the source of the problem.");
+            System.out.println(ResManager.loadResString("NewFilesAddedWatcher_0"));
             // May need to gracefully shut down the thread pool.
             shutdown();
         }

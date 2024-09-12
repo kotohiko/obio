@@ -1,6 +1,7 @@
 package org.jacob.im.obfo.logger;
 
 import org.jacob.im.common.helper.IMCommonHelper;
+import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
 
 import java.io.BufferedWriter;
@@ -14,9 +15,6 @@ import java.nio.file.Path;
  */
 public class OBFOLogger {
 
-    private static final String LOG_FILE_EXCEPTION = "The log file cannot be found,"
-            + " please check if the file name or path is configured correctly.";
-
     public static void filesAddedLogWriter(Path fileWithAbsPath, int fileCount) {
         // Write the number of files and date to log file.
         try (BufferedWriter bw = new BufferedWriter(
@@ -25,7 +23,7 @@ public class OBFOLogger {
                     + " INFO [Client] - New files added: " + fileWithAbsPath.getFileName()
                     + "; Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
-            System.out.println(LOG_FILE_EXCEPTION);
+            System.out.println(ResManager.loadResString("OBFOLogger_0"));
         }
     }
 
@@ -37,7 +35,7 @@ public class OBFOLogger {
                     + " INFO [Client] - File(s) has/have been moved; "
                     + "Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
-            System.out.println(LOG_FILE_EXCEPTION);
+            System.out.println(ResManager.loadResString("OBFOLogger_0"));
         }
     }
 }
