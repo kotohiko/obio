@@ -4,6 +4,8 @@ import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.service.ReadAndMoveService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedReader;
@@ -15,6 +17,8 @@ import java.util.Map;
  * @since 14:38 Sep 12, 2024
  */
 public class ReadAndMoveController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ReadAndMoveController.class);
 
     /**
      * Main Execution Method
@@ -33,13 +37,13 @@ public class ReadAndMoveController {
                 Map<String, String> pathsData = yaml.load(ReadAndMoveService.loadYamlFile());
                 String defaultSourcePath = pathsData.get("Default source path");
                 if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
-                    System.out.println(ResManager.loadResString("ReadAndMoveController_1"));
+                    logger.error(ResManager.loadResString("ReadAndMoveController_1"));
                 } else {
                     ReadAndMoveService.filesMove(defaultSourcePath, pathsData, targetPathKey);
                 }
             }
         } catch (IOException e) {
-            System.out.println(ResManager.loadResString("ReadAndMoveController_2"));
+            logger.error(ResManager.loadResString("ReadAndMoveController_2"), e);
         }
         ReadAndMoveService.endLinePrintAndReboot();
     }

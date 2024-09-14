@@ -18,6 +18,7 @@ import java.io.IOException;
 public class DirectoryFilePrinter {
 
     public static void main(String[] args) {
+        System.out.print(ResManager.loadResString("DirectoryFilePrinter_1"));
         // Input your path here
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
             var directory = new File(in.readLine());

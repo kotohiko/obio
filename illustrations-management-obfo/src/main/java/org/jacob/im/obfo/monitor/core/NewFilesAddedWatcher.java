@@ -1,9 +1,10 @@
 package org.jacob.im.obfo.monitor.core;
 
-import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
-import org.jacob.im.obfo.logger.OBFOLogger;
+import org.jacob.im.obfo.logger.OBFOLogFilesWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,11 +30,6 @@ public class NewFilesAddedWatcher {
     private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
 
     /**
-     * Log information constant.
-     */
-    private static final String SERVER_LOG_INFO = "INFO [Server] [Monitor service]";
-
-    /**
      * To avoid thread safety issues, atomic classes are used here.
      */
     private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
@@ -55,6 +51,11 @@ public class NewFilesAddedWatcher {
      * one or more asynchronous tasks.
      */
     private final ExecutorService executor;
+
+    /**
+     * Log recorder.
+     */
+    private static final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
 
     /**
      * Constructor of {@link NewFilesAddedWatcher}.<p>
@@ -86,7 +87,7 @@ public class NewFilesAddedWatcher {
             printMemoryInfo();
             printThreadsInfo();
         } catch (IOException e) {
-            System.out.println(ResManager.loadResString("NewFilesAddedWatcher_1"));
+            logger.error(ResManager.loadResString("NewFilesAddedWatcher_1"));
             throw new RuntimeException(e);
         }
     }
@@ -121,7 +122,7 @@ public class NewFilesAddedWatcher {
                 }
             }
         } catch (InterruptedException e) {
-            System.out.println(ResManager.loadResString("NewFilesAddedWatcher_0"));
+            logger.error(ResManager.loadResString("NewFilesAddedWatcher_0"));
             // May need to gracefully shut down the thread pool.
             shutdown();
         }
@@ -141,7 +142,8 @@ public class NewFilesAddedWatcher {
                 ++fileCount;
             }
         }
-        OBFOLogger.filesAddedLogWriter(fileWithAbsPath, fileCount);
+        logger.info(ResManager.loadResString("NewFilesAddedWatcher_2"), fileWithAbsPath, fileCount);
+        OBFOLogFilesWriter.filesAddedLogWriter(fileWithAbsPath, fileCount);
     }
 
     /**
@@ -155,12 +157,9 @@ public class NewFilesAddedWatcher {
         // The amount of free memory in the Java Virtual Machine
         long freeMemory = runtime.freeMemory();
         long usedMemory = totalMemory - freeMemory;
-        System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
-                + " Total Heap memory: " + totalMemory / 1024 / 1024 + " MB");
-        System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
-                + " Heap free memory: " + freeMemory / 1024 / 1024 + " MB");
-        System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
-                + " Heap used memory: " + usedMemory / 1024 / 1024 + " MB");
+        logger.info("Total Heap memory: {} MB", totalMemory / 1024 / 1024);
+        logger.info("Heap free memory: {} MB", freeMemory / 1024 / 1024);
+        logger.info("Heap used memory: {} MB", usedMemory / 1024 / 1024);
     }
 
     /**
@@ -172,9 +171,7 @@ public class NewFilesAddedWatcher {
         long[] threadIds = threadMXBean.getAllThreadIds();
         for (long id : threadIds) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
-            System.out.println(IMCommonHelper.getRealTime() + " " + SERVER_LOG_INFO
-                    + " Thread Name: " + threadInfo.getThreadName()
-                    + ", State: " + threadInfo.getThreadState());
+            logger.info("Thread Name: {}, State:  {}", threadInfo.getThreadName(), threadInfo.getThreadState());
         }
     }
 

@@ -1,5 +1,6 @@
 package org.jacob.im.ifp;
 
+import org.jacob.im.ifp.constants.IFPConstants;
 import org.jacob.im.ifp.controller.IFPEntranceController;
 
 /**
@@ -10,9 +11,7 @@ import org.jacob.im.ifp.controller.IFPEntranceController;
  */
 public final class IFPApplication {
     public static void main(String[] args) {
-        System.out.println("*************************************************"
-                + "   Welcome to Illustrations Filename Parser   "
-                + "*************************************************");
+        System.out.println(IFPConstants.WELCOME_MESSAGE);
         IFPEntranceController.getFilename();
     }
 }

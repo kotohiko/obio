@@ -1,10 +1,13 @@
 package org.jacob.im.obfo.service;
 
 import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
-import org.jacob.im.obfo.logger.OBFOLogger;
+import org.jacob.im.obfo.logger.OBFOLogFilesWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +25,8 @@ import java.util.Objects;
  */
 public class ReadAndMoveService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ReadAndMoveService.class);
+
     /**
      * Load the YAML file.
      *
@@ -32,8 +37,7 @@ public class ReadAndMoveService {
         try {
             ymlFileStream = new FileInputStream(OBFOConstants.ILLUSTRATIONS_CONF_YML_PATH);
         } catch (FileNotFoundException e) {
-            System.out.println("The Yaml file does not exist. Please check if the arguments"
-                    + " passed to the FileInputStream object constructor match the actual path.");
+            logger.error(ResManager.loadResString("ReadAndMoveService_1"));
             endLinePrintAndReboot();
         }
         return ymlFileStream;
@@ -52,7 +56,7 @@ public class ReadAndMoveService {
         Path sourcePath = Paths.get(defaultSourcePath);
         String targetPathStr = pathsData.get(targetPathCode);
         if (targetPathStr == null) {
-            System.out.println("The entered path code does not match any valid path. Please check and correct it.");
+            logger.error(ResManager.loadResString("ReadAndMoveService_0"));
         } else {
             checkBeforeMove(sourcePath, targetPathStr);
         }
@@ -77,11 +81,10 @@ public class ReadAndMoveService {
             }
             // Check whether the file is found after traversal is completed.
             if (statusEnums.equals(FilesMoveOperStatusEnums.NO_FILES)) {
-                System.out.println("No files found in the source directory: " + sourcePath);
+                logger.error(ResManager.loadResString("ReadAndMoveService_3"), sourcePath);
             }
         } catch (IOException e) {
-            System.out.println("An IOException occurred while creating source path stream. "
-                    + "The source path might not exist, or there could be other problems");
+            logger.error(ResManager.loadResString("ReadAndMoveService_2"));
         }
     }
 
@@ -98,12 +101,12 @@ public class ReadAndMoveService {
         Path targetFilePath = targetPath.resolve(filePath.getFileName());
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("File has been moved: " + filePath + " -> " + targetFilePath);
+            logger.info(ResManager.loadResString("ReadAndMoveService_4"), filePath, targetFilePath);
             countTheNumberOfFiles();
             // Signal that the files have been found
             return FilesMoveOperStatusEnums.HAS_FILES;
         } catch (IOException e) {
-            System.out.println("Failed to move files. Please verify that the target path is valid.");
+            logger.error(ResManager.loadResString("ReadAndMoveService_5"));
             return FilesMoveOperStatusEnums.TARGET_PATH_INVALID;
         }
     }
@@ -120,7 +123,7 @@ public class ReadAndMoveService {
                 ++fileCount;
             }
         }
-        OBFOLogger.filesMoveLogWriter(fileCount);
+        OBFOLogFilesWriter.filesMoveLogWriter(fileCount);
     }
 
     public static void endLinePrintAndReboot() {

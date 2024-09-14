@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <!-- One-Button Files Organizer -->
+        <!-- One-Button File Organizer -->
         <module>illustrations-management-obfo</module>
         <!-- Illustrations Filename Parser -->
         <module>illustrations-management-ifp</module>
@@ -23,7 +23,8 @@
 
         <!-- 版本统一管理 -->
         <snakeyaml.version>2.2</snakeyaml.version>
-        <jython-standalone.version>2.7.4</jython-standalone.version>
+        <slf4j-api.version>2.0.12</slf4j-api.version>
+        <logback-classic.version>1.5.8</logback-classic.version>
     </properties>
 
     <dependencies>
@@ -33,6 +34,19 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeyaml.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
         </dependency>
 
     </dependencies>
@@ -49,5 +63,12 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

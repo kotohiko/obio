@@ -16,7 +16,7 @@ public class OBFOConstants {
             = "illustrations-management-obfo/src/main/resources/conf/illustrations-paths-conf.yaml";
 
     public static final String PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG
-            = "illustrations-management-obfo/src/main/resources/logs/unclassified-remaining-images.log";
+            = "illustrations-management-obfo/src/main/resources/logs-data/unclassified-remaining-images.log";
 
     public static final String PATH_COLLECTION_TXT
             = "illustrations-management-obfo/src/main/resources/path-collection.txt";
@@ -27,7 +27,7 @@ public class OBFOConstants {
     public static final String WELCOME_LINE
             = """
             ***************************************************************************************************************************
-            ****************************************   Welcome to One-Button Files Organizer   ****************************************
+            ****************************************   Welcome to One-Button File Organizer   *****************************************
             ***************************************************************************************************************************
             """;
 
