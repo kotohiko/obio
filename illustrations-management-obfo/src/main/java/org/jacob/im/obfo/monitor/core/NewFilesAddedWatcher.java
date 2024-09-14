@@ -53,7 +53,9 @@ public class NewFilesAddedWatcher {
     private final ExecutorService executor;
 
     /**
-     * Log recorder.
+     * The logger instance used for logging messages related to the {@link NewFilesAddedWatcher} class.
+     * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
+     * used throughout the class to provide detailed information about the watcher's operations.
      */
     private static final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
 
@@ -93,7 +95,14 @@ public class NewFilesAddedWatcher {
     }
 
     /**
-     * Monitor core logic.
+     * Starts watching the directory for new file events. This method runs an infinite loop,
+     * blocking and waiting for events to occur. When an event is detected, it submits a task
+     * to the thread pool to handle the event. The task processes each event by resolving the
+     * file path and invoking the {@code processFile} method.
+     *
+     * <p>If an {@code InterruptedException} is caught, it indicates that the thread has been
+     * interrupted, typically as a result of a request to stop watching. In this case, an error
+     * message is logged, and the thread pool is gracefully shut down.
      */
     private void startWatching() {
         try {
@@ -147,7 +156,10 @@ public class NewFilesAddedWatcher {
     }
 
     /**
-     * Print memory information.
+     * Prints information about the memory usage of the Java Virtual Machine (JVM). This method
+     * retrieves the total amount of memory, the amount of free memory, and calculates the used
+     * memory by subtracting the free memory from the total memory. The memory usage is then logged
+     * in megabytes (MB).
      */
     private void printMemoryInfo() {
         // Print memory usage
@@ -163,10 +175,11 @@ public class NewFilesAddedWatcher {
     }
 
     /**
-     * Print threads information.
+     * Prints information about all threads in the Java Virtual Machine (JVM).
+     * This method retrieves thread information using the {@link ThreadMXBean} and logs the
+     * name and state of each thread.
      */
     private void printThreadsInfo() {
-        // Print thread information related to Watcher threads
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
         long[] threadIds = threadMXBean.getAllThreadIds();
         for (long id : threadIds) {

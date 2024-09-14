@@ -25,12 +25,18 @@ import java.util.Objects;
  */
 public class ReadAndMoveService {
 
+    /**
+     * The logger instance used for logging messages related to the {@link ReadAndMoveService} class.
+     * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
+     * used throughout the class to provide detailed information about the watcher's operations.
+     */
     private static final Logger logger = LoggerFactory.getLogger(ReadAndMoveService.class);
 
     /**
-     * Load the YAML file.
+     * Loads a {@link FileInputStream} for the YAML configuration file.
+     * If the file is not found, logs an error message and performs a system reboot.
      *
-     * @return YAML file stream
+     * @return FileInputStream representing the YAML file stream, or null if the file is not found.
      */
     public static FileInputStream loadYamlFile() {
         FileInputStream ymlFileStream = null;
@@ -44,11 +50,19 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Moving files service.
+     * Moves files from a default source path to a target path specified by a target path code.
      *
-     * @param defaultSourcePath The default source path
-     * @param pathsData         Path mapping data
-     * @param targetPathCode    Code of the target path
+     * <p>This method first defines the source path using the provided default source path. It then
+     * retrieves the target path string from the provided map of paths data using the target path code.
+     * If the target path string is null, an error message is logged. Otherwise, it calls the
+     * {@link #checkBeforeMove(Path, String)} method to perform any necessary checks before moving
+     * the files.
+     *
+     * @param defaultSourcePath The default source path from which files will be moved.
+     * @param pathsData         A map containing path data where the key is the target path code and the value
+     *                          is the corresponding target path string.
+     * @param targetPathCode    The target path code used to retrieve the target path string from the
+     *                          paths data map.
      */
     public static void filesMove(String defaultSourcePath,
                                  Map<String, String> pathsData, String targetPathCode) {
@@ -89,12 +103,25 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Move the files.
+     * Moves a file from its current location to a specified target directory.
+     * <p>
+     * This method constructs the target file path by resolving the given file name with the target directory path.
+     * It then attempts to move the file to the new location, replacing any existing file with the same name
+     * in the target directory.
+     * <p>
+     * If the move operation is successful, the method logs an info message and increments the count of
+     * files moved (assuming {@link ReadAndMoveService#countTheNumberOfFiles()} updates a count).
+     * In case of an error, such as if the target path is invalid or the file cannot be moved for any reason,
+     * it logs an error message and returns an error status.
      *
-     * @param targetPath The target path
-     * @param filePath   The path of file
-     * @return whether the process for moving files was executed correctly.
-     * {@code true} for yes and {@code false} for no.
+     * @param targetPath The target directory where the file should be moved to.
+     * @param filePath   The path of the file to be moved.
+     * @return A {@link FilesMoveOperStatusEnums} enum indicating the status of the operation.
+     * - {@link FilesMoveOperStatusEnums#HAS_FILES} if the file was successfully moved.
+     * - {@link FilesMoveOperStatusEnums#TARGET_PATH_INVALID} if the target path is invalid or the move failed
+     * for any other reason.
+     * @see Files#move(Path, Path, CopyOption...)
+     * @see StandardCopyOption#REPLACE_EXISTING
      */
     private static FilesMoveOperStatusEnums moveTheFiles(Path targetPath, Path filePath) {
         // Construct the target path
@@ -112,7 +139,10 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Count the number of files, and write the result into the log.
+     * Counts the number of files in the specified directory and writes the count to a log file.
+     * This method traverses all the files under the directory specified by
+     * {@code OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH}, counts the number of files,
+     * and then calls {@code OBFOLogFilesWriter.filesMoveLogWriter} to write the count to a log file.
      */
     private static void countTheNumberOfFiles() {
         File folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);

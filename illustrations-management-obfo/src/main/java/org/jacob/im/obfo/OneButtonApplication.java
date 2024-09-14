@@ -11,6 +11,11 @@ import org.slf4j.LoggerFactory;
  */
 public final class OneButtonApplication {
 
+    /**
+     * The logger instance used for logging messages related to the {@link OneButtonApplication} class.
+     * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
+     * used throughout the class to provide detailed information about the watcher's operations.
+     */
     private static final Logger logger = LoggerFactory.getLogger(OneButtonApplication.class);
 
     public static void main(String[] args) {

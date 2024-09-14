@@ -14,13 +14,19 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Entrance of parsing filename to URL.
+ * This class serves as the entry point for parsing filenames into URLs.
+ * It handles user input from the console, processes the filenames, and opens the resulting URLs in a browser.
  *
  * @author Kotohiko
  * @since Oct 2, 2023
  */
 public final class IFPEntranceController {
 
+    /**
+     * The logger instance used for logging messages related to the {@link IFPEntranceController} class.
+     * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
+     * used throughout the class to provide detailed information about the watcher's operations.
+     */
     private static final Logger logger = LoggerFactory.getLogger(IFPEntranceController.class);
 
     /**
@@ -30,7 +36,8 @@ public final class IFPEntranceController {
     }
 
     /**
-     * Get the filename and process the core logic.
+     * Prompts the user for a filename, processes it to extract a URL, and opens the URL in a browser.
+     * If the filename does not yield a valid URL, it logs a warning and prompts the user again.
      */
     public static void getFilename() {
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
@@ -54,7 +61,7 @@ public final class IFPEntranceController {
     }
 
     /**
-     * Supports opening directly through the browser after parsing.
+     * Opens the specified URI in the default browser.
      */
     private static void openUriByBrowser(String out) {
         logger.info(ResManager.loadResString("IFPEntranceController_2", out));
@@ -68,6 +75,9 @@ public final class IFPEntranceController {
         endLinePrintAndReboot();
     }
 
+    /**
+     * Prints a separator line and then calls {@link IFPEntranceController#getFilename()} to prompt the user again.
+     */
     private static void endLinePrintAndReboot() {
         System.out.println(IMCommonConstants.SEPARATOR_LINE);
         getFilename();

@@ -13,15 +13,26 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * This class is responsible for handling the main execution logic
+ * for reading YAML configuration files and moving files based on the specified paths.
+ * It uses a {@link BufferedReader} to read user input from the console and processes the input
+ * to perform file operations.
+ *
  * @author Kotohiko
  * @since 14:38 Sep 12, 2024
  */
 public class ReadAndMoveController {
 
+    /**
+     * The logger instance used for logging messages related to the {@link ReadAndMoveController} class.
+     * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
+     * used throughout the class to provide detailed information about the watcher's operations.
+     */
     private static final Logger logger = LoggerFactory.getLogger(ReadAndMoveController.class);
 
     /**
-     * Main Execution Method
+     * The main execution method of the {@link ReadAndMoveController} class. This method handles user input,
+     * reads YAML configuration files, and performs file moving operations based on the provided paths.
      */
     public static void mainPart() {
         System.out.print(OBFOConstants.WELCOME_LINE);
