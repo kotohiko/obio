@@ -1,7 +1,7 @@
 package org.jacob.im.ifp.service;
 
 /**
- * Core class for parsing filenames.
+ * Provides utilities for parsing filenames into URLs based on different platforms.
  *
  * @author Kotohiko
  * @since Oct 29, 2023
@@ -14,6 +14,12 @@ public final class FilenameParser {
     private FilenameParser() {
     }
 
+    /**
+     * Converts the specified string to a StringBuilder object.
+     *
+     * @param string The string to be converted.
+     * @return A StringBuilder object representing the input string.
+     */
     private static StringBuilder getStringBuilder(String string) {
         return new StringBuilder(string);
     }

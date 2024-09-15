@@ -12,7 +12,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.nio.file.*;
-import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,37 +26,33 @@ public class NewFilesAddedWatcher {
     /**
      * Used to identify the thread, and is also the name of the class that created this thread.
      */
-    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher";
+    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher-Thread";
 
     /**
      * To avoid thread safety issues, atomic classes are used here.
      */
     private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
-
-    /**
-     * A watch service that <em>watches</em> registered objects for changes and events.
-     */
-    private final WatchService watcher;
-
-    /**
-     * An object that may be used to locate a file in a file system.
-     * It will typically represent a system dependent file path.
-     */
-    private final Path dir;
-
-    /**
-     * An {@link Executor} that provides methods to manage termination and
-     * methods that can produce a {@link Future} for tracking progress of
-     * one or more asynchronous tasks.
-     */
-    private final ExecutorService executor;
-
     /**
      * The logger instance used for logging messages related to the {@link NewFilesAddedWatcher} class.
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
     private static final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
+    /**
+     * A watch service that <em>watches</em> registered objects for changes and events.
+     */
+    private final WatchService watcher;
+    /**
+     * An object that may be used to locate a file in a file system.
+     * It will typically represent a system dependent file path.
+     */
+    private final Path dir;
+    /**
+     * An {@link Executor} that provides methods to manage termination and
+     * methods that can produce a {@link Future} for tracking progress of
+     * one or more asynchronous tasks.
+     */
+    private final ExecutorService executor;
 
     /**
      * Constructor of {@link NewFilesAddedWatcher}.<p>
@@ -109,6 +104,7 @@ public class NewFilesAddedWatcher {
             while (true) {
                 // Block and wait for event occurs
                 var key = watcher.take();
+
                 // Submit a task for each event in the thread pool.
                 executor.submit(() -> {
                     var events = key.pollEvents();
@@ -119,13 +115,17 @@ public class NewFilesAddedWatcher {
                         }
 
                         @SuppressWarnings("unchecked")
-                        var ev = (WatchEvent<Path>) event;
-                        var filename = dir.resolve(ev.context());
+                        // Use a typed cast to eliminate unchecked cast warning
+                        WatchEvent<Path> ev = (WatchEvent<Path>) event;
+                        Path filename = dir.resolve(ev.context());
+                        // Validate the file path before processing
+                        Files.exists(filename);
                         processFile(filename);
                     }
                 });
+
                 // Reset the key
-                var valid = key.reset();
+                boolean valid = key.reset();
                 if (!valid) {
                     break;
                 }
@@ -144,14 +144,22 @@ public class NewFilesAddedWatcher {
      */
     private void processFile(Path fileWithAbsPath) {
         var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
-        var fileCount = 0;
-        // Iterate through all files in the directory
-        for (File allFiles : Objects.requireNonNull(folder.listFiles())) {
-            if (allFiles.isFile()) {
-                ++fileCount;
-            }
+
+        // Check if the folder exists and is a directory
+        if (!folder.exists() || !folder.isDirectory()) {
+            logger.error(ResManager.loadResString("NewFilesAddedWatcher_3",
+                    OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH));
+            return;
         }
-        logger.info(ResManager.loadResString("NewFilesAddedWatcher_2"), fileWithAbsPath, fileCount);
+
+        var fileCount = 0;
+        try (var stream = Files.list(folder.toPath())) {
+            fileCount = (int) stream.filter(Files::isRegularFile).count();
+        } catch (IOException e) {
+            logger.error(ResManager.loadResString("NewFilesAddedWatcher_4",
+                    OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH));
+            return;
+        }
         OBFOLogFilesWriter.filesAddedLogWriter(fileWithAbsPath, fileCount);
     }
 
@@ -163,12 +171,12 @@ public class NewFilesAddedWatcher {
      */
     private void printMemoryInfo() {
         // Print memory usage
-        Runtime runtime = Runtime.getRuntime();
+        var runtime = Runtime.getRuntime();
         // The total amount of memory in the Java virtual machine
-        long totalMemory = runtime.totalMemory();
+        var totalMemory = runtime.totalMemory();
         // The amount of free memory in the Java Virtual Machine
-        long freeMemory = runtime.freeMemory();
-        long usedMemory = totalMemory - freeMemory;
+        var freeMemory = runtime.freeMemory();
+        var usedMemory = totalMemory - freeMemory;
         logger.info("Total Heap memory: {} MB", totalMemory / 1024 / 1024);
         logger.info("Heap free memory: {} MB", freeMemory / 1024 / 1024);
         logger.info("Heap used memory: {} MB", usedMemory / 1024 / 1024);
@@ -181,7 +189,7 @@ public class NewFilesAddedWatcher {
      */
     private void printThreadsInfo() {
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
-        long[] threadIds = threadMXBean.getAllThreadIds();
+        var threadIds = threadMXBean.getAllThreadIds();
         for (long id : threadIds) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
             logger.info("Thread Name: {}, State:  {}", threadInfo.getThreadName(), threadInfo.getThreadState());

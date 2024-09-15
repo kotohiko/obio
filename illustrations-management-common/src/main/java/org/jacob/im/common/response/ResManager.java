@@ -2,6 +2,7 @@ package org.jacob.im.common.response;
 
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
@@ -14,8 +15,20 @@ import java.util.Map;
  */
 public class ResManager {
 
-    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(ResManager.class);
+    /**
+     * The logger instance used for logging messages related to the {@link ResManager} class.
+     * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
+     * used throughout the class to provide detailed information about the watcher's operations.
+     */
+    private static final Logger logger = LoggerFactory.getLogger(ResManager.class);
 
+    /**
+     * Loads a resource string based on the message key and replaces placeholders.
+     *
+     * @param msgKey      The message key used to find the corresponding string in the YAML file.
+     * @param placeholder Variable arguments used to replace placeholders in the message string.
+     * @return The processed message string with placeholders replaced.
+     */
     public static String loadResString(String msgKey, String... placeholder) {
         Yaml yaml = new Yaml();
         FileInputStream ymlFileStream = null;
@@ -24,9 +37,11 @@ public class ResManager {
         } catch (FileNotFoundException e) {
             logger.error(ResManager.loadResString("ResManager_0"));
         }
+
         Map<String, String> pathsData = yaml.load(ymlFileStream);
+        // Retrieve the corresponding string based on the message key
         String msg = pathsData.get(msgKey);
-        // 处理占位符
+        // Process placeholders
         if (placeholder.length > 0) {
             for (var i = 0; i < placeholder.length; ++i) {
                 msg = msg.replace("{" + i + "}", placeholder[i]);

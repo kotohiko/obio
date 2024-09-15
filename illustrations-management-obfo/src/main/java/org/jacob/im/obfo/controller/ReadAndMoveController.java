@@ -44,6 +44,7 @@ public class ReadAndMoveController {
                 if ((targetPathKey = in.readLine()) == null) {
                     break;
                 }
+
                 // Load a YAML file into a Java object.
                 Map<String, String> pathsData = yaml.load(ReadAndMoveService.loadYamlFile());
                 String defaultSourcePath = pathsData.get("Default source path");

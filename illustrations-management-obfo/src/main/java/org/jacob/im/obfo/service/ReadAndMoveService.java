@@ -18,7 +18,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Main class that reading and moving files.
+ * Provides functionality for reading and moving files between specified paths.
+ * This class handles loading configuration files, moving files, and logging operations.
  *
  * @author Kotohiko
  * @since 07:26 Aug 02, 2024
@@ -78,10 +79,17 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Necessary validation before and after moving files.
+     * Checks the source directory for files and moves them to the target directory if found.
      *
-     * @param sourcePath    The source path
-     * @param targetPathStr The target path string
+     * <p>This method iterates through all the files in the specified source directory,
+     * and moves each file to the specified target directory. It ignores any subdirectories
+     * and processes only regular files. If no files are found in the source directory,
+     * it logs an error message indicating that no files were found. If an IOException
+     * occurs during file traversal, it logs an error message for the exception.</p>
+     *
+     * @param sourcePath    the path of the source directory to check for files.
+     * @param targetPathStr the string representation of the target directory path
+     *                      where the files will be moved.
      */
     private static void checkBeforeMove(Path sourcePath, String targetPathStr) {
         Path targetPath = Paths.get(targetPathStr);
@@ -128,7 +136,8 @@ public class ReadAndMoveService {
         Path targetFilePath = targetPath.resolve(filePath.getFileName());
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
-            logger.info(ResManager.loadResString("ReadAndMoveService_4"), filePath, targetFilePath);
+            logger.info(ResManager.loadResString("ReadAndMoveService_4",
+                    filePath.toString(), targetFilePath.toString()));
             countTheNumberOfFiles();
             // Signal that the files have been found
             return FilesMoveOperStatusEnums.HAS_FILES;
