@@ -31,6 +31,8 @@ public class OBFOConstants {
             ***************************************************************************************************************************
             """;
 
+    public static final String EXPLORER_EXE = "explorer.exe";
+
     private OBFOConstants() {
     }
 }

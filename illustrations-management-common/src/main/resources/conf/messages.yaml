@@ -9,7 +9,9 @@ IFPEntranceController_4: "Failed to obtain input contents. Please verify and try
 # illustrations-management-obfo
 ReadAndMoveController_0: "Please enter your target path code: "
 ReadAndMoveController_1: "Failed to get the source path. Please check if the source path mapping in the YAML file matches the actual local path."
-ReadAndMoveController_2: "Cannot read your input contents, please check and try again."
+ReadAndMoveController_2: "Cannot read your input contents. Please check and try again."
+ReadAndMoveController_3: "Invalid path or cannot open the folder. Please check and try again."
+ReadAndMoveController_4: "Opening folder: {0}"
 ReadAndMoveService_0: "The entered path code does not match any valid target path. Please check and correct it."
 ReadAndMoveService_1: "The Yaml file does not exist. Please check if the arguments passed to the specified object constructor match the actual path."
 ReadAndMoveService_2: "An IOException occurred while creating source path stream. The source path might not exist, or there could be other problems. Please check and correct it."
