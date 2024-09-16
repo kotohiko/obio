@@ -1,9 +1,8 @@
 package org.jacob.im.ifp.controller;
 
-import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
-import org.jacob.im.ifp.service.FilenameSwitcher;
+import org.jacob.im.ifp.api.IFPParsingApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,26 +43,17 @@ public final class IFPEntranceController {
             String fileName;
             System.out.print(ResManager.loadResString("IFPEntranceController_1"));
             while ((fileName = in.readLine()) != null) {
-                String retUrl = FilenameSwitcher.parseFileName(fileName);
-                if (retUrl.isBlank()) {
-                    logger.warn(ResManager.loadResString("IFPEntranceController_0"));
-                    endLinePrintAndReboot();
-                } else {
-                    openUriByBrowser(retUrl);
-                    endLinePrintAndReboot();
-                    System.out.print(ResManager.loadResString("IFPEntranceController_1"));
-                }
+                IFPParsingApi.getAndParse(fileName);
             }
         } catch (IOException e) {
             logger.error(ResManager.loadResString("IFPEntranceController_4"));
         }
-        endLinePrintAndReboot();
     }
 
     /**
      * Opens the specified URI in the default browser.
      */
-    private static void openUriByBrowser(String out) {
+    public static void openUriByBrowser(String out) {
         logger.info(ResManager.loadResString("IFPEntranceController_2", out));
         Desktop desktop = Desktop.getDesktop();
         try {
@@ -72,14 +62,5 @@ public final class IFPEntranceController {
         } catch (URISyntaxException | IOException e) {
             logger.error(ResManager.loadResString("IFPEntranceController_3"));
         }
-        endLinePrintAndReboot();
-    }
-
-    /**
-     * Prints a separator line and then calls {@link IFPEntranceController#getFilename()} to prompt the user again.
-     */
-    private static void endLinePrintAndReboot() {
-        System.out.println(IMCommonConstants.SEPARATOR_LINE);
-        getFilename();
     }
 }

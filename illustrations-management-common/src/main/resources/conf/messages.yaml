@@ -7,7 +7,7 @@ IFPEntranceController_2: "Parsed successfully! The returned URL is: {0}. Your de
 IFPEntranceController_3: "An error occurred in the URL syntax, or the URL is null. Please verify that there are no errors or illegal characters in the input contents."
 IFPEntranceController_4: "Failed to obtain input contents. Please verify and try again."
 # illustrations-management-obfo
-ReadAndMoveController_0: "Please enter your target path code: "
+ReadAndMoveController_0: "Please enter your target path code or filename: "
 ReadAndMoveController_1: "Failed to get the source path. Please check if the source path mapping in the YAML file matches the actual local path."
 ReadAndMoveController_2: "Cannot read your input contents. Please check and try again."
 ReadAndMoveController_3: "Invalid path or cannot open the folder. Please check and try again."

@@ -3,6 +3,7 @@ package org.jacob.im.obfo.controller;
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
+import org.jacob.im.ifp.api.IFPParsingApi;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.service.ReadAndMoveService;
 import org.slf4j.Logger;
@@ -50,8 +51,11 @@ public class ReadAndMoveController {
                     break;
                 }
 
+                boolean switchToIFP = IFPParsingApi.getAndParse(targetPathKey);
                 if (isValidPath(targetPathKey)) {
                     openFolder(targetPathKey);
+                    System.out.println(IMCommonConstants.SEPARATOR_LINE);
+                } else if (switchToIFP) {
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else {
                     // Load a YAML file into a Java object.
