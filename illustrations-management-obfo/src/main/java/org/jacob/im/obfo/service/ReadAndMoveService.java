@@ -103,7 +103,7 @@ public class ReadAndMoveService {
             }
             // Check whether the file is found after traversal is completed.
             if (statusEnums.equals(FilesMoveOperStatusEnums.NO_FILES)) {
-                logger.error(ResManager.loadResString("ReadAndMoveService_3"), sourcePath);
+                logger.error(ResManager.loadResString("ReadAndMoveService_3", sourcePath.toString()));
             }
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveService_2"));

@@ -210,4 +210,19 @@ public final class FilenameParser {
     public static String wallpaperCaveParser(String str) {
         return "https://wallpapercave.com/w/" + str;
     }
+
+    /**
+     * <a href="https://www.deviantart.com/">Deviantart</a> URL-like filename parser.
+     *
+     * @param str filename string param
+     * @return parsed URL
+     */
+    public static String deviantartParser(String str) {
+        var sb = getStringBuilder(str);
+        sb.insert(5, "://");
+        sb.insert(sb.indexOf("com") + 3, "/");
+        sb.insert(sb.indexOf("sevenics") + 8, "/");
+        sb.insert(sb.lastIndexOf("art") + 3, "/");
+        return sb.toString();
+    }
 }

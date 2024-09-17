@@ -38,6 +38,8 @@ public final class FilenameSwitcher {
             return FilenameParser.bilibiliIllustrationsParser(fileName);
         } else if (fileName.contains("miyoushe.com")) {
             return FilenameParser.miyousheParser(fileName);
+        } else if (fileName.contains("deviantart")) {
+            return FilenameParser.deviantartParser(fileName);
         }
         return "";
     }

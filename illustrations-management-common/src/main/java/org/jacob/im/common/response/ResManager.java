@@ -10,6 +10,10 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 
 /**
+ * A utility class for managing resource strings loaded from a YAML configuration file.
+ * Provides methods for retrieving and formatting messages based on keys defined in the YAML file.
+ * Utilizes a logger for tracking operational status and errors.
+ *
  * @author Kotohiko
  * @since 17:02 Sep 12, 2024
  */
