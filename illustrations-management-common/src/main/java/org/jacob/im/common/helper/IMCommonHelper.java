@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * Utility class providing common helper functions for IM applications.
+ * Includes methods for obtaining the current timestamp in a standard format and reading from the console etc.
+ *
  * @author Kotohiko
  * @since 19:06 Sep 08, 2024
  */
