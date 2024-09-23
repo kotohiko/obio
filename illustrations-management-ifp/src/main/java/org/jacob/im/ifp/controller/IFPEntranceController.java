@@ -55,9 +55,9 @@ public final class IFPEntranceController {
      */
     public static void openUriByBrowser(String out) {
         logger.info(ResManager.loadResString("IFPEntranceController_2", out));
-        Desktop desktop = Desktop.getDesktop();
+        var desktop = Desktop.getDesktop();
         try {
-            URI uri = new URI(out);
+            var uri = new URI(out);
             desktop.browse(uri);
         } catch (URISyntaxException | IOException e) {
             logger.error(ResManager.loadResString("IFPEntranceController_3"));

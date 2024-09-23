@@ -14,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
@@ -51,7 +50,7 @@ public class ReadAndMoveController {
                     break;
                 }
 
-                boolean switchToIFP = IFPParsingApi.getAndParse(targetPathKey);
+                var switchToIFP = IFPParsingApi.getAndParse(targetPathKey);
                 if (isValidPath(targetPathKey)) {
                     openFolder(targetPathKey);
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
@@ -82,7 +81,7 @@ public class ReadAndMoveController {
     private static void openFolder(String path) {
         try {
             // Create a ProcessBuilder instance with the command to execute
-            ProcessBuilder builder = new ProcessBuilder(OBFOConstants.EXPLORER_EXE, path);
+            var builder = new ProcessBuilder(OBFOConstants.EXPLORER_EXE, path);
             builder.start();
             logger.info(ResManager.loadResString("ReadAndMoveController_4", path));
         } catch (IOException e) {
@@ -98,7 +97,7 @@ public class ReadAndMoveController {
      */
     private static boolean isValidPath(String path) {
         try {
-            Path p = Paths.get(path);
+            var p = Paths.get(path);
             return Files.exists(p);
         } catch (InvalidPathException e) {
             return false;

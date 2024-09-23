@@ -68,8 +68,8 @@ public class ReadAndMoveService {
     public static void filesMove(String defaultSourcePath,
                                  Map<String, String> pathsData, String targetPathCode) {
         // Define source path and target path
-        Path sourcePath = Paths.get(defaultSourcePath);
-        String targetPathStr = pathsData.get(targetPathCode);
+        var sourcePath = Paths.get(defaultSourcePath);
+        var targetPathStr = pathsData.get(targetPathCode);
         if (targetPathStr == null) {
             logger.error(ResManager.loadResString("ReadAndMoveService_0"));
         } else {
@@ -92,8 +92,8 @@ public class ReadAndMoveService {
      *                      where the files will be moved.
      */
     private static void checkBeforeMove(Path sourcePath, String targetPathStr) {
-        Path targetPath = Paths.get(targetPathStr);
-        FilesMoveOperStatusEnums statusEnums = FilesMoveOperStatusEnums.NO_FILES;
+        var targetPath = Paths.get(targetPathStr);
+        var statusEnums = FilesMoveOperStatusEnums.NO_FILES;
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
             for (Path filePath : directoryStream) {
                 // Ignore directories and process only files.
@@ -133,7 +133,7 @@ public class ReadAndMoveService {
      */
     private static FilesMoveOperStatusEnums moveTheFiles(Path targetPath, Path filePath) {
         // Construct the target path
-        Path targetFilePath = targetPath.resolve(filePath.getFileName());
+        var targetFilePath = targetPath.resolve(filePath.getFileName());
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
             logger.info(ResManager.loadResString("ReadAndMoveService_4",
@@ -154,7 +154,7 @@ public class ReadAndMoveService {
      * and then calls {@code OBFOLogFilesWriter.filesMoveLogWriter} to write the count to a log file.
      */
     private static void countTheNumberOfFiles() {
-        File folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
+        var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
         int fileCount = 0;
         // Traverse all the files under the specified directory.
         for (File file : Objects.requireNonNull(folder.listFiles())) {

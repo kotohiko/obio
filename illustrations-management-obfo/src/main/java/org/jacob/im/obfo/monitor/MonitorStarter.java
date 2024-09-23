@@ -22,7 +22,7 @@ public class MonitorStarter {
      * @return A string representation of the initialized {@link NewFilesAddedWatcher}.
      */
     public static String monitorStarter() {
-        NewFilesAddedWatcher addFileMonitor = new NewFilesAddedWatcher(Paths
+        var addFileMonitor = new NewFilesAddedWatcher(Paths
                 .get(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH), 5);
         return addFileMonitor.toString();
     }

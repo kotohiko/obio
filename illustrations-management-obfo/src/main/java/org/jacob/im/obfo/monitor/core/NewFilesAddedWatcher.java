@@ -125,7 +125,7 @@ public class NewFilesAddedWatcher {
                 });
 
                 // Reset the key
-                boolean valid = key.reset();
+                var valid = key.reset();
                 if (!valid) {
                     break;
                 }
