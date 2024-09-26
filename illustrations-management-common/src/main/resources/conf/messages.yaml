@@ -3,7 +3,7 @@ ResManager_0: "The YAML file does not exist. Please check if the arguments passe
 # illustrations-management-ifp
 IFPEntranceController_0: "The return URL value is blank, please verify that there are no errors or illegal characters in the input contents."
 IFPEntranceController_1: "Please enter your filename: "
-IFPEntranceController_2: "Parsed successfully! The returned URL is: {0}. Your default browser will open this URL automatically."
+IFPEntranceController_2: "Parsing Complete. The returned URL is: {0}. Your default browser will open this URL automatically."
 IFPEntranceController_3: "An error occurred in the URL syntax, or the URL is null. Please verify that there are no errors or illegal characters in the input contents."
 IFPEntranceController_4: "Failed to obtain input contents. Please verify and try again."
 # illustrations-management-obfo
