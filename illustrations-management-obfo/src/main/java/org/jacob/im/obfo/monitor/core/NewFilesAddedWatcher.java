@@ -26,27 +26,31 @@ public class NewFilesAddedWatcher {
     /**
      * Used to identify the thread, and is also the name of the class that created this thread.
      */
-    private static final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher-Thread";
+    private final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher-Thread";
 
     /**
      * To avoid thread safety issues, atomic classes are used here.
      */
-    private static final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
+    private final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
+
     /**
      * The logger instance used for logging messages related to the {@link NewFilesAddedWatcher} class.
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
-    private static final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
+    private final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
+
     /**
      * A watch service that <em>watches</em> registered objects for changes and events.
      */
     private final WatchService watcher;
+
     /**
      * An object that may be used to locate a file in a file system.
      * It will typically represent a system dependent file path.
      */
     private final Path dir;
+
     /**
      * An {@link Executor} that provides methods to manage termination and
      * methods that can produce a {@link Future} for tracking progress of
@@ -56,7 +60,7 @@ public class NewFilesAddedWatcher {
 
     /**
      * Constructor of {@link NewFilesAddedWatcher}.<p>
-     * This will submit the {@link NewFilesAddedWatcher#startWatching()} method of the current object
+     * This will submit the{@link NewFilesAddedWatcher#startWatching()}method of the current object
      * as a task to the executor thread pool for asynchronous execution. This task will be executed
      * on a thread in the thread pool without blocking the current thread.<p>
      * If you don't understand the new writing style:{@code executor.submit(this::startWatching);},
@@ -78,6 +82,7 @@ public class NewFilesAddedWatcher {
                 t.setDaemon(true);
                 return t;
             });
+
             // Start monitoring the directory upon initialization
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
             executor.submit(this::startWatching);
@@ -93,9 +98,9 @@ public class NewFilesAddedWatcher {
      * Starts watching the directory for new file events. This method runs an infinite loop,
      * blocking and waiting for events to occur. When an event is detected, it submits a task
      * to the thread pool to handle the event. The task processes each event by resolving the
-     * file path and invoking the {@code processFile} method.
+     * file path and invoking the{@code processFile}method.
      *
-     * <p>If an {@code InterruptedException} is caught, it indicates that the thread has been
+     * <p>If an{@code InterruptedException}is caught, it indicates that the thread has been
      * interrupted, typically as a result of a request to stop watching. In this case, an error
      * message is logged, and the thread pool is gracefully shut down.
      */
@@ -192,7 +197,7 @@ public class NewFilesAddedWatcher {
         var threadIds = threadMXBean.getAllThreadIds();
         for (long id : threadIds) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
-            logger.info("Thread Name: {}, State:  {}", threadInfo.getThreadName(), threadInfo.getThreadState());
+            logger.info("Thread Name: {}, State: {}", threadInfo.getThreadName(), threadInfo.getThreadState());
         }
     }
 

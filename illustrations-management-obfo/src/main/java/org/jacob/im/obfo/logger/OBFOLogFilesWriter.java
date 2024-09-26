@@ -20,7 +20,7 @@ import java.nio.file.Path;
 public class OBFOLogFilesWriter {
 
     /**
-     * The logger instance used for logging messages related to the {@link OBFOLogFilesWriter} class.
+     * The logger instance used for logging messages related to the{@link OBFOLogFilesWriter}class.
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
