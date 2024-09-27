@@ -34,7 +34,7 @@ public class NewFilesAddedWatcher {
     private final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
 
     /**
-     * The logger instance used for logging messages related to the {@link NewFilesAddedWatcher} class.
+     * The logger instance used for logging messages related to the{@link NewFilesAddedWatcher}class.
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
@@ -52,14 +52,14 @@ public class NewFilesAddedWatcher {
     private final Path dir;
 
     /**
-     * An {@link Executor} that provides methods to manage termination and
-     * methods that can produce a {@link Future} for tracking progress of
+     * An{@link Executor}that provides methods to manage termination and
+     * methods that can produce a{@link Future}for tracking progress of
      * one or more asynchronous tasks.
      */
     private final ExecutorService executor;
 
     /**
-     * Constructor of {@link NewFilesAddedWatcher}.<p>
+     * Constructor of{@link NewFilesAddedWatcher}.<p>
      * This will submit the{@link NewFilesAddedWatcher#startWatching()}method of the current object
      * as a task to the executor thread pool for asynchronous execution. This task will be executed
      * on a thread in the thread pool without blocking the current thread.<p>
@@ -189,7 +189,7 @@ public class NewFilesAddedWatcher {
 
     /**
      * Prints information about all threads in the Java Virtual Machine (JVM).
-     * This method retrieves thread information using the {@link ThreadMXBean} and logs the
+     * This method retrieves thread information using the{@link ThreadMXBean}and logs the
      * name and state of each thread.
      */
     private void printThreadsInfo() {
