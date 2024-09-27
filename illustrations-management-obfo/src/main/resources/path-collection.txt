@@ -4,6 +4,7 @@ S:\Gallery\【Steam】海报／截图
 S:\Gallery\【三次元】三次元世界
 S:\Gallery\【三次元】三次元世界\【摄影】都市／古建筑／自然景观
 S:\Gallery\【三次元】三次元世界\【摄影】都市／古建筑／自然景观\【日本】古风
+S:\Gallery\【三次元】三次元世界\【摄影】都市／古建筑／自然景观\【日本】温泉与旅馆
 S:\Gallery\【三次元】三次元世界\【摄影】都市／古建筑／自然景观\【日本】现代
 S:\Gallery\【三次元】三次元世界\【摄影】都市／古建筑／自然景观\【日本】自然景观
 S:\Gallery\【三次元】三次元世界\【生活】照片
@@ -263,6 +264,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Ge
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Citlali／#茜特菈莉／#シトラリ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Kachina／#卡齐娜／#カチーナ
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Kinich／#基尼奇／#キィニチ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Mavuika／#玛薇卡／#マーヴィカ／#마비카
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Mualani／#玛拉妮／#むあらに
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Mualani／#玛拉妮／#むあらに\#Great Illustrations／#优秀作品／#素晴らしいイラスト
@@ -270,6 +272,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Ge
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Mualani／#玛拉妮／#むあらに\Cosers
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#Mualani／#玛拉妮／#むあらに\R18
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#玛卡基三小只
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Natlan／#纳塔／#ナタ／#나타\#纳塔风景
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Serenitea Pot／#尘歌壶／#
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Snezhnaya／#至冬／#スネージナヤ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Genshin Impact／#原神／#原神（げんしん）／#원신\#Snezhnaya／#至冬／#スネージナヤ\#Ajax／#阿贾克斯／#アヤックス
@@ -393,6 +396,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Or
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] gomzi🌸 RAUM
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] H
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] rurudo
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] YUtuKI
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] あいに／ainy
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] うろつき
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] おおかみりる（小狼人OC）
@@ -403,6 +407,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Or
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] ようづき
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] れぶん
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] イコモチ
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] サイユ@illustrator🐾🌙
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] ロロコ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] 望月あおは
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] 犬吠埼いつき
@@ -411,6 +416,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Or
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] 玉之けだま\先生がエロすぎてようちえん留年しそうな件
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] 琴か
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] 藤ちょこ（藤原）
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[日] 鯖飛
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[韩] hagoonha
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\[韩] モカクラ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Original／#原创／#オリジナル\ほうき星
@@ -425,7 +431,6 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Or
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Princess Connect! Re：Dive／#公主连结Re：Dive／#プリンセスコネクト！Re：Dive
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Sakuna Of Rice and Ruin／#天穗之咲稻姬／#天穂のサクナヒメ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Scenery／#风景
-S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Scenery／#风景\#Washitsu／#和室
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Sound Voltex
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Sousou no Frieren／#葬送的芙莉莲／#葬送のフリーレン
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#SPY×FAMILY／#间谍过家家／#スパイファミリー
@@ -433,6 +438,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Te
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#The Apothecary Diaries／#药师少女的独语／#薬屋のひとりごと
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#The Idolmaster／#偶像大师
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project\#Hakurei Reimu／#博丽灵梦
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project\剧毒少女
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project\剧毒少女\(C74) [2008.08.16] [劇毒少女(ke-ta、日向、東馬雪崩)]【漫畵】東方少女 publication number I
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project\剧毒少女\(C76) [2009.08.15] [劇毒少女(ke-ta、日向、東馬雪崩)]【漫畵】東方少女 publication number II
@@ -517,6 +523,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#VT
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#VTuber／#Virtual singer／#虚拟歌姬／#虚拟主播／#仮想歌姫\[西]#AkugakiKoa／#アクガキコア
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#VTuber／#Virtual singer／#虚拟歌姬／#虚拟主播／#仮想歌姫\[韩]#Tenko Shibuki／#텐코 시부키
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Wandering Witch：The Journey of Elaina／#魔女之旅／#魔女の旅々
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Washitsu／#和室
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Wuthering Waves／#鸣潮
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Yosuga no Sora／#缘之空／#ヨスガノソラ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Zenless Zero Zone／#绝区零／#ゼンレスゾーンゼロ／#젠레스 존 제로
@@ -531,6 +538,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#�
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#少女前线
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#少女前线\PA-15
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#强袭魔女／#ストライクウィッチーズ
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#明日方舟
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#未定事件簿
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#物语系列#シリーズ
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#米游联动
