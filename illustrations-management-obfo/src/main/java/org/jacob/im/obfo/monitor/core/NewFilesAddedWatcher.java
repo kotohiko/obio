@@ -34,7 +34,7 @@ public class NewFilesAddedWatcher {
     private final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
 
     /**
-     * The logger instance used for logging messages related to the{@link NewFilesAddedWatcher}class.
+     * The logger instance used for logging messages related to the {@link NewFilesAddedWatcher} class.
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
@@ -52,19 +52,19 @@ public class NewFilesAddedWatcher {
     private final Path dir;
 
     /**
-     * An{@link Executor}that provides methods to manage termination and
-     * methods that can produce a{@link Future}for tracking progress of
+     * An {@link Executor} that provides methods to manage termination and
+     * methods that can produce a {@link Future} for tracking progress of
      * one or more asynchronous tasks.
      */
     private final ExecutorService executor;
 
     /**
-     * Constructor of{@link NewFilesAddedWatcher}.<p>
-     * This will submit the{@link NewFilesAddedWatcher#startWatching()}method of the current object
+     * Constructor of {@link NewFilesAddedWatcher}.<p>
+     * This will submit the {@link NewFilesAddedWatcher#startWatching()} method of the current object
      * as a task to the executor thread pool for asynchronous execution. This task will be executed
      * on a thread in the thread pool without blocking the current thread.<p>
-     * If you don't understand the new writing style:{@code executor.submit(this::startWatching);},
-     * you can refer to the old writing style:{@code executor.submit(() -> startWatching());}
+     * If you don't understand the new writing style: {@code executor.submit(this::startWatching);},
+     * you can refer to the old writing style: {@code executor.submit(() -> startWatching());}
      *
      * @param dir             The directory that needs to be monitored
      * @param numberOfThreads Number of threads
@@ -99,9 +99,9 @@ public class NewFilesAddedWatcher {
      * Starts watching the directory for new file events. This method runs an infinite loop,
      * blocking and waiting for events to occur. When an event is detected, it submits a task
      * to the thread pool to handle the event. The task processes each event by resolving the
-     * file path and invoking the{@code processFile}method.
+     * file path and invoking the {@code processFile} method.
      *
-     * <p>If an{@code InterruptedException}is caught, it indicates that the thread has been
+     * <p>If an {@code InterruptedException} is caught, it indicates that the thread has been
      * interrupted, typically as a result of a request to stop watching. In this case, an error
      * message is logged, and the thread pool is gracefully shut down.
      */
@@ -190,7 +190,7 @@ public class NewFilesAddedWatcher {
 
     /**
      * Prints information about all threads in the Java Virtual Machine (JVM).
-     * This method retrieves thread information using the{@link ThreadMXBean}and logs the
+     * This method retrieves thread information using the {@link ThreadMXBean} and logs the
      * name and state of each thread.
      */
     private void printThreadsInfo() {
