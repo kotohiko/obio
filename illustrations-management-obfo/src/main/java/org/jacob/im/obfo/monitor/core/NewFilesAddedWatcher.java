@@ -76,7 +76,8 @@ public class NewFilesAddedWatcher {
                     .newWatchService();
             this.dir = dir;
             // Create a fixed-size thread pool
-            this.executor = Executors.newFixedThreadPool(numberOfThreads, r -> {
+            this.executor = Executors.newFixedThreadPool(numberOfThreads, r ->
+            {
                 Thread t = new Thread(r, WATCHER_THREAD_NAME + "-" + THREAD_ID_SEQ.incrementAndGet());
                 // Set the current thread as a daemon thread
                 t.setDaemon(true);
