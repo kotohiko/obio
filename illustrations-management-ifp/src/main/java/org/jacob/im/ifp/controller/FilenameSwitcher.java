@@ -1,8 +1,8 @@
-package org.jacob.im.ifp.service;
+package org.jacob.im.ifp.controller;
 
 import org.jacob.im.ifp.constants.IFPConstants;
+import org.jacob.im.ifp.service.FilenameParser;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**

@@ -1,7 +1,7 @@
 package org.jacob.im.ifp.api;
 
 import org.jacob.im.ifp.controller.IFPEntranceController;
-import org.jacob.im.ifp.service.FilenameSwitcher;
+import org.jacob.im.ifp.controller.FilenameSwitcher;
 
 /**
  * @author Kotohiko
