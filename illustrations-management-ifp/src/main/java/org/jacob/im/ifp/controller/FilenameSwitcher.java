@@ -28,6 +28,7 @@ public final class FilenameSwitcher {
     public static String parseFileName(String fileName) {
         var pixivMatcher = Pattern.compile(IFPConstants.PIXIV_PATTERN).matcher(fileName);
         var pixivMatcher2 = Pattern.compile(IFPConstants.PIXIV_PATTERN_2).matcher(fileName);
+
         if (pixivMatcher.find() || pixivMatcher2.find()) {
             return FilenameParser.pixivIllustrationsOrIllustratorIdParser(fileName);
         } else if (fileName.contains("httpstwitter") || fileName.contains("httpsx")) {

@@ -41,9 +41,11 @@ public class ReadAndMoveController {
      */
     public static void mainPart() {
         System.out.print(OBFOConstants.WELCOME_LINE);
+
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String targetPathKey;
             Yaml yaml = new Yaml();
+
             while (true) {
                 System.out.print(ResManager.loadResString("ReadAndMoveController_0"));
                 if ((targetPathKey = in.readLine()) == null) {
@@ -51,6 +53,7 @@ public class ReadAndMoveController {
                 }
 
                 var switchToIFP = IFPParsingApi.getAndParse(targetPathKey);
+
                 if (isValidPath(targetPathKey)) {
                     openFolder(targetPathKey);
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);

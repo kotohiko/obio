@@ -41,12 +41,14 @@ public class ReadAndMoveService {
      */
     public static FileInputStream loadYamlFile() {
         FileInputStream ymlFileStream = null;
+
         try {
             ymlFileStream = new FileInputStream(OBFOConstants.ILLUSTRATIONS_CONF_YML_PATH);
         } catch (FileNotFoundException e) {
             logger.error(ResManager.loadResString("ReadAndMoveService_1"));
             endLinePrintAndReboot();
         }
+
         return ymlFileStream;
     }
 
@@ -70,6 +72,7 @@ public class ReadAndMoveService {
         // Define source path and target path
         var sourcePath = Paths.get(defaultSourcePath);
         var targetPathStr = pathsData.get(targetPathCode);
+
         if (targetPathStr == null) {
             logger.error(ResManager.loadResString("ReadAndMoveService_0"));
         } else {
@@ -94,6 +97,7 @@ public class ReadAndMoveService {
     private static void checkBeforeMove(Path sourcePath, String targetPathStr) {
         var targetPath = Paths.get(targetPathStr);
         var statusEnums = FilesMoveOperStatusEnums.NO_FILES;
+
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
             for (Path filePath : directoryStream) {
                 // Ignore directories and process only files.
@@ -101,6 +105,7 @@ public class ReadAndMoveService {
                     statusEnums = moveTheFiles(targetPath, filePath);
                 }
             }
+
             // Check whether the file is found after traversal is completed.
             if (statusEnums.equals(FilesMoveOperStatusEnums.NO_FILES)) {
                 logger.error(ResManager.loadResString("ReadAndMoveService_3", sourcePath.toString()));
@@ -134,10 +139,16 @@ public class ReadAndMoveService {
     private static FilesMoveOperStatusEnums moveTheFiles(Path targetPath, Path filePath) {
         // Construct the target path
         var targetFilePath = targetPath.resolve(filePath.getFileName());
+
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
-            logger.info(ResManager.loadResString("ReadAndMoveService_4",
+
+            Thread currentThread = Thread.currentThread();
+            String threadInfo = "Thread: " + currentThread.getName() + " (ID: " + currentThread.threadId() + ")";
+
+            logger.info("{} - {}", threadInfo, ResManager.loadResString("ReadAndMoveService_4",
                     filePath.toString(), targetFilePath.toString()));
+
             countTheNumberOfFiles();
             // Signal that the files have been found
             return FilesMoveOperStatusEnums.HAS_FILES;
@@ -156,6 +167,7 @@ public class ReadAndMoveService {
     private static void countTheNumberOfFiles() {
         var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
         int fileCount = 0;
+
         // Traverse all the files under the specified directory.
         for (File file : Objects.requireNonNull(folder.listFiles())) {
             if (file.isFile()) {

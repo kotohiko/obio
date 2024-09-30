@@ -76,8 +76,7 @@ public class NewFilesAddedWatcher {
                     .newWatchService();
             this.dir = dir;
             // Create a fixed-size thread pool
-            this.executor = Executors.newFixedThreadPool(numberOfThreads, r ->
-            {
+            this.executor = Executors.newFixedThreadPool(numberOfThreads, r -> {
                 Thread t = new Thread(r, WATCHER_THREAD_NAME + "-" + THREAD_ID_SEQ.incrementAndGet());
                 // Set the current thread as a daemon thread
                 t.setDaemon(true);
@@ -159,6 +158,7 @@ public class NewFilesAddedWatcher {
         }
 
         var fileCount = 0;
+
         try (var stream = Files.list(folder.toPath())) {
             fileCount = (int) stream.filter(Files::isRegularFile).count();
         } catch (IOException e) {
@@ -183,6 +183,7 @@ public class NewFilesAddedWatcher {
         // The amount of free memory in the Java Virtual Machine
         var freeMemory = runtime.freeMemory();
         var usedMemory = totalMemory - freeMemory;
+
         logger.info("Total Heap memory: {} MB", totalMemory / 1024 / 1024);
         logger.info("Heap free memory: {} MB", freeMemory / 1024 / 1024);
         logger.info("Heap used memory: {} MB", usedMemory / 1024 / 1024);
@@ -196,6 +197,7 @@ public class NewFilesAddedWatcher {
     private void printThreadsInfo() {
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
         var threadIds = threadMXBean.getAllThreadIds();
+
         for (long id : threadIds) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
             logger.info("Thread Name: {}, State: {}", threadInfo.getThreadName(), threadInfo.getThreadState());
@@ -207,6 +209,7 @@ public class NewFilesAddedWatcher {
      */
     public void shutdown() {
         executor.shutdown();
+
         try {
             if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
                 executor.shutdownNow();
