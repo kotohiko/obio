@@ -13,7 +13,6 @@ import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.nio.file.*;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A monitor that watches for changes and events related to files.
@@ -22,16 +21,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 16:29 Aug 18, 2024
  */
 public class NewFilesAddedWatcher {
-
-    /**
-     * Used to identify the thread, and is also the name of the class that created this thread.
-     */
-    private final String WATCHER_THREAD_NAME = "NewFilesAddedWatcher-Thread";
-
-    /**
-     * To avoid thread safety issues, atomic classes are used here.
-     */
-    private final AtomicInteger THREAD_ID_SEQ = new AtomicInteger(0);
 
     /**
      * The logger instance used for logging messages related to the {@link NewFilesAddedWatcher} class.
@@ -66,22 +55,16 @@ public class NewFilesAddedWatcher {
      * If you don't understand the new writing style: {@code executor.submit(this::startWatching);},
      * you can refer to the old writing style: {@code executor.submit(() -> startWatching());}
      *
-     * @param dir             The directory that needs to be monitored
-     * @param numberOfThreads Number of threads
+     * @param dir The directory that needs to be monitored
      */
-    public NewFilesAddedWatcher(Path dir, int numberOfThreads) {
+    public NewFilesAddedWatcher(Path dir) {
         try {
             this.watcher = FileSystems.getDefault()
                     // Constructs a new WatchService optional operation.
                     .newWatchService();
             this.dir = dir;
             // Create a fixed-size thread pool
-            this.executor = Executors.newFixedThreadPool(numberOfThreads, r -> {
-                Thread t = new Thread(r, WATCHER_THREAD_NAME + "-" + THREAD_ID_SEQ.incrementAndGet());
-                // Set the current thread as a daemon thread
-                t.setDaemon(true);
-                return t;
-            });
+            this.executor = Executors.newSingleThreadExecutor();
 
             // Start monitoring the directory upon initialization
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);

@@ -34,11 +34,13 @@ public class OBFOLogFilesWriter {
      * @param fileCount       The number of remaining unclassified images.
      */
     public static void filesAddedLogWriter(Path fileWithAbsPath, int fileCount) {
+        Thread currentThread = Thread.currentThread();
+        String threadInfo = " Thread: [" + currentThread.getName() + "] (ID: " + currentThread.threadId() + ")";
         // Write the number of files and date to log file.
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG, Boolean.TRUE))) {
             bw.write(IMCommonHelper.getRealTime()
-                    + " [main] INFO - New files added: " + fileWithAbsPath.getFileName()
+                    + threadInfo + " INFO - New files added: " + fileWithAbsPath.getFileName()
                     + "; Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
             logger.error(ResManager.loadResString("OBFOLogger_0"));
@@ -52,11 +54,13 @@ public class OBFOLogFilesWriter {
      * @param fileCount The number of remaining unclassified images.
      */
     public static void filesMoveLogWriter(int fileCount) {
+        Thread currentThread = Thread.currentThread();
+        String threadInfo = " Thread: [" + currentThread.getName() + "] (ID: " + currentThread.threadId() + ")";
         // Record the file count and date in the log file.
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG, Boolean.TRUE))) {
             bw.write(IMCommonHelper.getRealTime()
-                    + " [main] INFO - New files added: - File(s) has/have been moved; "
+                    + threadInfo + " INFO - New files added: - File(s) has/have been moved; "
                     + "Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
             logger.error(ResManager.loadResString("OBFOLogger_0"));

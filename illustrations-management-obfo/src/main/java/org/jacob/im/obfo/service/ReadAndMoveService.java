@@ -5,6 +5,7 @@ import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
+import org.jacob.im.obfo.enums.ThreadPoolSituationStatusEnums;
 import org.jacob.im.obfo.logger.OBFOLogFilesWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +15,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Provides functionality for reading and moving files between specified paths.
@@ -32,6 +38,20 @@ public class ReadAndMoveService {
      * used throughout the class to provide detailed information about the watcher's operations.
      */
     private static final Logger logger = LoggerFactory.getLogger(ReadAndMoveService.class);
+
+    /**
+     * A fixed-size thread pool executor service used for processing file read and move operations.
+     *
+     * <p>This thread pool is created with a core and maximum pool size of 3, ensuring that up to 3
+     * threads can be active at any given time. The threads in this pool are created using a custom
+     * {@link CustomThreadFactory} with the name prefix "ReadAndMovePool" to provide meaningful names
+     * for easier identification and debugging.
+     *
+     * <p>The thread pool is designed to handle tasks related to reading from and moving files, providing
+     * a controlled and efficient way to manage these I/O-bound operations.
+     */
+    private static final ExecutorService executorService
+            = Executors.newFixedThreadPool(3, new CustomThreadFactory("ReadAndMovePool"));
 
     /**
      * Loads a {@link FileInputStream} for the YAML configuration file.
@@ -96,22 +116,98 @@ public class ReadAndMoveService {
      */
     private static void checkBeforeMove(Path sourcePath, String targetPathStr) {
         var targetPath = Paths.get(targetPathStr);
-        var statusEnums = FilesMoveOperStatusEnums.NO_FILES;
+        AtomicBoolean foundFiles = new AtomicBoolean(false);
+        List<Path> filePaths = new ArrayList<>();
 
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
             for (Path filePath : directoryStream) {
-                // Ignore directories and process only files.
+                // 忽略目录，只处理文件
                 if (Files.isRegularFile(filePath)) {
-                    statusEnums = moveTheFiles(targetPath, filePath);
+                    filePaths.add(filePath);
                 }
             }
 
-            // Check whether the file is found after traversal is completed.
-            if (statusEnums.equals(FilesMoveOperStatusEnums.NO_FILES)) {
-                logger.error(ResManager.loadResString("ReadAndMoveService_3", sourcePath.toString()));
-            }
-        } catch (IOException e) {
-            logger.error(ResManager.loadResString("ReadAndMoveService_2"));
+            submitToExecutorPool(filePaths, targetPath, foundFiles, sourcePath);
+
+        } catch (IOException | InterruptedException e) {
+            logger.error(ResManager.loadResString("ReadAndMoveService_2"), e);
+        }
+    }
+
+    /**
+     * Submits tasks to the executor pool for moving files to the target path.
+     * <p>
+     * This method takes a list of file paths and submits each file moving task to an executor service.
+     * It uses a {@link CountDownLatch} to ensure that all tasks complete before proceeding.
+     * If no files are successfully moved, it logs an error message indicating that no files were found.
+     *
+     * @param filePaths  the list of file paths to be moved
+     * @param targetPath the target path where the files will be moved
+     * @param foundFiles an {@link AtomicBoolean} flag indicating if any files were successfully moved
+     * @param sourcePath the source path from which the files are being moved (for logging purposes)
+     * @throws InterruptedException if the current thread is interrupted while waiting for tasks to complete
+     */
+    private static void submitToExecutorPool(List<Path> filePaths, Path targetPath,
+                                             AtomicBoolean foundFiles, Path sourcePath) throws InterruptedException {
+
+        // Create a CountDownLatch initialized with the size of the filePaths list.
+        CountDownLatch latch = new CountDownLatch(filePaths.size());
+
+        printThreadPoolInfo(ThreadPoolSituationStatusEnums.BEFORE_SUBMITTED);
+
+        // Loop through each filePath and submit the file moving task to the executor service.
+        for (Path filePath : filePaths) {
+            executorService.submit(() -> {
+
+                try {
+                    // Attempt to move the file and check the status.
+                    FilesMoveOperStatusEnums status = moveTheFiles(targetPath, filePath);
+
+                    // If a file was moved (status is not NO_FILES), set the foundFiles flag to true.
+                    if (status != FilesMoveOperStatusEnums.NO_FILES) {
+                        foundFiles.set(true);
+                    }
+                } finally {
+                    // Decrement the latch count after the task completes (success or failure).
+                    latch.countDown();
+                }
+
+            });
+        }
+
+        // Wait for all submitted tasks to complete before proceeding.
+        latch.await();
+
+        printThreadPoolInfo(ThreadPoolSituationStatusEnums.TASK_FINISHED);
+
+        // If no files were successfully moved, log an error with the source path.
+        if (!foundFiles.get()) {
+            logger.error(ResManager.loadResString("ReadAndMoveService_3", sourcePath.toString()));
+        }
+    }
+
+    /**
+     * Prints the current status and configuration information of the thread pool.
+     *
+     * <p>This method logs the active thread count, current pool size, core pool size,
+     * and maximum pool size of the {@link ThreadPoolExecutor} instance. The information
+     * is logged with a specific status enum and resource strings for better readability
+     * and context.
+     *
+     * @param enums The status enum to be included in the log messages, providing
+     *              context about the situation when the information is being printed.
+     */
+    private static void printThreadPoolInfo(ThreadPoolSituationStatusEnums enums) {
+        if (executorService instanceof ThreadPoolExecutor threadPoolExecutor) {
+            var activeCount = threadPoolExecutor.getActiveCount();
+            var poolSize = threadPoolExecutor.getPoolSize();
+            var corePoolSize = threadPoolExecutor.getCorePoolSize();
+            var maximumPoolSize = threadPoolExecutor.getMaximumPoolSize();
+
+            logger.info("[{}] {}{}", enums, ResManager.loadResString("ReadAndMoveService_6"), activeCount);
+            logger.info("[{}] {}{}", enums, ResManager.loadResString("ReadAndMoveService_7"), poolSize);
+            logger.info("[{}] {}{}", enums, ResManager.loadResString("ReadAndMoveService_8"), corePoolSize);
+            logger.info("[{}] {}{}", enums, ResManager.loadResString("ReadAndMoveService_9"), maximumPoolSize);
         }
     }
 
@@ -142,13 +238,8 @@ public class ReadAndMoveService {
 
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
-
-            Thread currentThread = Thread.currentThread();
-            String threadInfo = "Thread: " + currentThread.getName() + " (ID: " + currentThread.threadId() + ")";
-
-            logger.info("{} - {}", threadInfo, ResManager.loadResString("ReadAndMoveService_4",
+            logger.info(ResManager.loadResString("ReadAndMoveService_4",
                     filePath.toString(), targetFilePath.toString()));
-
             countTheNumberOfFiles();
             // Signal that the files have been found
             return FilesMoveOperStatusEnums.HAS_FILES;
@@ -180,5 +271,50 @@ public class ReadAndMoveService {
     public static void endLinePrintAndReboot() {
         System.out.println(IMCommonConstants.SEPARATOR_LINE);
         ReadAndMoveController.mainPart();
+    }
+
+    /**
+     * CustomThreadFactory is an implementation of the {@link ThreadFactory} interface
+     * that allows for custom naming of threads created in a thread pool.
+     * Each thread name is prefixed with a specified base name followed by a unique, incrementing number.
+     * <p>
+     * This is useful for debugging and monitoring purposes, making it easier to identify and track
+     * threads in a multi-threaded environment.
+     * <p>
+     * Example thread names: ReadAndMovePool-thread-1, ReadAndMovePool-thread-2, etc.
+     */
+    private static class CustomThreadFactory implements ThreadFactory {
+
+        /**
+         * Base name for all threads in the pool
+         */
+        private final String baseName;
+        /**
+         * Counter to give unique IDs to threads
+         */
+        private final AtomicInteger threadCount = new AtomicInteger(1);
+
+        /**
+         * Constructs a CustomThreadFactory with a specified base name for threads.
+         *
+         * @param baseName the base name for threads created by this factory
+         */
+        public CustomThreadFactory(String baseName) {
+            this.baseName = baseName;
+        }
+
+        /**
+         * Creates a new thread with a custom name consisting of the base name followed by a unique ID.
+         *
+         * @param r the runnable task to be executed by the new thread
+         * @return a new {@link Thread} object with a custom name
+         */
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread thread = new Thread(r);
+            // Set custom thread name with incrementing thread count
+            thread.setName(baseName + "-thread-" + threadCount.getAndIncrement());
+            return thread;
+        }
     }
 }
