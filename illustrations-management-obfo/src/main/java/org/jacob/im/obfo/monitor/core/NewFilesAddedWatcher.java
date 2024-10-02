@@ -48,23 +48,35 @@ public class NewFilesAddedWatcher {
     private final ExecutorService executor;
 
     /**
-     * Constructor of {@link NewFilesAddedWatcher}.<p>
-     * This will submit the {@link NewFilesAddedWatcher#startWatching()} method of the current object
-     * as a task to the executor thread pool for asynchronous execution. This task will be executed
-     * on a thread in the thread pool without blocking the current thread.<p>
-     * If you don't understand the new writing style: {@code executor.submit(this::startWatching);},
-     * you can refer to the old writing style: {@code executor.submit(() -> startWatching());}
+     * Constructs a new {@link NewFilesAddedWatcher} instance that monitors a specified directory
+     * for newly created files. This class uses a {@link WatchService} to track file creation events
+     * and a single-threaded {@link ThreadPoolExecutor} to handle the event processing.
      *
-     * @param dir The directory that needs to be monitored
+     * @param dir the directory {@link Path} to be monitored for newly added files
+     * @throws RuntimeException if an {@link IOException} occurs during the initialization of the WatchService
+     *
+     *                          <p>
+     *                          The constructor performs the following actions:
+     *                          <ul>
+     *                              <li>Initializes a WatchService to monitor the specified directory for {@link StandardWatchEventKinds#ENTRY_CREATE} events.</li>
+     *                              <li>Creates a single-threaded {@link ThreadPoolExecutor} with a bounded queue of size 100 to handle file system events.</li>
+     *                              <li>Submits a task to the executor service to start watching the directory for file creation events.</li>
+     *                              <li>Prints memory and thread information for debugging and monitoring purposes.</li>
+     *                          </ul>
+     *                          If an error occurs while initializing the WatchService, a {@code RuntimeException} is thrown.
      */
     public NewFilesAddedWatcher(Path dir) {
         try {
-            this.watcher = FileSystems.getDefault()
-                    // Constructs a new WatchService optional operation.
-                    .newWatchService();
+            this.watcher = FileSystems.getDefault().newWatchService();
             this.dir = dir;
-            // Create a fixed-size thread pool
-            this.executor = Executors.newSingleThreadExecutor();
+            // Create a fixed-size thread pool with a bounded queue
+            this.executor = new ThreadPoolExecutor(
+                    1, 1, 0L, TimeUnit.MILLISECONDS,
+                    // Bounded queue with capacity of 100
+                    new ArrayBlockingQueue<>(10),
+                    // RejectedExecutionHandler
+                    new ThreadPoolExecutor.CallerRunsPolicy()
+            );
 
             // Start monitoring the directory upon initialization
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
@@ -79,11 +91,10 @@ public class NewFilesAddedWatcher {
 
     /**
      * Starts watching the directory for new file events. This method runs an infinite loop,
-     * blocking and waiting for events to occur. When an event is detected, it submits a task
-     * to the thread pool to handle the event. The task processes each event by resolving the
-     * file path and invoking the {@code processFile} method.
-     *
-     * <p>If an {@code InterruptedException} is caught, it indicates that the thread has been
+     * blocking and waiting for events to occur. When an event is detected, it processes each event
+     * directly in the current thread by resolving the file path and invoking the {@code processFile} method.
+     * <p>
+     * If an {@code InterruptedException} is caught, it indicates that the thread has been
      * interrupted, typically as a result of a request to stop watching. In this case, an error
      * message is logged, and the thread pool is gracefully shut down.
      */
@@ -93,34 +104,31 @@ public class NewFilesAddedWatcher {
                 // Block and wait for event occurs
                 var key = watcher.take();
 
-                // Submit a task for each event in the thread pool.
-                executor.submit(() -> {
-                    var events = key.pollEvents();
-                    for (WatchEvent<?> event : events) {
-                        WatchEvent.Kind<?> kind = event.kind();
-                        if (kind == StandardWatchEventKinds.OVERFLOW) {
-                            continue;
-                        }
+                // Process events directly in the current thread
+                for (WatchEvent<?> event : key.pollEvents()) {
+                    WatchEvent.Kind<?> kind = event.kind();
+                    if (kind == StandardWatchEventKinds.OVERFLOW) {
+                        continue;
+                    }
 
-                        @SuppressWarnings("unchecked")
-                        // Use a typed cast to eliminate unchecked cast warning
-                        WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                        Path filename = dir.resolve(ev.context());
-                        // Validate the file path before processing
-                        Files.exists(filename);
+                    @SuppressWarnings("unchecked")
+                    WatchEvent<Path> ev = (WatchEvent<Path>) event;
+                    Path filename = dir.resolve(ev.context());
+                    // Validate the file path before processing
+                    if (Files.exists(filename)) {
                         processFile(filename);
                     }
-                });
+                }
 
                 // Reset the key
-                var valid = key.reset();
+                boolean valid = key.reset();
                 if (!valid) {
                     break;
                 }
             }
         } catch (InterruptedException e) {
             logger.error(ResManager.loadResString("NewFilesAddedWatcher_0"));
-            // May need to gracefully shut down the thread pool.
+            // Gracefully shut down the thread pool
             shutdown();
         }
     }
@@ -140,7 +148,7 @@ public class NewFilesAddedWatcher {
             return;
         }
 
-        var fileCount = 0;
+        int fileCount;
 
         try (var stream = Files.list(folder.toPath())) {
             fileCount = (int) stream.filter(Files::isRegularFile).count();
