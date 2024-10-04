@@ -73,7 +73,7 @@ public class NewFilesAddedWatcher {
             this.executor = new ThreadPoolExecutor(
                     1, 1, 0L, TimeUnit.MILLISECONDS,
                     // Bounded queue with capacity of 100
-                    new ArrayBlockingQueue<>(10),
+                    new ArrayBlockingQueue<>(5),
                     // RejectedExecutionHandler
                     new ThreadPoolExecutor.CallerRunsPolicy()
             );
@@ -94,7 +94,7 @@ public class NewFilesAddedWatcher {
      * blocking and waiting for events to occur. When an event is detected, it processes each event
      * directly in the current thread by resolving the file path and invoking the {@code processFile} method.
      * <p>
-     * If an {@code InterruptedException} is caught, it indicates that the thread has been
+     * If an {@link InterruptedException} is caught, it indicates that the thread has been
      * interrupted, typically as a result of a request to stop watching. In this case, an error
      * message is logged, and the thread pool is gracefully shut down.
      */

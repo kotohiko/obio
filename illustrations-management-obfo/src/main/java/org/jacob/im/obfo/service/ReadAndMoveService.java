@@ -121,7 +121,6 @@ public class ReadAndMoveService {
 
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
             for (Path filePath : directoryStream) {
-                // 忽略目录，只处理文件
                 if (Files.isRegularFile(filePath)) {
                     filePaths.add(filePath);
                 }
@@ -238,8 +237,8 @@ public class ReadAndMoveService {
 
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
-            logger.info(ResManager.loadResString("ReadAndMoveService_4",
-                    filePath.toString(), targetFilePath.toString()));
+            logger.info(ResManager.loadResString("ReadAndMoveService_4", filePath.toString(),
+                    targetFilePath.toString()));
             countTheNumberOfFiles();
             // Signal that the files have been found
             return FilesMoveOperStatusEnums.HAS_FILES;
