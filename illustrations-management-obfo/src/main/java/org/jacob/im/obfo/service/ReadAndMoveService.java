@@ -98,6 +98,7 @@ public class ReadAndMoveService {
         } else {
             checkBeforeMove(sourcePath, targetPathStr);
         }
+
         System.out.println(IMCommonConstants.SEPARATOR_LINE);
     }
 
@@ -119,17 +120,53 @@ public class ReadAndMoveService {
         AtomicBoolean foundFiles = new AtomicBoolean(false);
         List<Path> filePaths = new ArrayList<>();
 
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
-            for (Path filePath : directoryStream) {
-                if (Files.isRegularFile(filePath)) {
-                    filePaths.add(filePath);
-                }
-            }
+        try {
+            // Recursively process directories and files in the source path (excluding the source path itself)
+            processDirectory(sourcePath, targetPath, filePaths);
 
+            // Submit tasks to the thread pool
             submitToExecutorPool(filePaths, targetPath, foundFiles, sourcePath);
 
         } catch (IOException | InterruptedException e) {
             logger.error(ResManager.loadResString("ReadAndMoveService_2"), e);
+        }
+    }
+
+    /**
+     * Recursively processes and moves the contents of a directory, including subdirectories and files.
+     * <p>
+     * This method traverses the given source directory's contents (subdirectories and files), and moves
+     * them to the target path, maintaining the directory structure. The source directory itself is not
+     * moved, only its contents. Regular files found during traversal are added to the provided list for
+     * further processing.
+     *
+     * @param sourcePath the starting directory whose contents will be moved
+     * @param targetPath the target directory where files and subdirectories should be moved
+     * @param filePaths  the list to store the paths of regular files found during traversal
+     * @throws IOException if an I/O error occurs while accessing the file system
+     */
+    private static void processDirectory(Path sourcePath, Path targetPath, List<Path> filePaths) throws IOException {
+        if (Files.isDirectory(sourcePath)) {
+            // Ensure the target directory exists
+            Files.createDirectories(targetPath);
+
+            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
+                for (Path filePath : directoryStream) {
+                    Path newTargetPath = targetPath.resolve(filePath.getFileName());
+
+                    // If it's a directory, recursively call the processing method
+                    if (Files.isDirectory(filePath)) {
+                        processDirectory(filePath, newTargetPath, filePaths);
+                        // After processing, remove the empty source directory
+                        Files.delete(filePath);
+                    } else if (Files.isRegularFile(filePath)) {
+                        // Move the file to the new target directory
+                        Files.move(filePath, newTargetPath, StandardCopyOption.REPLACE_EXISTING);
+                        // Add the file to the list
+                        filePaths.add(newTargetPath);
+                    }
+                }
+            }
         }
     }
 
