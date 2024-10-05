@@ -133,16 +133,17 @@ public class ReadAndMoveService {
     }
 
     /**
-     * Recursively processes and moves the contents of a directory, including subdirectories and files.
+     * Moves the contents of a source directory to a target directory, including both files and subdirectories.
      * <p>
-     * This method traverses the given source directory's contents (subdirectories and files), and moves
-     * them to the target path, maintaining the directory structure. The source directory itself is not
-     * moved, only its contents. Regular files found during traversal are added to the provided list for
-     * further processing.
+     * If the source path contains regular files, each file is moved to the corresponding location in the target directory.
+     * If the source path contains subdirectories, the entire subdirectory is moved to the target location without further
+     * recursive processing of its contents.
+     * <p>
+     * If the source path itself is a regular file, the file is moved directly to the target directory.
      *
-     * @param sourcePath the starting directory whose contents will be moved
+     * @param sourcePath the source directory or file to process
      * @param targetPath the target directory where files and subdirectories should be moved
-     * @param filePaths  the list to store the paths of regular files found during traversal
+     * @param filePaths  the list to store the paths of regular files that are moved
      * @throws IOException if an I/O error occurs while accessing the file system
      */
     private static void processDirectory(Path sourcePath, Path targetPath, List<Path> filePaths) throws IOException {
@@ -154,11 +155,10 @@ public class ReadAndMoveService {
                 for (Path filePath : directoryStream) {
                     Path newTargetPath = targetPath.resolve(filePath.getFileName());
 
-                    // If it's a directory, recursively call the processing method
+                    // If it's a directory, move the entire directory
                     if (Files.isDirectory(filePath)) {
-                        processDirectory(filePath, newTargetPath, filePaths);
-                        // After processing, remove the empty source directory
-                        Files.delete(filePath);
+                        // Move the entire directory to the target path
+                        Files.move(filePath, newTargetPath, StandardCopyOption.REPLACE_EXISTING);
                     } else if (Files.isRegularFile(filePath)) {
                         // Move the file to the new target directory
                         Files.move(filePath, newTargetPath, StandardCopyOption.REPLACE_EXISTING);
@@ -167,8 +167,14 @@ public class ReadAndMoveService {
                     }
                 }
             }
+        } else if (Files.isRegularFile(sourcePath)) {
+            // If the sourcePath is a file, move it directly to the target directory
+            Files.move(sourcePath, targetPath.resolve(sourcePath.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+            // Add the file to the list
+            filePaths.add(targetPath.resolve(sourcePath.getFileName()));
         }
     }
+
 
     /**
      * Submits tasks to the executor pool for moving files to the target path.
@@ -203,6 +209,7 @@ public class ReadAndMoveService {
                     if (status != FilesMoveOperStatusEnums.NO_FILES) {
                         foundFiles.set(true);
                     }
+
                 } finally {
                     // Decrement the latch count after the task completes (success or failure).
                     latch.countDown();
