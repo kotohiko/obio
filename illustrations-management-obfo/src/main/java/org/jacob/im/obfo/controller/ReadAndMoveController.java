@@ -44,7 +44,6 @@ public class ReadAndMoveController {
 
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String targetPathKey;
-            Yaml yaml = new Yaml();
 
             while (true) {
                 System.out.print(ResManager.loadResString("ReadAndMoveController_0"));
@@ -53,21 +52,13 @@ public class ReadAndMoveController {
                 }
 
                 var switchToIFP = IFPParsingApi.getAndParse(targetPathKey);
-
                 if (isValidPath(targetPathKey)) {
                     openFolder(targetPathKey);
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else if (switchToIFP) {
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else {
-                    // Load a YAML file into a Java object.
-                    Map<String, String> pathsData = yaml.load(ReadAndMoveService.loadYamlFile());
-                    String defaultSourcePath = pathsData.get("Default source path");
-                    if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
-                        logger.error(ResManager.loadResString("ReadAndMoveController_1"));
-                    } else {
-                        ReadAndMoveService.filesMove(defaultSourcePath, pathsData, targetPathKey);
-                    }
+                    readYamlAndMoveFiles(targetPathKey);
                 }
             }
         } catch (IOException e) {
@@ -89,6 +80,24 @@ public class ReadAndMoveController {
             logger.info(ResManager.loadResString("ReadAndMoveController_4", path));
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveController_3"));
+        }
+    }
+
+    /**
+     * Reads a YAML file to obtain paths data and moves files based on the provided target path key.
+     * Logs an error if the default source path is not found or empty.
+     *
+     * @param targetPathKey the key used to identify the target path in the YAML data
+     */
+    private static void readYamlAndMoveFiles(String targetPathKey) {
+        // Load a YAML file into a Java object.
+        Map<String, String> pathsData = new Yaml().load(ReadAndMoveService.loadYamlFile());
+        String defaultSourcePath = pathsData.get("Default source path");
+
+        if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
+            logger.error(ResManager.loadResString("ReadAndMoveController_1"));
+        } else {
+            ReadAndMoveService.filesMove(defaultSourcePath, pathsData, targetPathKey);
         }
     }
 

@@ -67,11 +67,14 @@ public class NewFilesAddedWatcher {
      */
     public NewFilesAddedWatcher(Path dir) {
         try {
+            int corePoolSize = 1;
+            int maxPoolSize = 1;
+            long keepAliveTime = 0L;
+
             this.watcher = FileSystems.getDefault().newWatchService();
             this.dir = dir;
             // Create a fixed-size thread pool with a bounded queue
-            this.executor = new ThreadPoolExecutor(
-                    1, 1, 0L, TimeUnit.MILLISECONDS,
+            this.executor = new ThreadPoolExecutor(corePoolSize, maxPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
                     // Bounded queue with capacity of 100
                     new ArrayBlockingQueue<>(5),
                     // RejectedExecutionHandler
@@ -110,10 +113,10 @@ public class NewFilesAddedWatcher {
                     if (kind == StandardWatchEventKinds.OVERFLOW) {
                         continue;
                     }
-
                     @SuppressWarnings("unchecked")
                     WatchEvent<Path> ev = (WatchEvent<Path>) event;
                     Path filename = dir.resolve(ev.context());
+
                     // Validate the file path before processing
                     if (Files.exists(filename)) {
                         processFile(filename);
@@ -140,6 +143,7 @@ public class NewFilesAddedWatcher {
      */
     private void processFile(Path fileWithAbsPath) {
         var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
+        int fileCount;
 
         // Check if the folder exists and is a directory
         if (!folder.exists() || !folder.isDirectory()) {
@@ -148,8 +152,6 @@ public class NewFilesAddedWatcher {
             return;
         }
 
-        int fileCount;
-
         try (var stream = Files.list(folder.toPath())) {
             fileCount = (int) stream.filter(Files::isRegularFile).count();
         } catch (IOException e) {
@@ -157,6 +159,7 @@ public class NewFilesAddedWatcher {
                     OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH));
             return;
         }
+
         OBFOLogFilesWriter.filesAddedLogWriter(fileWithAbsPath, fileCount);
     }
 

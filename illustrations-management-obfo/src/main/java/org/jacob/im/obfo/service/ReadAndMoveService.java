@@ -165,6 +165,7 @@ public class ReadAndMoveService {
                         // Add the file to the list
                         filePaths.add(newTargetPath);
                     }
+
                 }
             }
         } else if (Files.isRegularFile(sourcePath)) {
@@ -194,7 +195,6 @@ public class ReadAndMoveService {
 
         // Create a CountDownLatch initialized with the size of the filePaths list.
         CountDownLatch latch = new CountDownLatch(filePaths.size());
-
         printThreadPoolInfo(ThreadPoolSituationStatusEnums.BEFORE_SUBMITTED);
 
         // Loop through each filePath and submit the file moving task to the executor service.
@@ -284,6 +284,7 @@ public class ReadAndMoveService {
             logger.info(ResManager.loadResString("ReadAndMoveService_4", filePath.toString(),
                     targetFilePath.toString()));
             countTheNumberOfFiles();
+
             // Signal that the files have been found
             return FilesMoveOperStatusEnums.HAS_FILES;
         } catch (IOException e) {
