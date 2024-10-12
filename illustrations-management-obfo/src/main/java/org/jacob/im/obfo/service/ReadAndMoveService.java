@@ -87,10 +87,22 @@ public class ReadAndMoveService {
      * @param targetPathCode    The target path code used to retrieve the target path string from the
      *                          paths data map.
      */
-    public static void filesMove(String defaultSourcePath,
-                                 Map<String, String> pathsData, String targetPathCode) {
+    public static void defineSourcePathAndTargetPath(String defaultSourcePath,
+                                                     Map<String, String> pathsData, String targetPathCode) {
         // Define source path and target path
         var sourcePath = Paths.get(defaultSourcePath);
+
+        // Check if there are any files in the source directory
+        try (var stream = Files.list(sourcePath)) {
+            if (!Files.exists(sourcePath) || !Files.isDirectory(sourcePath) || stream.findAny().isEmpty()) {
+                System.out.println("No files in source directory " + sourcePath + ", returning directly");
+                return;
+            }
+        } catch (IOException e) {
+            logger.error("Failed to check source directory: {}", e.getMessage());
+            return;
+        }
+
         var targetPathStr = pathsData.get(targetPathCode);
 
         if (targetPathStr == null) {

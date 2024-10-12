@@ -97,7 +97,7 @@ public class ReadAndMoveController {
         if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
             logger.error(ResManager.loadResString("ReadAndMoveController_1"));
         } else {
-            ReadAndMoveService.filesMove(defaultSourcePath, pathsData, targetPathKey);
+            ReadAndMoveService.defineSourcePathAndTargetPath(defaultSourcePath, pathsData, targetPathKey);
         }
     }
 
