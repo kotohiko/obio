@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -43,28 +44,49 @@ public class ReadAndMoveController {
         System.out.print(OBFOConstants.WELCOME_LINE);
 
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
-            String targetPathKey;
+            String cmd;
 
             while (true) {
                 System.out.print(ResManager.loadResString("ReadAndMoveController_0"));
-                if ((targetPathKey = in.readLine()) == null) {
+                if ((cmd = in.readLine()) == null) {
                     break;
                 }
 
-                var switchToIFP = IFPParsingApi.getAndParse(targetPathKey);
-                if (isValidPath(targetPathKey)) {
-                    openFolder(targetPathKey);
+                var switchToIFP = IFPParsingApi.getAndParse(cmd);
+                if (cmd.equals("check")) {
+                    checkPathStatus();
+                } else if (isValidPath(cmd)) {
+                    openFolder(cmd);
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else if (switchToIFP) {
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else {
-                    readYamlAndMoveFiles(targetPathKey);
+                    readYamlAndMoveFiles(cmd);
                 }
             }
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveController_2"), e);
         }
         ReadAndMoveService.endLinePrintAndReboot();
+    }
+
+    private static void checkPathStatus() {
+        File directory = new File(OBFOConstants.ROCKET_LAUNCHER);
+
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+
+            if (files != null) {
+                for (File file : files) {
+                    System.out.println(file.getName());
+                }
+            } else {
+                System.out.println("该目录为空");
+            }
+
+        } else {
+            System.out.println("路径不存在或不是一个有效的目录路径");
+        }
     }
 
     /**
