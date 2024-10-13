@@ -70,24 +70,30 @@ public class ReadAndMoveController {
         ReadAndMoveService.endLinePrintAndReboot();
     }
 
+    /**
+     * Checks the status of a specified path and prints out the names of any files found.
+     * If no files are present, it provides feedback accordingly.
+     */
     private static void checkPathStatus() {
         File directory = new File(OBFOConstants.ROCKET_LAUNCHER);
 
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
 
-            if (files != null) {
+            // Check if there are actually files in the directory
+            if (files != null && files.length > 0) {
                 for (File file : files) {
                     System.out.println(file.getName());
                 }
+                // Provide feedback when no files are found
             } else {
-                System.out.println("该目录为空");
+                System.out.println("Buffer has no files yet.");
             }
-
         } else {
-            System.out.println("路径不存在或不是一个有效的目录路径");
+            System.out.println("Path does not exist or is not a valid directory path");
         }
     }
+
 
     /**
      * Opens a folder using the explorer.exe command.
