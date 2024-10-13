@@ -59,7 +59,7 @@ public class NewFilesAddedWatcher {
      *                          The constructor performs the following actions:
      *                          <ul>
      *                              <li>Initializes a WatchService to monitor the specified directory for {@link StandardWatchEventKinds#ENTRY_CREATE} events.</li>
-     *                              <li>Creates a single-threaded {@link ThreadPoolExecutor} with a bounded queue of size 100 to handle file system events.</li>
+     *                              <li>Creates a single-threaded {@link ThreadPoolExecutor} with a bounded queue to handle file system events.</li>
      *                              <li>Submits a task to the executor service to start watching the directory for file creation events.</li>
      *                              <li>Prints memory and thread information for debugging and monitoring purposes.</li>
      *                          </ul>
@@ -75,7 +75,7 @@ public class NewFilesAddedWatcher {
             this.dir = dir;
             // Create a fixed-size thread pool with a bounded queue
             this.executor = new ThreadPoolExecutor(corePoolSize, maxPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
-                    // Bounded queue with capacity of 100
+                    // Bounded queue
                     new ArrayBlockingQueue<>(5),
                     // RejectedExecutionHandler
                     new ThreadPoolExecutor.CallerRunsPolicy()
@@ -113,6 +113,7 @@ public class NewFilesAddedWatcher {
                     if (kind == StandardWatchEventKinds.OVERFLOW) {
                         continue;
                     }
+
                     @SuppressWarnings("unchecked")
                     WatchEvent<Path> ev = (WatchEvent<Path>) event;
                     Path filename = dir.resolve(ev.context());

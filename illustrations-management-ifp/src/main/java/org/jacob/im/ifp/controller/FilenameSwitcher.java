@@ -13,6 +13,9 @@ import java.util.regex.Pattern;
  */
 public final class FilenameSwitcher {
 
+    private static final Pattern PIXIV_MATCHER = Pattern.compile(IFPConstants.PIXIV_PATTERN);
+    private static final Pattern PIXIV_MATCHER_2 = Pattern.compile(IFPConstants.PIXIV_PATTERN_2);
+
     /**
      * Don't let anyone instantiate this class
      */
@@ -26,10 +29,10 @@ public final class FilenameSwitcher {
      * @return parsed URL
      */
     public static String parseFileName(String fileName) {
-        var pixivMatcher = Pattern.compile(IFPConstants.PIXIV_PATTERN).matcher(fileName);
-        var pixivMatcher2 = Pattern.compile(IFPConstants.PIXIV_PATTERN_2).matcher(fileName);
+        var pixivMatched = PIXIV_MATCHER.matcher(fileName).find();
+        var pixivMatched2 = PIXIV_MATCHER_2.matcher(fileName).find();
 
-        if (pixivMatcher.find() || pixivMatcher2.find()) {
+        if (pixivMatched || pixivMatched2) {
             return FilenameParser.pixivIllustrationsOrIllustratorIdParser(fileName);
         } else if (fileName.contains("httpstwitter") || fileName.contains("httpsx")) {
             return FilenameParser.twitterParser(fileName);

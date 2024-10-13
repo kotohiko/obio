@@ -94,7 +94,6 @@ public class ReadAndMoveController {
         }
     }
 
-
     /**
      * Opens a folder using the explorer.exe command.
      *
