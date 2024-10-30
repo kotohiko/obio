@@ -225,4 +225,19 @@ public final class FilenameParser {
         sb.insert(sb.lastIndexOf("art") + 3, "/");
         return sb.toString();
     }
+
+    /**
+     * <a href="https://www.facebook.com/">Facebook</a> URL-like filename parser.
+     *
+     * @param str filename string param
+     * @return parsed URL
+     */
+    public static String facebookParser(String str) {
+        var sb = getStringBuilder(str);
+        sb.insert(5, "://");
+        sb.insert(sb.indexOf("com") + 3, "/");
+        sb.insert(sb.indexOf("photo") + 5, "/");
+        sb.insert(sb.indexOf("photo") + 6, "?");
+        return sb.toString();
+    }
 }

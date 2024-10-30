@@ -27,7 +27,7 @@ public class NewFilesAddedWatcher {
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
-    private final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
+    private static final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
 
     /**
      * A watch service that <em>watches</em> registered objects for changes and events.

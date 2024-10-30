@@ -293,8 +293,7 @@ public class ReadAndMoveService {
 
         try {
             Files.move(filePath, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
-            logger.info(ResManager.loadResString("ReadAndMoveService_4", filePath.toString(),
-                    targetFilePath.toString()));
+            logger.info(ResManager.loadResString("ReadAndMoveService_4", targetFilePath.toString()));
             countTheNumberOfFiles();
 
             // Signal that the files have been found

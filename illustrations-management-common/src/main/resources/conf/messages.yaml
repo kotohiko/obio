@@ -16,7 +16,7 @@ ReadAndMoveService_0: "The entered path code does not match any valid target pat
 ReadAndMoveService_1: "The Yaml file does not exist. Please check if the arguments passed to the specified object constructor match the actual path."
 ReadAndMoveService_2: "An IOException occurred while creating source path stream. The source path might not exist, or there could be other problems. Please check and correct it."
 ReadAndMoveService_3: "No files found in the source directory: {0}"
-ReadAndMoveService_4: "File has been moved: {0} -> {1}"
+ReadAndMoveService_4: "File has been moved: -> {0}"
 ReadAndMoveService_5: "Failed to move files. Please verify that the target path is valid."
 ReadAndMoveService_6: "Active Threads: "
 ReadAndMoveService_7: "Current Pool Size: "

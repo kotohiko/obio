@@ -44,6 +44,8 @@ public final class FilenameSwitcher {
             return FilenameParser.miyousheParser(fileName);
         } else if (fileName.contains("deviantart")) {
             return FilenameParser.deviantartParser(fileName);
+        } else if (fileName.contains("facebook")) {
+            return FilenameParser.facebookParser(fileName);
         }
         return "";
     }
