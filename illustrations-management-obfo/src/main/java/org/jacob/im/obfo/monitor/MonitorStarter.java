@@ -14,7 +14,6 @@ import java.nio.file.Paths;
  * @since 10:16 Sep 03, 2024
  */
 public class MonitorStarter {
-
     /**
      * Starts monitoring the specified directory for new files and returns a string representation
      * of the initialized{@link NewFilesAddedWatcher}.

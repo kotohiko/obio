@@ -53,7 +53,9 @@ public class ReadAndMoveController {
                 }
 
                 var switchToIFP = IFPParsingApi.getAndParse(cmd);
-                if (cmd.equals("check")) {
+                if (cmd.isEmpty()) {
+                    mainPart();
+                } else if (cmd.equals("check")) {
                     checkPathStatus();
                 } else if (isValidPath(cmd)) {
                     openFolder(cmd);

@@ -60,7 +60,7 @@ public class OBFOLogFilesWriter {
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG, Boolean.TRUE))) {
             bw.write(IMCommonHelper.getRealTime()
-                    + threadInfo + " INFO - New files added: - File(s) has/have been moved; "
+                    + threadInfo + " INFO - File(s) has/have been moved; "
                     + "Remaining unclassified images: " + fileCount + "\n");
         } catch (IOException e) {
             logger.error(ResManager.loadResString("OBFOLogger_0"));
