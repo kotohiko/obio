@@ -3,7 +3,6 @@ package org.jacob.im.obfo.service;
 import org.jacob.im.common.constants.IMCommonConstants;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.constants.OBFOConstants;
-import org.jacob.im.obfo.controller.ReadAndMoveController;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
 import org.jacob.im.obfo.enums.ThreadPoolSituationStatusEnums;
 import org.jacob.im.obfo.logger.OBFOLogFilesWriter;
@@ -11,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -52,25 +49,6 @@ public class ReadAndMoveService {
      */
     private static final ExecutorService executorService
             = Executors.newFixedThreadPool(3, new CustomThreadFactory("ReadAndMovePool"));
-
-    /**
-     * Loads a {@link FileInputStream} for the YAML configuration file.
-     * If the file is not found, logs an error message and performs a system reboot.
-     *
-     * @return FileInputStream representing the YAML file stream, or null if the file is not found.
-     */
-    public static FileInputStream loadYamlFile() {
-        FileInputStream ymlFileStream = null;
-
-        try {
-            ymlFileStream = new FileInputStream(OBFOConstants.ILLUSTRATIONS_CONF_YML_PATH);
-        } catch (FileNotFoundException e) {
-            logger.error(ResManager.loadResString("ReadAndMoveService_1"));
-            endLinePrintAndReboot();
-        }
-
-        return ymlFileStream;
-    }
 
     /**
      * Moves files from a default source path to a target path specified by a target path code.
@@ -147,9 +125,10 @@ public class ReadAndMoveService {
     /**
      * Moves the contents of a source directory to a target directory, including both files and subdirectories.
      * <p>
-     * If the source path contains regular files, each file is moved to the corresponding location in the target directory.
-     * If the source path contains subdirectories, the entire subdirectory is moved to the target location without further
-     * recursive processing of its contents.
+     * If the source path contains regular files, each file is moved to the corresponding location
+     * in the target directory.
+     * If the source path contains subdirectories, the entire subdirectory is moved to the target location
+     * without further recursive processing of its contents.
      * <p>
      * If the source path itself is a regular file, the file is moved directly to the target directory.
      *
@@ -323,11 +302,6 @@ public class ReadAndMoveService {
         OBFOLogFilesWriter.filesMoveLogWriter(fileCount);
     }
 
-    public static void endLinePrintAndReboot() {
-        System.out.println(IMCommonConstants.SEPARATOR_LINE);
-        ReadAndMoveController.mainPart();
-    }
-
     /**
      * CustomThreadFactory is an implementation of the {@link ThreadFactory} interface
      * that allows for custom naming of threads created in a thread pool.
@@ -344,6 +318,7 @@ public class ReadAndMoveService {
          * Base name for all threads in the pool
          */
         private final String baseName;
+
         /**
          * Counter to give unique IDs to threads
          */

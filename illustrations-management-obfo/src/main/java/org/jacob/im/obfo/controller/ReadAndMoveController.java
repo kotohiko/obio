@@ -10,9 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
@@ -53,6 +51,7 @@ public class ReadAndMoveController {
                 }
 
                 var switchToIFP = IFPParsingApi.getAndParse(cmd);
+                cmd = cmd.trim();
                 if (cmd.isEmpty()) {
                     mainPart();
                 } else if (cmd.equals("check")) {
@@ -69,7 +68,7 @@ public class ReadAndMoveController {
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveController_2"), e);
         }
-        ReadAndMoveService.endLinePrintAndReboot();
+        endLinePrintAndReboot();
     }
 
     /**
@@ -120,7 +119,7 @@ public class ReadAndMoveController {
      */
     private static void readYamlAndMoveFiles(String targetPathKey) {
         // Load a YAML file into a Java object.
-        Map<String, String> pathsData = new Yaml().load(ReadAndMoveService.loadYamlFile());
+        Map<String, String> pathsData = new Yaml().load(loadYamlFile());
         String defaultSourcePath = pathsData.get("Default source path");
 
         if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
@@ -128,6 +127,29 @@ public class ReadAndMoveController {
         } else {
             ReadAndMoveService.defineSourcePathAndTargetPath(defaultSourcePath, pathsData, targetPathKey);
         }
+    }
+
+    /**
+     * Loads a {@link FileInputStream} for the YAML configuration file.
+     * If the file is not found, logs an error message and performs a system reboot.
+     *
+     * @return FileInputStream representing the YAML file stream, or null if the file is not found.
+     */
+    private static FileInputStream loadYamlFile() {
+        FileInputStream ymlFileStream = null;
+
+        try {
+            ymlFileStream = new FileInputStream(OBFOConstants.ILLUSTRATIONS_CONF_YML_PATH);
+        } catch (FileNotFoundException e) {
+            logger.error(ResManager.loadResString("ReadAndMoveService_1"));
+            endLinePrintAndReboot();
+        }
+        return ymlFileStream;
+    }
+
+    public static void endLinePrintAndReboot() {
+        System.out.println(IMCommonConstants.SEPARATOR_LINE);
+        ReadAndMoveController.mainPart();
     }
 
     /**

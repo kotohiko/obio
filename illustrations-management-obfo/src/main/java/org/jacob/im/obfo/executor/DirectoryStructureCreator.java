@@ -33,7 +33,8 @@ public class DirectoryStructureCreator {
          * @param targetRootDir  目标根目录
          * @throws IOException 如果在读取文件或创建目录过程中发生I/O错误
          */
-        private static void createDirectoryStructureFromFilePaths(Path sourceFilePath, Path targetRootDir) throws IOException {
+        private static void createDirectoryStructureFromFilePaths(Path sourceFilePath, Path targetRootDir)
+                throws IOException {
             try (BufferedReader reader = Files.newBufferedReader(sourceFilePath)) {
                 String line;
                 while ((line = reader.readLine()) != null) {
