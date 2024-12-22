@@ -113,10 +113,7 @@ public final class FilenameParser {
      */
     public static String danbooruParser(String str) {
         var sb = getStringBuilder(str);
-        sb.insert(5, "://");
-        sb.insert(26, "/");
-        sb.insert(32, "/");
-        return String.valueOf(sb);
+        return sb.replace(0, 28, "https://danbooru.donmai.us/posts/").toString();
     }
 
     /**
@@ -146,7 +143,6 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    @SuppressWarnings("unused")
     public static String bilibiliVideosParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
@@ -192,11 +188,15 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    @SuppressWarnings("unused")
     public static String youtubeParser(String str) {
         var sb = getStringBuilder(str);
-        sb.insert(5, "://");
-        sb.insert(sb.indexOf("youtu.be") + 8, "/");
+        if (str.contains("httpswww.youtube.comwatch")) {
+            sb.replace(0, 27, "https://www.youtube.com/watch?v=");
+        } else if (str.contains("httpsyoutu.be")) {
+            sb.replace(0, 13, "https://youtu.be/");
+        } else if (str.contains("httpswww.youtube.comshorts")) {
+            sb.replace(0, 26, "https://www.youtube.com/shorts/");
+        }
         return sb.toString();
     }
 

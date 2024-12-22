@@ -38,7 +38,7 @@ public final class FilenameSwitcher {
             return FilenameParser.twitterParser(fileName);
         } else if (fileName.contains("httpsdanbooru")) {
             return FilenameParser.danbooruParser(fileName);
-        } else if (fileName.contains("bilibili")) {
+        } else if (fileName.contains("bilibili.comopus")) {
             return FilenameParser.bilibiliIllustrationsParser(fileName);
         } else if (fileName.contains("miyoushe.com")) {
             return FilenameParser.miyousheParser(fileName);
@@ -46,7 +46,10 @@ public final class FilenameSwitcher {
             return FilenameParser.deviantartParser(fileName);
         } else if (fileName.contains("facebook")) {
             return FilenameParser.facebookParser(fileName);
-        }
+        } else if (fileName.contains("bilibili.comvideo")) {
+            return FilenameParser.bilibiliVideosParser(fileName);
+        } else if (fileName.contains("youtube"))
+            return FilenameParser.youtubeParser(fileName);
         return "";
     }
 }

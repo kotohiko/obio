@@ -459,6 +459,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#SP
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Teasing Master Takagi-san／#擅长捉弄的高木同学／#からかい上手の高木さん
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#The Apothecary Diaries／#药师少女的独语／#薬屋のひとりごと
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#The Idolmaster／#偶像大师
+S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#The Idolmaster／#偶像大师\#Fujita Kotone／#藤田琴音／#藤田（ふじた） ことね
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project\#Hakurei Reimu／#博丽灵梦
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#Touhou Project／#东方Project\剧毒少女
@@ -568,6 +569,7 @@ S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#�
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#雷索纳斯
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#饿殍：明末千里行
 S:\Gallery\【二次元】Anime World／二次元世界／アニメの世界\#魔法少女伊莉雅
-S:\Gallery\【网络素材】
-S:\Gallery\【网络素材】\【Meme】Twitter
-S:\Gallery\【网络素材】\图标库
+S:\Gallery\【素材图库】
+S:\Gallery\【素材图库】\P图
+S:\Gallery\【素材图库】\【Meme】Twitter
+S:\Gallery\【素材图库】\图标库
