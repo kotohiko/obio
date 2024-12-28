@@ -31,12 +31,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     public static String pixivIllustrationsOrIllustratorIdParser(String str) {
-        if (str.contains("_")) {
-            str = str.substring(0, str.indexOf('_'));
-            return "https://www.pixiv.net/artworks/" + str;
-        } else {
-            return "https://www.pixiv.net/users/" + str;
-        }
+        return String.format("https://www.pixiv.net/artworks/%s", str.substring(0, str.indexOf('_')));
     }
 
     /**
@@ -47,11 +42,10 @@ public final class FilenameParser {
      */
     public static String twitterParser(String str) {
         var sb = getStringBuilder(str);
-        sb.insert(5, "://");
-        if (str.contains("twitter")) {
-            sb.insert(19, "/");
+        if (str.contains("httpstwitter.com")) {
+            sb.replace(0,16, "https://x.com/");
         } else if (str.contains("httpsx.com")) {
-            sb.insert(13, "/");
+            sb.replace(0,10, "https://x.com/");
         }
         sb.insert(sb.indexOf("status"), "/");
         sb.insert(sb.indexOf("status") + 6, "/");

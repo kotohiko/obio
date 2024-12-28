@@ -76,7 +76,9 @@ public class ReadAndMoveController {
      * If no files are present, it provides feedback accordingly.
      */
     private static void checkPathStatus() {
-        File directory = new File(OBFOConstants.ROCKET_LAUNCHER);
+        Map<String, String> pathsData = new Yaml().load(loadYamlFile());
+        String defaultSourcePath = pathsData.get("Default source path");
+        File directory = new File(defaultSourcePath);
 
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
