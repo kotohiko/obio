@@ -47,7 +47,7 @@ public class ReadAndMoveService {
      * <p>The thread pool is designed to handle tasks related to reading from and moving files, providing
      * a controlled and efficient way to manage these I/O-bound operations.
      */
-    private static final ExecutorService executorService
+    private final ExecutorService executorService
             = Executors.newFixedThreadPool(3, new CustomThreadFactory("ReadAndMovePool"));
 
     /**
@@ -65,7 +65,7 @@ public class ReadAndMoveService {
      * @param targetPathCode    The target path code used to retrieve the target path string from the
      *                          paths data map.
      */
-    public static void defineSourcePathAndTargetPath(String defaultSourcePath,
+    public void defineSourcePathAndTargetPath(String defaultSourcePath,
                                                      Map<String, String> pathsData, String targetPathCode) {
         // Define source path and target path
         var sourcePath = Paths.get(defaultSourcePath);
@@ -105,7 +105,7 @@ public class ReadAndMoveService {
      * @param targetPathStr the string representation of the target directory path
      *                      where the files will be moved.
      */
-    private static void checkBeforeMove(Path sourcePath, String targetPathStr) {
+    private void checkBeforeMove(Path sourcePath, String targetPathStr) {
         var targetPath = Paths.get(targetPathStr);
         AtomicBoolean foundFiles = new AtomicBoolean(false);
         List<Path> filePaths = new ArrayList<>();
@@ -137,7 +137,7 @@ public class ReadAndMoveService {
      * @param filePaths  the list to store the paths of regular files that are moved
      * @throws IOException if an I/O error occurs while accessing the file system
      */
-    private static void processDirectory(Path sourcePath, Path targetPath, List<Path> filePaths) throws IOException {
+    private void processDirectory(Path sourcePath, Path targetPath, List<Path> filePaths) throws IOException {
         if (Files.isDirectory(sourcePath)) {
             // Ensure the target directory exists
             Files.createDirectories(targetPath);
@@ -181,7 +181,7 @@ public class ReadAndMoveService {
      * @param sourcePath the source path from which the files are being moved (for logging purposes)
      * @throws InterruptedException if the current thread is interrupted while waiting for tasks to complete
      */
-    private static void submitToExecutorPool(List<Path> filePaths, Path targetPath,
+    private void submitToExecutorPool(List<Path> filePaths, Path targetPath,
                                              AtomicBoolean foundFiles, Path sourcePath) throws InterruptedException {
 
         // Create a CountDownLatch initialized with the size of the filePaths list.
@@ -231,7 +231,7 @@ public class ReadAndMoveService {
      * @param enums The status enum to be included in the log messages, providing
      *              context about the situation when the information is being printed.
      */
-    private static void printThreadPoolInfo(ThreadPoolSituationStatusEnums enums) {
+    private void printThreadPoolInfo(ThreadPoolSituationStatusEnums enums) {
         if (executorService instanceof ThreadPoolExecutor threadPoolExecutor) {
             var activeCount = threadPoolExecutor.getActiveCount();
             var poolSize = threadPoolExecutor.getPoolSize();
@@ -266,7 +266,7 @@ public class ReadAndMoveService {
      * @see Files#move(Path, Path, CopyOption...)
      * @see StandardCopyOption#REPLACE_EXISTING
      */
-    private static FilesMoveOperStatusEnums moveTheFiles(Path targetPath, Path filePath) {
+    private FilesMoveOperStatusEnums moveTheFiles(Path targetPath, Path filePath) {
         // Construct the target path
         var targetFilePath = targetPath.resolve(filePath.getFileName());
 
@@ -289,8 +289,8 @@ public class ReadAndMoveService {
      * {@code OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH}, counts the number of files,
      * and then calls {@code OBFOLogFilesWriter.filesMoveLogWriter} to write the count to a log file.
      */
-    private static void countTheNumberOfFiles() {
-        var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
+    private void countTheNumberOfFiles() {
+        var folder = new File(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES);
         int fileCount = 0;
 
         // Traverse all the files under the specified directory.
@@ -312,7 +312,7 @@ public class ReadAndMoveService {
      * <p>
      * Example thread names: ReadAndMovePool-thread-1, ReadAndMovePool-thread-2, etc.
      */
-    private static class CustomThreadFactory implements ThreadFactory {
+    private class CustomThreadFactory implements ThreadFactory {
 
         /**
          * Base name for all threads in the pool

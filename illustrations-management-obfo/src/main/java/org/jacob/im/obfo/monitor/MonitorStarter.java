@@ -22,7 +22,7 @@ public class MonitorStarter {
      */
     public static String monitorStarter() {
         var addFileMonitor = new NewFilesAddedWatcher(Paths
-                .get(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH));
+                .get(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
         return addFileMonitor.toString();
     }
 }

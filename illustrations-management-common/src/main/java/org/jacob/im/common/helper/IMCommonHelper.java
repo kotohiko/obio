@@ -1,9 +1,12 @@
 package org.jacob.im.common.helper;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import org.jacob.im.common.constants.IMCommonConstants;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 /**
  * Utility class providing common helper functions for IM applications.
@@ -28,5 +31,17 @@ public class IMCommonHelper {
      */
     public static BufferedReader consoleReader() {
         return new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    public static Map<String, String> getIllustrationsPathMap() throws IOException {
+        FileInputStream ymlFileStream;
+
+        try {
+            ymlFileStream = new FileInputStream(IMCommonConstants.ILLUSTRATIONS_CONF_YML_PATH);
+        } catch (FileNotFoundException e) {
+            throw new IOException("ReadAndMoveService_1");
+        }
+        return new Yaml().load(ymlFileStream);
+
     }
 }

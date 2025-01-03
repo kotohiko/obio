@@ -8,9 +8,10 @@ import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.service.ReadAndMoveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
@@ -32,13 +33,13 @@ public class ReadAndMoveController {
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
-    private static final Logger logger = LoggerFactory.getLogger(ReadAndMoveController.class);
+    private final Logger logger = LoggerFactory.getLogger(ReadAndMoveController.class);
 
     /**
      * The main execution method of the {@link ReadAndMoveController} class. This method handles user input,
      * reads YAML configuration files, and performs file moving operations based on the provided paths.
      */
-    public static void mainPart() {
+    public void mainPart() {
         System.out.print(OBFOConstants.WELCOME_LINE);
 
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
@@ -53,16 +54,16 @@ public class ReadAndMoveController {
                 var switchToIFP = IFPParsingApi.getAndParse(cmd);
                 cmd = cmd.trim();
                 if (cmd.isEmpty()) {
-                    mainPart();
+                    this.mainPart();
                 } else if (cmd.equals("check")) {
-                    checkPathStatus();
+                    this.checkPathStatus();
                 } else if (isValidPath(cmd)) {
-                    openFolder(cmd);
+                    this.openFolder(cmd);
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else if (switchToIFP) {
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else {
-                    readYamlAndMoveFiles(cmd);
+                    this.readYamlAndMoveFiles(cmd);
                 }
             }
         } catch (IOException e) {
@@ -75,25 +76,29 @@ public class ReadAndMoveController {
      * Checks the status of a specified path and prints out the names of any files found.
      * If no files are present, it provides feedback accordingly.
      */
-    private static void checkPathStatus() {
-        Map<String, String> pathsData = new Yaml().load(loadYamlFile());
-        String defaultSourcePath = pathsData.get("Default source path");
-        File directory = new File(defaultSourcePath);
+    private void checkPathStatus() {
+        try {
+            Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
+            String defaultSourcePath = illustrationsPathMap.get("Default source path");
+            File directory = new File(defaultSourcePath);
 
-        if (directory.exists() && directory.isDirectory()) {
-            File[] files = directory.listFiles();
+            if (directory.exists() && directory.isDirectory()) {
+                File[] files = directory.listFiles();
 
-            // Check if there are actually files in the directory
-            if (files != null && files.length > 0) {
-                for (File file : files) {
-                    System.out.println(file.getName());
+                // Check if there are actually files in the directory
+                if (files != null && files.length > 0) {
+                    for (File file : files) {
+                        System.out.println(file.getName());
+                    }
+                    // Provide feedback when no files are found
+                } else {
+                    System.out.println("Buffer has no files yet.");
                 }
-                // Provide feedback when no files are found
             } else {
-                System.out.println("Buffer has no files yet.");
+                System.out.println("Path does not exist or is not a valid directory path");
             }
-        } else {
-            System.out.println("Path does not exist or is not a valid directory path");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -102,7 +107,7 @@ public class ReadAndMoveController {
      *
      * @param path The path of the folder to be opened.
      */
-    private static void openFolder(String path) {
+    private void openFolder(String path) {
         try {
             // Create a ProcessBuilder instance with the command to execute
             var builder = new ProcessBuilder(OBFOConstants.EXPLORER_EXE, path);
@@ -119,39 +124,21 @@ public class ReadAndMoveController {
      *
      * @param targetPathKey the key used to identify the target path in the YAML data
      */
-    private static void readYamlAndMoveFiles(String targetPathKey) {
+    private void readYamlAndMoveFiles(String targetPathKey) throws IOException {
         // Load a YAML file into a Java object.
-        Map<String, String> pathsData = new Yaml().load(loadYamlFile());
-        String defaultSourcePath = pathsData.get("Default source path");
+        Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
+        String defaultSourcePath = illustrationsPathMap.get("Default source path");
 
         if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
             logger.error(ResManager.loadResString("ReadAndMoveController_1"));
         } else {
-            ReadAndMoveService.defineSourcePathAndTargetPath(defaultSourcePath, pathsData, targetPathKey);
+            new ReadAndMoveService().defineSourcePathAndTargetPath(defaultSourcePath, illustrationsPathMap, targetPathKey);
         }
     }
 
-    /**
-     * Loads a {@link FileInputStream} for the YAML configuration file.
-     * If the file is not found, logs an error message and performs a system reboot.
-     *
-     * @return FileInputStream representing the YAML file stream, or null if the file is not found.
-     */
-    private static FileInputStream loadYamlFile() {
-        FileInputStream ymlFileStream = null;
-
-        try {
-            ymlFileStream = new FileInputStream(OBFOConstants.ILLUSTRATIONS_CONF_YML_PATH);
-        } catch (FileNotFoundException e) {
-            logger.error(ResManager.loadResString("ReadAndMoveService_1"));
-            endLinePrintAndReboot();
-        }
-        return ymlFileStream;
-    }
-
-    public static void endLinePrintAndReboot() {
+    public void endLinePrintAndReboot() {
         System.out.println(IMCommonConstants.SEPARATOR_LINE);
-        ReadAndMoveController.mainPart();
+        mainPart();
     }
 
     /**
@@ -160,7 +147,7 @@ public class ReadAndMoveController {
      * @param path The path to validate.
      * @return true if the path is valid, false otherwise.
      */
-    private static boolean isValidPath(String path) {
+    private boolean isValidPath(String path) {
         try {
             var p = Paths.get(path);
             return Files.exists(p);

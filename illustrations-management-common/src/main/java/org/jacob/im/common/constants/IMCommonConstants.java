@@ -12,4 +12,7 @@ public class IMCommonConstants {
     public static final String SEPARATOR_LINE
             = "-----------------------------------------------------------SEPARATOR LINE"
             + "-----------------------------------------------------------";
+
+    public static final String ILLUSTRATIONS_CONF_YML_PATH
+            = "illustrations-management-obfo/src/main/resources/conf/illustrations-paths-conf.yaml";
 }

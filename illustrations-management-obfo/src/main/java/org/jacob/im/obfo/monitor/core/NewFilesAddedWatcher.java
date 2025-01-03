@@ -12,7 +12,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.nio.file.*;
-import java.util.concurrent.*;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * A monitor that watches for changes and events related to files.
@@ -27,7 +27,7 @@ public class NewFilesAddedWatcher {
      * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
      * used throughout the class to provide detailed information about the watcher's operations.
      */
-    private static final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
+    private final Logger logger = LoggerFactory.getLogger(NewFilesAddedWatcher.class);
 
     /**
      * A watch service that <em>watches</em> registered objects for changes and events.
@@ -39,13 +39,6 @@ public class NewFilesAddedWatcher {
      * It will typically represent a system dependent file path.
      */
     private final Path dir;
-
-    /**
-     * An {@link Executor} that provides methods to manage termination and
-     * methods that can produce a {@link Future} for tracking progress of
-     * one or more asynchronous tasks.
-     */
-    private final ExecutorService executor;
 
     /**
      * Constructs a new {@link NewFilesAddedWatcher} instance that monitors a specified directory
@@ -67,23 +60,18 @@ public class NewFilesAddedWatcher {
      */
     public NewFilesAddedWatcher(Path dir) {
         try {
-            int corePoolSize = 1;
-            int maxPoolSize = 1;
-            long keepAliveTime = 0L;
-
             this.watcher = FileSystems.getDefault().newWatchService();
             this.dir = dir;
-            // Create a fixed-size thread pool with a bounded queue
-            this.executor = new ThreadPoolExecutor(corePoolSize, maxPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
-                    // Bounded queue
-                    new ArrayBlockingQueue<>(5),
-                    // RejectedExecutionHandler
-                    new ThreadPoolExecutor.CallerRunsPolicy()
-            );
 
-            // Start monitoring the directory upon initialization
+            // Register the directory for the ENTRY_CREATE event
             dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
-            executor.submit(this::startWatching);
+
+            // Start a dedicated thread to monitor the directory
+            Thread watcherThread = new Thread(this::startWatching);
+            // Set as a daemon thread to terminate with the program
+            watcherThread.setDaemon(true);
+            watcherThread.start();
+
             printMemoryInfo();
             printThreadsInfo();
         } catch (IOException e) {
@@ -132,8 +120,6 @@ public class NewFilesAddedWatcher {
             }
         } catch (InterruptedException e) {
             logger.error(ResManager.loadResString("NewFilesAddedWatcher_0"));
-            // Gracefully shut down the thread pool
-            shutdown();
         }
     }
 
@@ -143,13 +129,13 @@ public class NewFilesAddedWatcher {
      * @param fileWithAbsPath Files with absolute path
      */
     private void processFile(Path fileWithAbsPath) {
-        var folder = new File(OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH);
+        var folder = new File(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES);
         int fileCount;
 
         // Check if the folder exists and is a directory
         if (!folder.exists() || !folder.isDirectory()) {
             logger.error(ResManager.loadResString("NewFilesAddedWatcher_3",
-                    OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH));
+                    OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
             return;
         }
 
@@ -157,7 +143,7 @@ public class NewFilesAddedWatcher {
             fileCount = (int) stream.filter(Files::isRegularFile).count();
         } catch (IOException e) {
             logger.error(ResManager.loadResString("NewFilesAddedWatcher_4",
-                    OBFOConstants.UNCLASSIFIED_REMAINING_IMAGES_FOLDER_PATH));
+                    OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
             return;
         }
 
@@ -196,21 +182,6 @@ public class NewFilesAddedWatcher {
         for (long id : threadIds) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(id);
             logger.info("Thread Name: {}, State: {}", threadInfo.getThreadName(), threadInfo.getThreadState());
-        }
-    }
-
-    /**
-     * Shut down the thread pool gracefully.
-     */
-    public void shutdown() {
-        executor.shutdown();
-
-        try {
-            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
-                executor.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            executor.shutdownNow();
         }
     }
 }
