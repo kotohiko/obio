@@ -1,16 +1,16 @@
 package org.jacob.im.obfo.command.impl;
 
-import org.jacob.im.obfo.command.Command;
+import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 
 /**
  * Handles empty commands.
  */
-public class EmptyCommand implements Command {
+public class EmptyCmd implements UserCmd {
 
     private final ReadAndMoveController controller;
 
-    public EmptyCommand(ReadAndMoveController controller) {
+    public EmptyCmd(ReadAndMoveController controller) {
         this.controller = controller;
     }
 

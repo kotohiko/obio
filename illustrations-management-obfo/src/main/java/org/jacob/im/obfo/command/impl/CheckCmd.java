@@ -1,26 +1,26 @@
 package org.jacob.im.obfo.command.impl;
 
-import org.jacob.im.obfo.command.Command;
+import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 
 /**
- * Handles YAML processing commands.
+ * Handles "check" command.
  */
-public class ReadYamlCommand implements Command {
+public class CheckCmd implements UserCmd {
 
     private final ReadAndMoveController controller;
 
-    public ReadYamlCommand(ReadAndMoveController controller) {
+    public CheckCmd(ReadAndMoveController controller) {
         this.controller = controller;
     }
 
     @Override
     public boolean matches(String input) {
-        return !input.isEmpty();
+        return "check".equals(input);
     }
 
     @Override
     public void execute(String input) {
-        controller.readYamlAndMoveFiles(input);
+        controller.checkPathStatus();
     }
 }

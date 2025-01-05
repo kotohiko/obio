@@ -5,7 +5,7 @@ import org.jacob.im.common.controller.BaseController;
 import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.ifp.api.IFPParsingApi;
-import org.jacob.im.obfo.command.Command;
+import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.command.impl.*;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.service.ReadAndMoveService;
@@ -40,18 +40,19 @@ public class ReadAndMoveController extends BaseController {
     /**
      * A list of commands supported by this controller.
      */
-    private final List<Command> commands;
+    private final List<UserCmd> userCmds;
 
     /**
      * Constructs a new ReadAndMoveController and initializes its command handlers.
      * Each command is mapped to a specific action that this controller can perform.
      */
     public ReadAndMoveController() {
-        commands = List.of(
-                new EmptyCommand(this),
-                new CheckCommand(this),
-                new OpenCommand(this),
-                new ReadYamlCommand(this)
+        userCmds = List.of(
+                new EmptyCmd(this),
+                new CheckCmd(this),
+                new OpenCmd(this),
+                new ShortOpenCmd(this),
+                new ReadYamlCmd(this)
         );
     }
 
@@ -74,9 +75,9 @@ public class ReadAndMoveController extends BaseController {
                 cmd = cmd.trim();
 
                 boolean handled = false;
-                for (Command command : commands) {
-                    if (command.matches(cmd)) {
-                        command.execute(cmd);
+                for (UserCmd userCmd : userCmds) {
+                    if (userCmd.matches(cmd)) {
+                        userCmd.execute(cmd);
                         handled = true;
                         break;
                     }
@@ -85,13 +86,13 @@ public class ReadAndMoveController extends BaseController {
                 if (!handled && switchToIFP) {
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
                 } else if (!handled) {
-                    readYamlAndMoveFiles(cmd);
+                    this.readYamlAndMoveFiles(cmd);
                 }
             }
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveController_2"), e);
         }
-        endLinePrintAndReboot();
+        this.endLinePrintAndReboot();
     }
 
     /**

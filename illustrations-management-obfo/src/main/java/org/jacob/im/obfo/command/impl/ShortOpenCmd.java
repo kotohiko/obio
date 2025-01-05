@@ -1,7 +1,7 @@
 package org.jacob.im.obfo.command.impl;
 
 import org.jacob.im.common.helper.IMCommonHelper;
-import org.jacob.im.obfo.command.Command;
+import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 
 import java.io.IOException;
@@ -12,11 +12,11 @@ import java.util.Map;
  * @author Kotohiko
  * @since 13:40 Jan 05, 2025
  */
-public class OpenCommandShort implements Command {
+public class ShortOpenCmd implements UserCmd {
 
     private final ReadAndMoveController controller;
 
-    public OpenCommandShort(ReadAndMoveController controller) {
+    public ShortOpenCmd(ReadAndMoveController controller) {
         this.controller = controller;
     }
 

@@ -1,26 +1,26 @@
 package org.jacob.im.obfo.command.impl;
 
-import org.jacob.im.obfo.command.Command;
+import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 
 /**
- * Handles "check" command.
+ * Handles {@code open} command.
  */
-public class CheckCommand implements Command {
+public class OpenCmd implements UserCmd {
 
     private final ReadAndMoveController controller;
 
-    public CheckCommand(ReadAndMoveController controller) {
+    public OpenCmd(ReadAndMoveController controller) {
         this.controller = controller;
     }
 
     @Override
     public boolean matches(String input) {
-        return "check".equals(input);
+        return input.startsWith("open ") && controller.isValidPath(input.substring(5));
     }
 
     @Override
     public void execute(String input) {
-        controller.checkPathStatus();
+        controller.openFolder(input.substring(5));
     }
 }

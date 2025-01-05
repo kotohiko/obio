@@ -1,6 +1,6 @@
 package org.jacob.im.obfo.command;
 
-public interface Command {
+public interface UserCmd {
 
     boolean matches(String input);
 
