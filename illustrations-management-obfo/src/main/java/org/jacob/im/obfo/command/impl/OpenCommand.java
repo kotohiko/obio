@@ -4,7 +4,7 @@ import org.jacob.im.obfo.command.Command;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
 
 /**
- * Handles "open" command.
+ * Handles {@code open} command.
  */
 public class OpenCommand implements Command {
 

@@ -48,10 +48,10 @@ sigewinne: S:\Gallery\二次元世界\原神\#Fontaine／#枫丹／#フォンテ
 须弥: S:\Gallery\二次元世界\原神\须弥
 sumeru: S:\Gallery\二次元世界\原神\须弥
 Sumeru: S:\Gallery\二次元世界\原神\须弥
-草神: 纳西妲
-纳西妲: 纳西妲
-Nahida: 纳西妲
-nahida: 纳西妲
+草神: S:\Gallery\二次元世界\原神\须弥\纳西妲
+纳西妲: S:\Gallery\二次元世界\原神\须弥\纳西妲
+Nahida: S:\Gallery\二次元世界\原神\须弥\纳西妲
+nahida: S:\Gallery\二次元世界\原神\须弥\纳西妲
 妮露: S:\Gallery\二次元世界\原神\须弥\#Nilou／#妮露／#ニィロウ／#닐루
 Nilou: S:\Gallery\二次元世界\原神\须弥\#Nilou／#妮露／#ニィロウ／#닐루
 nilou: S:\Gallery\二次元世界\原神\须弥\#Nilou／#妮露／#ニィロウ／#닐루
@@ -118,11 +118,11 @@ natlan: S:\Gallery\二次元世界\原神\纳塔
 Mavuika: S:\Gallery\二次元世界\原神\纳塔\#Mavuika／#玛薇卡／#マーヴィカ／#마비카
 mavuika: S:\Gallery\二次元世界\原神\纳塔\#Mavuika／#玛薇卡／#マーヴィカ／#마비카
 
-流泉之众: S:\Gallery\二次元世界\原神\纳塔\#「People of the Springs」Meztli／#「流泉之众」梅兹特利／#「流泉の衆」メズトリ／#「샘물 무리」메슬리
-麻辣妮儿: S:\Gallery\二次元世界\原神\纳塔\#「People of the Springs」Meztli／#「流泉之众」梅兹特利／#「流泉の衆」メズトリ／#「샘물 무리」메슬리\#Mualani／#玛拉妮／#むあらに
-Mualani: S:\Gallery\二次元世界\原神\纳塔\#「People of the Springs」Meztli／#「流泉之众」梅兹特利／#「流泉の衆」メズトリ／#「샘물 무리」메슬리\#Mualani／#玛拉妮／#むあらに
-mualani: S:\Gallery\二次元世界\原神\纳塔\#「People of the Springs」Meztli／#「流泉之众」梅兹特利／#「流泉の衆」メズトリ／#「샘물 무리」메슬리\#Mualani／#玛拉妮／#むあらに
-玛拉妮: S:\Gallery\二次元世界\原神\纳塔\#「People of the Springs」Meztli／#「流泉之众」梅兹特利／#「流泉の衆」メズトリ／#「샘물 무리」메슬리\#Mualani／#玛拉妮／#むあらに
+流泉之众: S:\Gallery\二次元世界\原神\纳塔\「流泉之众」梅兹特利
+麻辣妮儿: S:\Gallery\二次元世界\原神\纳塔\「流泉之众」梅兹特利\玛拉妮
+Mualani: S:\Gallery\二次元世界\原神\纳塔\「流泉之众」梅兹特利\玛拉妮
+mualani: S:\Gallery\二次元世界\原神\纳塔\「流泉之众」梅兹特利\玛拉妮
+玛拉妮: S:\Gallery\二次元世界\原神\纳塔\「流泉之众」梅兹特利\玛拉妮
 
 回声之子: S:\Gallery\二次元世界\原神\纳塔\#「Children of Echoes」Nanatzcayan／#「回声之子」纳茨卡延／#「こだまの子」ナナツカヤン／#「메아리 아이」나나치카얀
 卡齐娜: S:\Gallery\二次元世界\原神\纳塔\#「Children of Echoes」Nanatzcayan／#「回声之子」纳茨卡延／#「こだまの子」ナナツカヤン／#「메아리 아이」나나치카얀\#Kachina／#卡齐娜／#カチーナ
@@ -204,9 +204,9 @@ huohuo: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Luofu／#仙�
 Huohuo: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Luofu／#仙舟「罗浮」\#Huohuo／#藿藿／#フォフォ／#곽향
 
 # 仙舟「朱明」
-云璃: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Zhuming／#仙舟「朱明」\#Yunli／#云璃／#雲璃（ウンリ）
-Yunli: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Zhuming／#仙舟「朱明」\#Yunli／#云璃／#雲璃（ウンリ）
-yunli: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Zhuming／#仙舟「朱明」\#Yunli／#云璃／#雲璃（ウンリ）
+云璃: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Zhuming／#仙舟「朱明」\云璃
+Yunli: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Zhuming／#仙舟「朱明」\云璃
+yunli: S:\Gallery\二次元世界\崩坏：星穹铁道\#Xianzhou Zhuming／#仙舟「朱明」\云璃
 
 # 假面愚者
 花火: S:\Gallery\二次元世界\崩坏：星穹铁道\假面愚者\花火
@@ -257,16 +257,16 @@ Arona: S:\Gallery\二次元世界\BA\沙勒\#Arona／#阿洛娜／#アロナ
 plana: S:\Gallery\二次元世界\BA\沙勒\#Plana／#普拉娜／#プラナ
 Plana: S:\Gallery\二次元世界\BA\沙勒\#Plana／#普拉娜／#プラナ
 普拉娜: S:\Gallery\二次元世界\BA\沙勒\#Plana／#普拉娜／#プラナ
-阿普娜: S:\Gallery\二次元世界\BA\沙勒\#Arona & Plana／#阿洛娜 & 普拉娜
+阿普娜: S:\Gallery\二次元世界\BA\沙勒\阿普娜
 
 # 千禧年科技学院
 千禧年: S:\Gallery\二次元世界\BA\千禧年科技学院
 千禧年科技学院: S:\Gallery\二次元世界\BA\千禧年科技学院
 ## 研讨会
-研讨会: S:\Gallery\二次元世界\BA\千禧年科技学院\#Seminar／#研讨会／#セミナー
-早濑优香: S:\Gallery\二次元世界\BA\千禧年科技学院\#Seminar／#研讨会／#セミナー\#Hayase Yūka／#早濑优香／#早瀬ユウカ
-生盐诺亚: S:\Gallery\二次元世界\BA\千禧年科技学院\#Seminar／#研讨会／#セミナー\#Ushio Noa／#生盐诺亚／#生塩ノア
-黑崎小雪: S:\Gallery\二次元世界\BA\千禧年科技学院\#Seminar／#研讨会／#セミナー\#Kurosaki Koyuki／#黑崎小雪／#黒崎（くろさき） コユキ
+研讨会: S:\Gallery\二次元世界\BA\千禧年科技学院\研讨会
+早濑优香: S:\Gallery\二次元世界\BA\千禧年科技学院\研讨会\#Hayase Yūka／#早濑优香／#早瀬ユウカ
+生盐诺亚: S:\Gallery\二次元世界\BA\千禧年科技学院\研讨会\#Ushio Noa／#生盐诺亚／#生塩ノア
+黑崎小雪: S:\Gallery\二次元世界\BA\千禧年科技学院\研讨会\#Kurosaki Koyuki／#黑崎小雪／#黒崎（くろさき） コユキ
 ## 游戏开发部
 游戏开发部: S:\Gallery\二次元世界\BA\千禧年科技学院\游戏开发部
 天童爱丽丝: S:\Gallery\二次元世界\BA\千禧年科技学院\游戏开发部\#Tendou Alice#／#天童爱丽丝／#天童アリス
@@ -284,26 +284,26 @@ Arisu: S:\Gallery\二次元世界\BA\千禧年科技学院\游戏开发部\天�
 
 # 崔尼蒂综合学院
 ## 补课部
-补课部: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Supplementary Lessons Department (Make-Up Work Club)／#补课部／#補習授業部
-日富美: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Supplementary Lessons Department (Make-Up Work Club)／#补课部／#補習授業部\#Ajitani Hifumi／#阿慈谷日富美／#阿慈谷（あじたに） ヒフミ
-阿慈谷日富美: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Supplementary Lessons Department (Make-Up Work Club)／#补课部／#補習授業部\#Ajitani Hifumi／#阿慈谷日富美／#阿慈谷（あじたに） ヒフミ
-小春: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Supplementary Lessons Department (Make-Up Work Club)／#补课部／#補習授業部\#Shimoe Koharu／#下江小春／#下江（しもえ） コハル
-下江小春: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Supplementary Lessons Department (Make-Up Work Club)／#补课部／#補習授業部\#Shimoe Koharu／#下江小春／#下江（しもえ） コハル
-白洲梓: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Supplementary Lessons Department (Make-Up Work Club)／#补课部／#補習授業部\#Shirasu Azusa／#白洲梓／#白洲（しらす） アズサ
+补课部: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\补课部
+日富美: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\补课部\#Ajitani Hifumi／#阿慈谷日富美／#阿慈谷（あじたに） ヒフミ
+阿慈谷日富美: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\补课部\#Ajitani Hifumi／#阿慈谷日富美／#阿慈谷（あじたに） ヒフミ
+小春: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\补课部\#Shimoe Koharu／#下江小春／#下江（しもえ） コハル
+下江小春: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\补课部\#Shimoe Koharu／#下江小春／#下江（しもえ） コハル
+白洲梓: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\补课部\#Shirasu Azusa／#白洲梓／#白洲（しらす） アズサ
 
 ## 茶会
 崔尼蒂茶会: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー
-圣娅: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\#Yurizono Seia／#百合园圣娅／#百合園（ゆりぞの）セイア
-百合园圣娅: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\#Yurizono Seia／#百合园圣娅／#百合園（ゆりぞの）セイア
-圣园未花: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\#Misono Mika／#圣园未花／#聖園（みその） ミカ
-未花: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\#Misono Mika／#圣园未花／#聖園（みその） ミカ
+圣娅: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\百合园圣娅
+百合园圣娅: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\百合园圣娅
+圣园未花: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\圣园未花
+未花: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Tea Party／#茶会／#ティーパーティー\圣园未花
 
 ## 修女会
-伊落玛丽: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Sisterhood／#修女会／#シスターフッド\#Iochi Mari／#伊落玛丽／#伊落マリー
+伊落玛丽: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\修女会\#Iochi Mari／#伊落玛丽／#伊落マリー
 
 ## 放学后的甜点部
-放学后的甜点部: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#After School Dessert／#放学后的甜点部／#放課後スイーツ部
-柚鸟夏: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#After School Dessert／#放学后的甜点部／#放課後スイーツ部\#Yutori Natsu／#柚鸟夏／#柚鳥ナツ
+放学后的甜点部: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\放学后的甜点部
+柚鸟夏: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\放学后的甜点部\#Yutori Natsu／#柚鸟夏／#柚鳥ナツ
 
 ## 图书委员会
 忧: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Library Committee／#图书委员会／#図書委員会\#Kozeki Ui／#古关忧／#古関ウイ
@@ -312,17 +312,17 @@ Arisu: S:\Gallery\二次元世界\BA\千禧年科技学院\游戏开发部\天�
 宇泽玲纱: S:\Gallery\二次元世界\BA\崔尼蒂综合学院\#Trinity Vigilante Crew／#トリニティ自警団／#\#Uzawa Reisa／#宇泽玲纱／#宇沢レイサ
 
 # 阿拜多斯高等学院
-阿拜多斯: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校
-小鸟游星野: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Takanashi Hoshino／#小鸟游星野／#小鳥遊（たかなし） ホシノ
-星野: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Takanashi Hoshino／#小鸟游星野／#小鳥遊（たかなし） ホシノ
-大叔: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Takanashi Hoshino／#小鸟游星野／#小鳥遊（たかなし） ホシノ
-Hoshino: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Takanashi Hoshino／#小鸟游星野／#小鳥遊（たかなし） ホシノ
-白子: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Sunaōkami Shiroko／#砂狼白子／#砂狼（すなおおかみ） シロコ
-砂狼白子: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Sunaōkami Shiroko／#砂狼白子／#砂狼（すなおおかみ） シロコ
-绫音: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Okusora Ayane／#奥空绫音／#奥空アヤネ
-奥空绫音: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Okusora Ayane／#奥空绫音／#奥空アヤネ
-芹香: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Kuromi Serika／#黑见芹香／#黒見セリカ
-黑见芹香: S:\Gallery\二次元世界\BA\#Abydos High School／#阿拜多斯高等学院／#アビドス高等学校\#Kuromi Serika／#黑见芹香／#黒見セリカ
+阿拜多斯: S:\Gallery\二次元世界\BA\阿拜多斯高等学院
+小鸟游星野: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\小鸟游星野
+星野: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\小鸟游星野
+大叔: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\小鸟游星野
+Hoshino: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\小鸟游星野
+白子: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\砂狼白子
+砂狼白子: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\砂狼白子
+绫音: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\#Okusora Ayane／#奥空绫音／#奥空アヤネ
+奥空绫音: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\#Okusora Ayane／#奥空绫音／#奥空アヤネ
+芹香: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\#Kuromi Serika／#黑见芹香／#黒見セリカ
+黑见芹香: S:\Gallery\二次元世界\BA\阿拜多斯高等学院\#Kuromi Serika／#黑见芹香／#黒見セリカ
 
 # 山海经高级中学
 山海经高级中学: S:\Gallery\二次元世界\BA\山海经高级中学
@@ -406,22 +406,22 @@ srt r: S:\Gallery\二次元世界\BA\SRT 特殊学园\#SRT RABBIT 小队
 
 # 海兰德铁道学园
 海兰德: S:\Gallery\二次元世界\BA\海兰德铁道学园\#CentralControlCenter
-橘光: S:\Gallery\二次元世界\BA\海兰德铁道学园\#CentralControlCenter\#橘ノゾミ & 橘ヒカリ
-橘望: S:\Gallery\二次元世界\BA\海兰德铁道学园\#CentralControlCenter\#橘ノゾミ & 橘ヒカリ
+橘光: S:\Gallery\二次元世界\BA\海兰德铁道学园\#CentralControlCenter\橘光 & 橘望
+橘望: S:\Gallery\二次元世界\BA\海兰德铁道学园\#CentralControlCenter\橘光 & 橘望
 
 # 瓦尔基丽
 瓦尔基丽: S:\Gallery\二次元世界\BA\#Valkyrie Police Academy／#瓦尔基丽／#ヴァルキューレ警察学校
 吹雪: S:\Gallery\二次元世界\BA\#Valkyrie Police Academy／#女武神警察学园／#ヴァルキューレ警察学校\#生活安全局\#合歓垣フブキ
 
 # 赤冬联邦学院
-赤冬: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／
-红冬: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／
-切里诺: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／\#Renkawa Cherino／#连河切里诺／#連河チェリノ
-连河切里诺: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／\#Renkawa Cherino／#连河切里诺／#連河チェリノ
-斯大萝: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／\#Renkawa Cherino／#连河切里诺／#連河チェリノ
-和香: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／\#Amami Nodoka／#天见和香／#天見ノドカ
-天见和香: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／\#Amami Nodoka／#天见和香／#天見ノドカ
-间宵时雨: S:\Gallery\二次元世界\BA\#Red Winter Federal Academy／#赤冬联邦学园／#レッドウィンター連邦学園／\#Mayoi Shigure／#间宵时雨／#間宵（まよい） シグレ／#마요이 시구레
+赤冬: S:\Gallery\二次元世界\BA\赤冬联邦学园
+红冬: S:\Gallery\二次元世界\BA\赤冬联邦学园
+切里诺: S:\Gallery\二次元世界\BA\赤冬联邦学园\#Renkawa Cherino／#连河切里诺／#連河チェリノ
+连河切里诺: S:\Gallery\二次元世界\BA\赤冬联邦学园\#Renkawa Cherino／#连河切里诺／#連河チェリノ
+斯大萝: S:\Gallery\二次元世界\BA\赤冬联邦学园\#Renkawa Cherino／#连河切里诺／#連河チェリノ
+和香: S:\Gallery\二次元世界\BA\赤冬联邦学园\#Amami Nodoka／#天见和香／#天見ノドカ
+天见和香: S:\Gallery\二次元世界\BA\赤冬联邦学园\#Amami Nodoka／#天见和香／#天見ノドカ
+间宵时雨: S:\Gallery\二次元世界\BA\赤冬联邦学园\#Mayoi Shigure／#间宵时雨／#間宵（まよい） シグレ／#마요이 시구레
 
 ######################################################## 崩二崩三 ########################################################
 崩二: S:\Gallery\二次元世界\崩坏
@@ -452,14 +452,14 @@ Zenless Zero Zone: S:\Gallery\二次元世界\zzz
 绝区零: S:\Gallery\二次元世界\zzz
 
 ######################################################## 阴阳师 ########################################################
-yys: S:\Gallery\二次元世界\#Onmyoji／#阴阳师／#陰陽師
-YYS: S:\Gallery\二次元世界\#Onmyoji／#阴阳师／#陰陽師
-阴阳师: S:\Gallery\二次元世界\#Onmyoji／#阴阳师／#陰陽師
+yys: S:\Gallery\二次元世界\阴阳师
+YYS: S:\Gallery\二次元世界\阴阳师
+阴阳师: S:\Gallery\二次元世界\阴阳师
 
-面灵气: S:\Gallery\二次元世界\#Onmyoji／#阴阳师／#陰陽師\#Menreiki／#面灵气／#面霊気
-Menreiki: S:\Gallery\二次元世界\#Onmyoji／#阴阳师／#陰陽師\#Menreiki／#面灵气／#面霊気
-menreiki: S:\Gallery\二次元世界\#Onmyoji／#阴阳师／#陰陽師\#Menreiki／#面灵气／#面霊気
-面面: S:\Gallery\二次元世界\#Onmyoji／#阴阳师／#陰陽師\#Menreiki／#面灵气／#面霊気
+面灵气: S:\Gallery\二次元世界\阴阳师\#Menreiki／#面灵气／#面霊気
+Menreiki: S:\Gallery\二次元世界\阴阳师\#Menreiki／#面灵气／#面霊気
+menreiki: S:\Gallery\二次元世界\阴阳师\#Menreiki／#面灵气／#面霊気
+面面: S:\Gallery\二次元世界\阴阳师\#Menreiki／#面灵气／#面霊気
 
 
 ########################################################## 鸣潮 #########################################################

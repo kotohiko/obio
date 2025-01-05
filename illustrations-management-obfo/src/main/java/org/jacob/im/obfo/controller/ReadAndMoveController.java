@@ -6,10 +6,7 @@ import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.ifp.api.IFPParsingApi;
 import org.jacob.im.obfo.command.Command;
-import org.jacob.im.obfo.command.impl.CheckCommand;
-import org.jacob.im.obfo.command.impl.EmptyCommand;
-import org.jacob.im.obfo.command.impl.OpenCommand;
-import org.jacob.im.obfo.command.impl.ReadYamlCommand;
+import org.jacob.im.obfo.command.impl.*;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.service.ReadAndMoveService;
 
