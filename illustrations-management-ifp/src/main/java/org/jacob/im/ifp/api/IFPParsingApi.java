@@ -1,7 +1,7 @@
 package org.jacob.im.ifp.api;
 
-import org.jacob.im.ifp.controller.IFPEntranceController;
 import org.jacob.im.ifp.controller.FilenameSwitcher;
+import org.jacob.im.ifp.controller.IFPEntranceController;
 
 /**
  * @author Kotohiko
@@ -14,7 +14,7 @@ public class IFPParsingApi {
         if (retUrl.isBlank()) {
             return false;
         } else {
-            IFPEntranceController.openUriByBrowser(retUrl);
+            new IFPEntranceController().openUriByBrowser(retUrl);
             return true;
         }
     }

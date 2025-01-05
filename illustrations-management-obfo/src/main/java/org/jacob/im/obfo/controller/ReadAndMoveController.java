@@ -1,13 +1,17 @@
 package org.jacob.im.obfo.controller;
 
 import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.controller.BaseController;
 import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.ifp.api.IFPParsingApi;
+import org.jacob.im.obfo.command.Command;
+import org.jacob.im.obfo.command.impl.CheckCommand;
+import org.jacob.im.obfo.command.impl.EmptyCommand;
+import org.jacob.im.obfo.command.impl.OpenCommand;
+import org.jacob.im.obfo.command.impl.ReadYamlCommand;
 import org.jacob.im.obfo.constants.OBFOConstants;
 import org.jacob.im.obfo.service.ReadAndMoveService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,33 +19,51 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 /**
- * This class is responsible for handling the main execution logic
- * for reading YAML configuration files and moving files based on the specified paths.
- * It uses a {@link BufferedReader} to read user input from the console and processes the input
- * to perform file operations.
+ * The ReadAndMoveController class handles user commands related to reading configuration files,
+ * checking path statuses, opening folders, and moving files based on YAML configuration.
+ * It employs the Command design pattern to delegate command execution to respective handlers.
  *
- * @author Kotohiko
- * @since 14:38 Sep 12, 2024
+ * <p>This class interacts with the user via a console interface and processes input commands.
+ * Supported commands include:
+ * <ul>
+ *   <li>Empty command: Executes the default command handler.</li>
+ *   <li>{@code check}: Verifies and displays the status of a specified directory path.</li>
+ *   <li>{@code open [path]}: Opens a folder at the specified path.</li>
+ *   <li>Other commands: Reads YAML files and processes file operations.</li>
+ * </ul>
+ *
+ * <p>Usage of this class involves calling the {@link #cmdHandler()} method to start the interaction loop.
  */
-public class ReadAndMoveController {
+public class ReadAndMoveController extends BaseController {
 
     /**
-     * The logger instance used for logging messages related to the {@link ReadAndMoveController} class.
-     * This logger is configured to log messages at various levels (e.g., debug, info, error) and can be
-     * used throughout the class to provide detailed information about the watcher's operations.
+     * A list of commands supported by this controller.
      */
-    private final Logger logger = LoggerFactory.getLogger(ReadAndMoveController.class);
+    private final List<Command> commands;
 
     /**
-     * The main execution method of the {@link ReadAndMoveController} class. This method handles user input,
-     * reads YAML configuration files, and performs file moving operations based on the provided paths.
+     * Constructs a new ReadAndMoveController and initializes its command handlers.
+     * Each command is mapped to a specific action that this controller can perform.
      */
-    public void mainPart() {
+    public ReadAndMoveController() {
+        commands = List.of(
+                new EmptyCommand(this),
+                new CheckCommand(this),
+                new OpenCommand(this),
+                new ReadYamlCommand(this)
+        );
+    }
+
+    /**
+     * Starts the command handling loop, reading input from the console and delegating
+     * execution to the appropriate command or fallback logic.
+     */
+    public void cmdHandler() {
         System.out.print(OBFOConstants.WELCOME_LINE);
-
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String cmd;
 
@@ -53,17 +75,20 @@ public class ReadAndMoveController {
 
                 var switchToIFP = IFPParsingApi.getAndParse(cmd);
                 cmd = cmd.trim();
-                if (cmd.isEmpty()) {
-                    this.mainPart();
-                } else if (cmd.equals("check")) {
-                    this.checkPathStatus();
-                } else if (isValidPath(cmd)) {
-                    this.openFolder(cmd);
+
+                boolean handled = false;
+                for (Command command : commands) {
+                    if (command.matches(cmd)) {
+                        command.execute(cmd);
+                        handled = true;
+                        break;
+                    }
+                }
+
+                if (!handled && switchToIFP) {
                     System.out.println(IMCommonConstants.SEPARATOR_LINE);
-                } else if (switchToIFP) {
-                    System.out.println(IMCommonConstants.SEPARATOR_LINE);
-                } else {
-                    this.readYamlAndMoveFiles(cmd);
+                } else if (!handled) {
+                    readYamlAndMoveFiles(cmd);
                 }
             }
         } catch (IOException e) {
@@ -73,10 +98,10 @@ public class ReadAndMoveController {
     }
 
     /**
-     * Checks the status of a specified path and prints out the names of any files found.
-     * If no files are present, it provides feedback accordingly.
+     * Checks the status of a specified directory path and lists the files it contains.
+     * Provides feedback if the directory does not exist or is empty.
      */
-    private void checkPathStatus() {
+    public void checkPathStatus() {
         try {
             Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
             String defaultSourcePath = illustrationsPathMap.get("Default source path");
@@ -85,12 +110,10 @@ public class ReadAndMoveController {
             if (directory.exists() && directory.isDirectory()) {
                 File[] files = directory.listFiles();
 
-                // Check if there are actually files in the directory
                 if (files != null && files.length > 0) {
                     for (File file : files) {
                         System.out.println(file.getName());
                     }
-                    // Provide feedback when no files are found
                 } else {
                     System.out.println("Buffer has no files yet.");
                 }
@@ -104,12 +127,9 @@ public class ReadAndMoveController {
 
     /**
      * Opens a folder using the explorer.exe command.
-     *
-     * @param path The path of the folder to be opened.
      */
-    private void openFolder(String path) {
+    public void openFolder(String path) {
         try {
-            // Create a ProcessBuilder instance with the command to execute
             var builder = new ProcessBuilder(OBFOConstants.EXPLORER_EXE, path);
             builder.start();
             logger.info(ResManager.loadResString("ReadAndMoveController_4", path));
@@ -119,35 +139,40 @@ public class ReadAndMoveController {
     }
 
     /**
-     * Reads a YAML file to obtain paths data and moves files based on the provided target path key.
-     * Logs an error if the default source path is not found or empty.
+     * Reads a YAML configuration file and performs file operations based on the provided target path key.
      *
-     * @param targetPathKey the key used to identify the target path in the YAML data
+     * @param targetPathKey The key used to identify the target path in the YAML configuration.
      */
-    private void readYamlAndMoveFiles(String targetPathKey) throws IOException {
-        // Load a YAML file into a Java object.
-        Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
-        String defaultSourcePath = illustrationsPathMap.get("Default source path");
+    public void readYamlAndMoveFiles(String targetPathKey) {
+        try {
+            Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
+            String defaultSourcePath = illustrationsPathMap.get("Default source path");
 
-        if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
-            logger.error(ResManager.loadResString("ReadAndMoveController_1"));
-        } else {
-            new ReadAndMoveService().defineSourcePathAndTargetPath(defaultSourcePath, illustrationsPathMap, targetPathKey);
+            if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
+                logger.error(ResManager.loadResString("ReadAndMoveController_1"));
+            } else {
+                new ReadAndMoveService().defineSourcePathAndTargetPath(defaultSourcePath, illustrationsPathMap, targetPathKey);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Prints a separator line and restarts the command handler loop.
+     */
     public void endLinePrintAndReboot() {
         System.out.println(IMCommonConstants.SEPARATOR_LINE);
-        mainPart();
+        cmdHandler();
     }
 
     /**
-     * Checks if the given path is valid.
+     * Validates if the given path exists and is accessible.
      *
      * @param path The path to validate.
-     * @return true if the path is valid, false otherwise.
+     * @return True if the path exists, false otherwise.
      */
-    private boolean isValidPath(String path) {
+    public boolean isValidPath(String path) {
         try {
             var p = Paths.get(path);
             return Files.exists(p);

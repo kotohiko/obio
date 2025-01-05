@@ -33,6 +33,6 @@ public final class OneButtonApplication {
     public static void main(String[] args) {
         var addFileMonitor = MonitorStarter.monitorStarter();
         logger.info("{} has started successfully.", addFileMonitor);
-        new ReadAndMoveController().mainPart();
+        new ReadAndMoveController().cmdHandler();
     }
 }
