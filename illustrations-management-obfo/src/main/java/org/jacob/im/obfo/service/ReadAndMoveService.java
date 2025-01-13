@@ -17,7 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -66,7 +69,7 @@ public class ReadAndMoveService {
      *                          paths data map.
      */
     public void defineSourcePathAndTargetPath(String defaultSourcePath,
-                                                     Map<String, String> pathsData, String targetPathCode) {
+                                              Map<String, String> pathsData, String targetPathCode) {
         // Define source path and target path
         var sourcePath = Paths.get(defaultSourcePath);
 
@@ -182,7 +185,7 @@ public class ReadAndMoveService {
      * @throws InterruptedException if the current thread is interrupted while waiting for tasks to complete
      */
     private void submitToExecutorPool(List<Path> filePaths, Path targetPath,
-                                             AtomicBoolean foundFiles, Path sourcePath) throws InterruptedException {
+                                      AtomicBoolean foundFiles, Path sourcePath) throws InterruptedException {
 
         // Create a CountDownLatch initialized with the size of the filePaths list.
         CountDownLatch latch = new CountDownLatch(filePaths.size());

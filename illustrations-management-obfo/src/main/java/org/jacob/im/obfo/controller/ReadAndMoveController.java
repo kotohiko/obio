@@ -74,6 +74,10 @@ public class ReadAndMoveController extends BaseController {
                 var switchToIFP = IFPParsingApi.getAndParse(cmd);
                 cmd = cmd.trim();
 
+                if (cmd.isEmpty()) {
+                    continue;
+                }
+
                 boolean handled = false;
                 for (UserCmd userCmd : userCmds) {
                     if (userCmd.matches(cmd)) {
