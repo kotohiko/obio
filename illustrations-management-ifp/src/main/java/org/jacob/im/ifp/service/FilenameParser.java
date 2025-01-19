@@ -9,18 +9,12 @@ package org.jacob.im.ifp.service;
 public final class FilenameParser {
 
     /**
-     * Don't let anyone instantiate this class.
-     */
-    private FilenameParser() {
-    }
-
-    /**
      * Converts the specified string to a StringBuilder object.
      *
      * @param string The string to be converted.
      * @return A StringBuilder object representing the input string.
      */
-    private static StringBuilder getStringBuilder(String string) {
+    private StringBuilder getStringBuilder(String string) {
         return new StringBuilder(string);
     }
 
@@ -30,7 +24,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String pixivIllustrationsOrIllustratorIdParser(String str) {
+    public String pixivIllustrationsOrIllustratorIdParser(String str) {
         return String.format("https://www.pixiv.net/artworks/%s", str.substring(0, str.indexOf('_')));
     }
 
@@ -40,12 +34,12 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String twitterParser(String str) {
+    public String twitterParser(String str) {
         var sb = getStringBuilder(str);
         if (str.contains("httpstwitter.com")) {
-            sb.replace(0,16, "https://x.com/");
+            sb.replace(0, 16, "https://x.com/");
         } else if (str.contains("httpsx.com")) {
-            sb.replace(0,10, "https://x.com/");
+            sb.replace(0, 10, "https://x.com/");
         }
         sb.insert(sb.indexOf("status"), "/");
         sb.insert(sb.indexOf("status") + 6, "/");
@@ -69,7 +63,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     @SuppressWarnings("unused")
-    public static String yandeParser(String str) {
+    public String yandeParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(16, "/");
@@ -84,7 +78,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String miyousheParser(String str) {
+    public String miyousheParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(24, "/");
@@ -105,7 +99,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String danbooruParser(String str) {
+    public String danbooruParser(String str) {
         var sb = getStringBuilder(str);
         return sb.replace(0, 28, "https://danbooru.donmai.us/posts/").toString();
     }
@@ -116,7 +110,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String bilibiliIllustrationsParser(String str) {
+    public String bilibiliIllustrationsParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
         if (str.contains("opus")) {
@@ -137,7 +131,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String bilibiliVideosParser(String str) {
+    public String bilibiliVideosParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(sb.indexOf("video"), "/");
@@ -146,7 +140,7 @@ public final class FilenameParser {
     }
 
     @SuppressWarnings("unused")
-    public static String baiduNetDiskParser(String str) {
+    public String baiduNetDiskParser(String str) {
         return "pan.baidu.com/s/" + str;
     }
 
@@ -157,7 +151,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     @SuppressWarnings("unused")
-    public static String nicoVideoParser(String str) {
+    public String nicoVideoParser(String str) {
         return "https://seiga.nicovideo.jp/seiga/" + str;
     }
 
@@ -168,7 +162,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     @SuppressWarnings("unused")
-    public static String alphacodersParser(String str) {
+    public String alphacodersParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(sb.indexOf("com") + 3, "/");
@@ -182,7 +176,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String youtubeParser(String str) {
+    public String youtubeParser(String str) {
         var sb = getStringBuilder(str);
         if (str.contains("httpswww.youtube.comwatch")) {
             sb.replace(0, 27, "https://www.youtube.com/watch?v=");
@@ -201,7 +195,7 @@ public final class FilenameParser {
      * @return parsed URL
      */
     @SuppressWarnings("unused")
-    public static String wallpaperCaveParser(String str) {
+    public String wallpaperCaveParser(String str) {
         return "https://wallpapercave.com/w/" + str;
     }
 
@@ -211,7 +205,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String deviantartParser(String str) {
+    public String deviantartParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(sb.indexOf("com") + 3, "/");
@@ -226,7 +220,7 @@ public final class FilenameParser {
      * @param str filename string param
      * @return parsed URL
      */
-    public static String facebookParser(String str) {
+    public String facebookParser(String str) {
         var sb = getStringBuilder(str);
         sb.insert(5, "://");
         sb.insert(sb.indexOf("com") + 3, "/");

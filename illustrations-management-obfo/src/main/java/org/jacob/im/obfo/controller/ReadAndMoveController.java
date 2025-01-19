@@ -5,6 +5,7 @@ import org.jacob.im.common.controller.BaseController;
 import org.jacob.im.common.helper.IMCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.ifp.api.IFPParsingApi;
+import org.jacob.im.ifp.controller.FileNameParserService;
 import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.command.impl.*;
 import org.jacob.im.obfo.constants.OBFOConstants;
@@ -42,11 +43,14 @@ public class ReadAndMoveController extends BaseController {
      */
     private final List<UserCmd> userCmds;
 
+    private final IFPParsingApi ifpParsingApi;
+
     /**
      * Constructs a new ReadAndMoveController and initializes its command handlers.
      * Each command is mapped to a specific action that this controller can perform.
      */
     public ReadAndMoveController() {
+        this.ifpParsingApi = new IFPParsingApi(new FileNameParserService());
         userCmds = List.of(
                 new EmptyCmd(this),
                 new CheckCmd(this),
@@ -71,7 +75,7 @@ public class ReadAndMoveController extends BaseController {
                     break;
                 }
 
-                var switchToIFP = IFPParsingApi.getAndParse(cmd);
+                var switchToIFP = ifpParsingApi.getAndParse(cmd);
                 cmd = cmd.trim();
 
                 if (cmd.isEmpty()) {

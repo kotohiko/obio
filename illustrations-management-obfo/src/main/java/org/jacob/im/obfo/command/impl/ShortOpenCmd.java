@@ -33,8 +33,9 @@ public class ShortOpenCmd implements UserCmd {
             Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
             if (null != illustrationsPathMap.get(shortPath)) {
                 controller.openFolder(illustrationsPathMap.get(shortPath));
+            } else {
+                System.out.println(ResManager.loadResString("ShortOpenCmd_0", shortPath));
             }
-            System.out.println(ResManager.loadResString("ShortOpenCmd_0", shortPath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
