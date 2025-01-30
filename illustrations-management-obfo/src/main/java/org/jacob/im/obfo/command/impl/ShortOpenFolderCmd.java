@@ -13,11 +13,11 @@ import java.util.Map;
  * @author Kotohiko
  * @since 13:40 Jan 05, 2025
  */
-public class ShortOpenCmd implements UserCmd {
+public class ShortOpenFolderCmd implements UserCmd {
 
     private final ReadAndMoveController controller;
 
-    public ShortOpenCmd(ReadAndMoveController controller) {
+    public ShortOpenFolderCmd(ReadAndMoveController controller) {
         this.controller = controller;
     }
 

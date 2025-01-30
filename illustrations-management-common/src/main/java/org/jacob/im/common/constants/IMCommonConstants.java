@@ -10,7 +10,8 @@ public class IMCommonConstants {
             = "illustrations-management-common/src/main/resources/conf/messages.yaml";
 
     public static final String SEPARATOR_LINE
-            = "-----------------------------------------------------------SEPARATOR LINE"
+            = "The operation completed successfully.\n"
+            + "-----------------------------------------------------------SEPARATOR LINE"
             + "-----------------------------------------------------------";
 
     public static final String ILLUSTRATIONS_CONF_YML_PATH

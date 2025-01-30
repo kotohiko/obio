@@ -6,11 +6,11 @@ import org.jacob.im.obfo.controller.ReadAndMoveController;
 /**
  * Handles {@code open} command.
  */
-public class OpenCmd implements UserCmd {
+public class OpenFolderCmd implements UserCmd {
 
     private final ReadAndMoveController controller;
 
-    public OpenCmd(ReadAndMoveController controller) {
+    public OpenFolderCmd(ReadAndMoveController controller) {
         this.controller = controller;
     }
 

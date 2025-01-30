@@ -50,6 +50,7 @@ public final class FileNameParserService {
             }
         }
 
-        return ""; // Default case if no conditions are matched
+        // Default case if no conditions are matched
+        return "";
     }
 }

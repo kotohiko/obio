@@ -54,8 +54,8 @@ public class ReadAndMoveController extends BaseController {
         userCmds = List.of(
                 new EmptyCmd(this),
                 new CheckCmd(this),
-                new OpenCmd(this),
-                new ShortOpenCmd(this),
+                new OpenFolderCmd(this),
+                new ShortOpenFolderCmd(this),
                 new ReadYamlCmd(this)
         );
     }
@@ -66,23 +66,28 @@ public class ReadAndMoveController extends BaseController {
      */
     public void cmdHandler() {
         System.out.print(OBFOConstants.WELCOME_LINE);
+
         try (BufferedReader in = IMCommonHelper.consoleReader()) {
             String cmd;
 
             while (true) {
                 System.out.print(ResManager.loadResString("ReadAndMoveController_0"));
-                if ((cmd = in.readLine()) == null) {
+                cmd = in.readLine();
+
+                if (cmd == null || "exit".equalsIgnoreCase(cmd.trim())) {
                     break;
                 }
 
-                var switchToIFP = ifpParsingApi.getAndParse(cmd);
                 cmd = cmd.trim();
-
                 if (cmd.isEmpty()) {
                     continue;
                 }
 
                 boolean handled = false;
+                boolean switchToIFP = ifpParsingApi.getAndParse(cmd);
+                if (switchToIFP) {
+                    continue;
+                }
                 for (UserCmd userCmd : userCmds) {
                     if (userCmd.matches(cmd)) {
                         userCmd.execute(cmd);
@@ -91,15 +96,14 @@ public class ReadAndMoveController extends BaseController {
                     }
                 }
 
-                if (!handled && switchToIFP) {
-                    System.out.println(IMCommonConstants.SEPARATOR_LINE);
-                } else if (!handled) {
-                    this.readYamlAndMoveFiles(cmd);
+                if (!handled) {
+                    logger.error(ResManager.loadResString("ReadAndMoveController_3"));
                 }
             }
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveController_2"), e);
         }
+
         this.endLinePrintAndReboot();
     }
 
