@@ -70,10 +70,7 @@ public class ReadAndMoveService {
      */
     public void defineSourcePathAndTargetPath(String defaultSourcePath,
                                               Map<String, String> pathsData, String targetPathCode) {
-        // Define source path and target path
         var sourcePath = Paths.get(defaultSourcePath);
-
-        // Check if there are any files in the source directory
         try (var stream = Files.list(sourcePath)) {
             if (!Files.exists(sourcePath) || !Files.isDirectory(sourcePath) || stream.findAny().isEmpty()) {
                 System.out.println("No files in source directory " + sourcePath + ", returning directly");
@@ -85,14 +82,13 @@ public class ReadAndMoveService {
         }
 
         var targetPathStr = pathsData.get(targetPathCode);
-
         if (targetPathStr == null) {
-            logger.error(ResManager.loadResString("ReadAndMoveService_0"));
+            System.out.println(ResManager.loadResString("ReadAndMoveService_0"));
+            System.out.println(IMCommonConstants.EXCEPTIONAL_SEPARATOR_LINE);
         } else {
             checkBeforeMove(sourcePath, targetPathStr);
+            System.out.println(IMCommonConstants.SUCCESS_SEPARATOR_LINE);
         }
-
-        System.out.println(IMCommonConstants.SEPARATOR_LINE);
     }
 
     /**
@@ -114,12 +110,8 @@ public class ReadAndMoveService {
         List<Path> filePaths = new ArrayList<>();
 
         try {
-            // Recursively process directories and files in the source path (excluding the source path itself)
             processDirectory(sourcePath, targetPath, filePaths);
-
-            // Submit tasks to the thread pool
             submitToExecutorPool(filePaths, targetPath, foundFiles, sourcePath);
-
         } catch (IOException | InterruptedException e) {
             logger.error(ResManager.loadResString("ReadAndMoveService_2"), e);
         }
@@ -142,30 +134,23 @@ public class ReadAndMoveService {
      */
     private void processDirectory(Path sourcePath, Path targetPath, List<Path> filePaths) throws IOException {
         if (Files.isDirectory(sourcePath)) {
-            // Ensure the target directory exists
             Files.createDirectories(targetPath);
 
             try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
                 for (Path filePath : directoryStream) {
                     Path newTargetPath = targetPath.resolve(filePath.getFileName());
 
-                    // If it's a directory, move the entire directory
                     if (Files.isDirectory(filePath)) {
-                        // Move the entire directory to the target path
                         Files.move(filePath, newTargetPath, StandardCopyOption.REPLACE_EXISTING);
                     } else if (Files.isRegularFile(filePath)) {
-                        // Move the file to the new target directory
                         Files.move(filePath, newTargetPath, StandardCopyOption.REPLACE_EXISTING);
-                        // Add the file to the list
                         filePaths.add(newTargetPath);
                     }
 
                 }
             }
         } else if (Files.isRegularFile(sourcePath)) {
-            // If the sourcePath is a file, move it directly to the target directory
             Files.move(sourcePath, targetPath.resolve(sourcePath.getFileName()), StandardCopyOption.REPLACE_EXISTING);
-            // Add the file to the list
             filePaths.add(targetPath.resolve(sourcePath.getFileName()));
         }
     }
@@ -186,29 +171,20 @@ public class ReadAndMoveService {
      */
     private void submitToExecutorPool(List<Path> filePaths, Path targetPath,
                                       AtomicBoolean foundFiles, Path sourcePath) throws InterruptedException {
-
-        // Create a CountDownLatch initialized with the size of the filePaths list.
         CountDownLatch latch = new CountDownLatch(filePaths.size());
         printThreadPoolInfo(ThreadPoolSituationStatusEnums.BEFORE_SUBMITTED);
 
-        // Loop through each filePath and submit the file moving task to the executor service.
         for (Path filePath : filePaths) {
             executorService.submit(() -> {
 
                 try {
-                    // Attempt to move the file and check the status.
                     FilesMoveOperStatusEnums status = moveTheFiles(targetPath, filePath);
-
-                    // If a file was moved (status is not NO_FILES), set the foundFiles flag to true.
                     if (status != FilesMoveOperStatusEnums.NO_FILES) {
                         foundFiles.set(true);
                     }
-
                 } finally {
-                    // Decrement the latch count after the task completes (success or failure).
                     latch.countDown();
                 }
-
             });
         }
 

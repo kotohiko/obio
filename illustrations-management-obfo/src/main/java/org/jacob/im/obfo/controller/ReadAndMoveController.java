@@ -86,6 +86,7 @@ public class ReadAndMoveController extends BaseController {
                 boolean handled = false;
                 boolean switchToIFP = ifpParsingApi.getAndParse(cmd);
                 if (switchToIFP) {
+                    System.out.println(IMCommonConstants.SUCCESS_SEPARATOR_LINE);
                     continue;
                 }
                 for (UserCmd userCmd : userCmds) {
@@ -143,6 +144,7 @@ public class ReadAndMoveController extends BaseController {
             var builder = new ProcessBuilder(OBFOConstants.EXPLORER_EXE, path);
             builder.start();
             logger.info(ResManager.loadResString("ReadAndMoveController_4", path));
+            System.out.println(IMCommonConstants.SEPARATOR_LINE);
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveController_3"));
         }
@@ -161,7 +163,8 @@ public class ReadAndMoveController extends BaseController {
             if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
                 logger.error(ResManager.loadResString("ReadAndMoveController_1"));
             } else {
-                new ReadAndMoveService().defineSourcePathAndTargetPath(defaultSourcePath, illustrationsPathMap, targetPathKey);
+                new ReadAndMoveService()
+                        .defineSourcePathAndTargetPath(defaultSourcePath, illustrationsPathMap, targetPathKey);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -172,7 +175,7 @@ public class ReadAndMoveController extends BaseController {
      * Prints a separator line and restarts the command handler loop.
      */
     public void endLinePrintAndReboot() {
-        System.out.println(IMCommonConstants.SEPARATOR_LINE);
+        System.out.println(IMCommonConstants.SUCCESS_SEPARATOR_LINE);
         cmdHandler();
     }
 
