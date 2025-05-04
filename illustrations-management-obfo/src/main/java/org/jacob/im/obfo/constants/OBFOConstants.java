@@ -10,7 +10,7 @@ public class OBFOConstants {
 
     public static final String MY_GALLERY_PATH = "S:\\Gallery";
 
-    public static final String PATH_OF_UNCLASSIFIED_REMAINING_IMAGES = "S:\\Gallery\\#####未分类缓冲池";
+    public static final String PATH_OF_UNCLASSIFIED_REMAINING_IMAGES = "S:\\NewGallery\\Unclassified";
 
     public static final String PATH_OF_UNCLASSIFIED_REMAINING_IMAGES_LOG
             = "illustrations-management-obfo/src/main/resources/logs-data/unclassified-remaining-images.log";
