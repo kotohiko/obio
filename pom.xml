@@ -5,26 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jacob</groupId>
-    <artifactId>illustrations-management</artifactId>
+    <artifactId>obio</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <!-- One-Button File Organizer -->
-        <module>illustrations-management-obfo</module>
+        <module>obio-core</module>
         <!-- Illustrations Filename Parser -->
-        <module>illustrations-management-ifp</module>
-        <module>illustrations-management-common</module>
+        <module>obio-ifp</module>
+        <module>obio-common</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- 版本统一管理 -->
         <snakeyaml.version>2.2</snakeyaml.version>
         <slf4j-api.version>2.0.12</slf4j-api.version>
-        <logback-classic.version>1.5.8</logback-classic.version>
+        <logback-classic.version>1.5.13</logback-classic.version>
     </properties>
 
     <dependencies>
@@ -57,8 +57,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>21</source>
-                    <target>21</target>
+                    <source>23</source>
+                    <target>23</target>
                 </configuration>
             </plugin>
         </plugins>
