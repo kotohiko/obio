@@ -1,6 +1,6 @@
 package org.jacob.im.obfo.monitor;
 
-import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.constants.ObioConstants;
 import org.jacob.im.obfo.monitor.core.NewFilesAddedWatcher;
 
 import java.nio.file.Paths;
@@ -22,7 +22,7 @@ public class MonitorStarter {
      */
     public static String monitorStarter() {
         var addFileMonitor = new NewFilesAddedWatcher(Paths
-                .get(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
+                .get(ObioConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
         return addFileMonitor.toString();
     }
 }

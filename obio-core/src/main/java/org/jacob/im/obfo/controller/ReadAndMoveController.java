@@ -1,14 +1,14 @@
 package org.jacob.im.obfo.controller;
 
-import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.constants.ObioCommonConstants;
 import org.jacob.im.common.controller.BaseController;
-import org.jacob.im.common.helper.IMCommonHelper;
+import org.jacob.im.common.helper.ObioCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.ifp.api.IFPParsingApi;
 import org.jacob.im.ifp.controller.FileNameParserService;
 import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.command.impl.*;
-import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.constants.ObioConstants;
 import org.jacob.im.obfo.service.ReadAndMoveService;
 
 import java.io.BufferedReader;
@@ -65,9 +65,9 @@ public class ReadAndMoveController extends BaseController {
      * execution to the appropriate command or fallback logic.
      */
     public void cmdHandler() {
-        System.out.print(OBFOConstants.WELCOME_LINE);
+        System.out.print(ObioConstants.WELCOME_LINE);
 
-        try (BufferedReader in = IMCommonHelper.consoleReader()) {
+        try (BufferedReader in = ObioCommonHelper.consoleReader()) {
             String cmd;
 
             while (true) {
@@ -86,7 +86,7 @@ public class ReadAndMoveController extends BaseController {
                 boolean handled = false;
                 boolean switchToIFP = ifpParsingApi.getAndParse(cmd);
                 if (switchToIFP) {
-                    System.out.println(IMCommonConstants.SUCCESS_SEPARATOR_LINE);
+                    System.out.println(ObioCommonConstants.SUCCESS_SEPARATOR_LINE);
                     continue;
                 }
                 for (UserCmd userCmd : userCmds) {
@@ -114,7 +114,7 @@ public class ReadAndMoveController extends BaseController {
      */
     public void checkPathStatus() {
         try {
-            Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
+            Map<String, String> illustrationsPathMap = ObioCommonHelper.getIllustrationsPathMap();
             String defaultSourcePath = illustrationsPathMap.get("Default source path");
             File directory = new File(defaultSourcePath);
 
@@ -141,10 +141,10 @@ public class ReadAndMoveController extends BaseController {
      */
     public void openFolder(String path) {
         try {
-            var builder = new ProcessBuilder(OBFOConstants.EXPLORER_EXE, path);
+            var builder = new ProcessBuilder(ObioConstants.EXPLORER_EXE, path);
             builder.start();
             logger.info(ResManager.loadResString("ReadAndMoveController_4", path));
-            System.out.println(IMCommonConstants.SEPARATOR_LINE);
+            System.out.println(ObioCommonConstants.SEPARATOR_LINE);
         } catch (IOException e) {
             logger.error(ResManager.loadResString("ReadAndMoveController_3"));
         }
@@ -157,7 +157,7 @@ public class ReadAndMoveController extends BaseController {
      */
     public void readYamlAndMoveFiles(String targetPathKey) {
         try {
-            Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
+            Map<String, String> illustrationsPathMap = ObioCommonHelper.getIllustrationsPathMap();
             String defaultSourcePath = illustrationsPathMap.get("Default source path");
 
             if (defaultSourcePath == null || defaultSourcePath.isEmpty()) {
@@ -175,7 +175,7 @@ public class ReadAndMoveController extends BaseController {
      * Prints a separator line and restarts the command handler loop.
      */
     public void endLinePrintAndReboot() {
-        System.out.println(IMCommonConstants.SUCCESS_SEPARATOR_LINE);
+        System.out.println(ObioCommonConstants.SUCCESS_SEPARATOR_LINE);
         cmdHandler();
     }
 

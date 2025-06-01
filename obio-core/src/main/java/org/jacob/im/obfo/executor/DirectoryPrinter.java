@@ -1,7 +1,7 @@
 package org.jacob.im.obfo.executor;
 
 import org.jacob.im.common.response.ResManager;
-import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.constants.ObioConstants;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -42,9 +42,9 @@ public class DirectoryPrinter {
      * @param subdirectories subdirectories list object
      */
     private static void printSubdirectories(List<String> subdirectories) {
-        var rootDir = new File(OBFOConstants.MY_GALLERY_PATH);
+        var rootDir = new File(ObioConstants.MY_GALLERY_PATH);
         if (!rootDir.exists() || !rootDir.isDirectory()) {
-            System.out.println(ResManager.loadResString("DirectoryPrinter_2", OBFOConstants.MY_GALLERY_PATH));
+            System.out.println(ResManager.loadResString("DirectoryPrinter_2", ObioConstants.MY_GALLERY_PATH));
             return;
         }
         traverseDirectory(rootDir, subdirectories);
@@ -75,7 +75,7 @@ public class DirectoryPrinter {
      * @param subdirectories subdirectories collection
      */
     private static void writeToFile(List<String> subdirectories) {
-        var outputPath = Paths.get(OBFOConstants.PATH_COLLECTION_TXT);
+        var outputPath = Paths.get(ObioConstants.PATH_COLLECTION_TXT);
         try (PrintWriter writer = new PrintWriter(new FileWriter(outputPath.toFile()))) {
             for (String subdirectory : subdirectories) {
                 writer.println(subdirectory);

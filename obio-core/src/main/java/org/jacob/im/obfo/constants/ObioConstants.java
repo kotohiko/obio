@@ -6,7 +6,7 @@ package org.jacob.im.obfo.constants;
  * @author Kotohiko
  * @since 13:53 Aug 03, 2024
  */
-public class OBFOConstants {
+public class ObioConstants {
 
     public static final String MY_GALLERY_PATH = "S:\\Gallery";
 
@@ -30,7 +30,7 @@ public class OBFOConstants {
 
     public static final String EXPLORER_EXE = "explorer.exe";
 
-    private OBFOConstants() {
+    private ObioConstants() {
     }
 }
 

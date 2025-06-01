@@ -1,7 +1,7 @@
 package org.jacob.im.obfo.monitor.core;
 
 import org.jacob.im.common.response.ResManager;
-import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.constants.ObioConstants;
 import org.jacob.im.obfo.logger.OBFOLogFilesWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -129,13 +129,13 @@ public class NewFilesAddedWatcher {
      * @param fileWithAbsPath Files with absolute path
      */
     private void processFile(Path fileWithAbsPath) {
-        var folder = new File(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES);
+        var folder = new File(ObioConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES);
         int fileCount;
 
         // Check if the folder exists and is a directory
         if (!folder.exists() || !folder.isDirectory()) {
             logger.error(ResManager.loadResString("NewFilesAddedWatcher_3",
-                    OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
+                    ObioConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
             return;
         }
 
@@ -143,7 +143,7 @@ public class NewFilesAddedWatcher {
             fileCount = (int) stream.filter(Files::isRegularFile).count();
         } catch (IOException e) {
             logger.error(ResManager.loadResString("NewFilesAddedWatcher_4",
-                    OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
+                    ObioConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES));
             return;
         }
 

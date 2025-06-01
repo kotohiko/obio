@@ -1,6 +1,6 @@
 package org.jacob.im.common.helper;
 
-import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.constants.ObioCommonConstants;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Kotohiko
  * @since 19:06 Sep 08, 2024
  */
-public class IMCommonHelper {
+public class ObioCommonHelper {
 
     /**
      * Just one simple line of code is needed to obtain real-time time in standard format.
@@ -37,7 +37,7 @@ public class IMCommonHelper {
         FileInputStream ymlFileStream;
 
         try {
-            ymlFileStream = new FileInputStream(IMCommonConstants.ILLUSTRATIONS_CONF_YML_PATH);
+            ymlFileStream = new FileInputStream(ObioCommonConstants.ILLUSTRATIONS_CONF_YML_PATH);
         } catch (FileNotFoundException e) {
             throw new IOException("ReadAndMoveService_1");
         }

@@ -1,6 +1,6 @@
 package org.jacob.im.common.response;
 
-import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.constants.ObioCommonConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -37,7 +37,7 @@ public class ResManager {
         Yaml yaml = new Yaml();
         FileInputStream ymlFileStream = null;
         try {
-            ymlFileStream = new FileInputStream(IMCommonConstants.MESSAGES_YAML_PATH);
+            ymlFileStream = new FileInputStream(ObioCommonConstants.MESSAGES_YAML_PATH);
         } catch (FileNotFoundException e) {
             logger.error(ResManager.loadResString("ResManager_0"));
         }

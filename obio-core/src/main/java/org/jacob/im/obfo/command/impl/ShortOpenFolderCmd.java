@@ -1,6 +1,6 @@
 package org.jacob.im.obfo.command.impl;
 
-import org.jacob.im.common.helper.IMCommonHelper;
+import org.jacob.im.common.helper.ObioCommonHelper;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.obfo.command.UserCmd;
 import org.jacob.im.obfo.controller.ReadAndMoveController;
@@ -30,7 +30,7 @@ public class ShortOpenFolderCmd implements UserCmd {
     public void execute(String input) {
         try {
             String shortPath = input.substring(8);
-            Map<String, String> illustrationsPathMap = IMCommonHelper.getIllustrationsPathMap();
+            Map<String, String> illustrationsPathMap = ObioCommonHelper.getIllustrationsPathMap();
             if (null != illustrationsPathMap.get(shortPath)) {
                 controller.openFolder(illustrationsPathMap.get(shortPath));
             } else {

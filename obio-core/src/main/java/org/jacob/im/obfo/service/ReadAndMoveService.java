@@ -1,9 +1,9 @@
 package org.jacob.im.obfo.service;
 
-import org.jacob.im.common.constants.IMCommonConstants;
+import org.jacob.im.common.constants.ObioCommonConstants;
 import org.jacob.im.common.response.ResManager;
 import org.jacob.im.common.utils.factory.CustomThreadFactory;
-import org.jacob.im.obfo.constants.OBFOConstants;
+import org.jacob.im.obfo.constants.ObioConstants;
 import org.jacob.im.obfo.enums.FilesMoveOperStatusEnums;
 import org.jacob.im.obfo.enums.ThreadPoolSituationStatusEnums;
 import org.jacob.im.obfo.logger.OBFOLogFilesWriter;
@@ -84,10 +84,10 @@ public class ReadAndMoveService {
         var targetPathStr = pathsData.get(targetPathCode);
         if (targetPathStr == null) {
             System.out.println(ResManager.loadResString("ReadAndMoveService_0"));
-            System.out.println(IMCommonConstants.EXCEPTIONAL_SEPARATOR_LINE);
+            System.out.println(ObioCommonConstants.EXCEPTIONAL_SEPARATOR_LINE);
         } else {
             checkBeforeMove(sourcePath, targetPathStr);
-            System.out.println(IMCommonConstants.SUCCESS_SEPARATOR_LINE);
+            System.out.println(ObioCommonConstants.SUCCESS_SEPARATOR_LINE);
         }
     }
 
@@ -269,7 +269,7 @@ public class ReadAndMoveService {
      * and then calls {@code OBFOLogFilesWriter.filesMoveLogWriter} to write the count to a log file.
      */
     private void countTheNumberOfFiles() {
-        var folder = new File(OBFOConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES);
+        var folder = new File(ObioConstants.PATH_OF_UNCLASSIFIED_REMAINING_IMAGES);
         int fileCount = 0;
 
         // Traverse all the files under the specified directory.

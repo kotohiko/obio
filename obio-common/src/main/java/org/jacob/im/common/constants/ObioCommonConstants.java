@@ -4,7 +4,7 @@ package org.jacob.im.common.constants;
  * @author Kotohiko
  * @since 23:27 Aug 26, 2024
  */
-public class IMCommonConstants {
+public class ObioCommonConstants {
 
     public static final String MESSAGES_YAML_PATH
             = "obio-common/src/main/resources/conf/messages.yaml";
