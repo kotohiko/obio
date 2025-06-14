@@ -3,6 +3,7 @@ Default source path: S:\NewGallery\Unclassified\Launcher
 ################################################################## 原神 ##################################################################
 
 原神: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん
+ys: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん
 
 # 蒙德
 
@@ -10,15 +11,23 @@ Default source path: S:\NewGallery\Unclassified\Launcher
 # 稻妻
 稻妻: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Inazuma／稻妻／稲妻（いなずま）
 
+# 枫丹
+furina: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Fontaine／枫丹／フォンテーヌ\芙宁娜
+Furina: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Fontaine／枫丹／フォンテーヌ\芙宁娜
+芙芙: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Fontaine／枫丹／フォンテーヌ\芙宁娜
+芙卡洛斯: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Fontaine／枫丹／フォンテーヌ\芙宁娜
+Focalors: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Fontaine／枫丹／フォンテーヌ\芙宁娜
+focalors: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Fontaine／枫丹／フォンテーヌ\芙宁娜
+
 # 纳塔
 玛拉妮: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Natlan／纳塔／ナタ\Mualani／玛拉妮／ムアラニ
 mualani: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Natlan／纳塔／ナタ\Mualani／玛拉妮／ムアラニ
 麻辣妮儿: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Natlan／纳塔／ナタ\Mualani／玛拉妮／ムアラニ
 纳塔鲨: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Natlan／纳塔／ナタ\Mualani／玛拉妮／ムアラニ
 
-
 ################################################################## 星穹铁道 ##################################################################
 
+# 雅利洛-VI
 克拉拉: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\雅利洛-VI\克拉拉
 clara: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\雅利洛-VI\克拉拉
 Clara: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\雅利洛-VI\克拉拉
@@ -31,9 +40,24 @@ Hanabi: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道
 Sparkle: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\假面愚者\Sparkle／花火／花火（はなび）
 sparkle: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\假面愚者\Sparkle／花火／花火（はなび）
 
+# 仙舟「朱明」
+云璃: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\仙舟「朱明」\Yunli／云璃／雲璃（ウンリ）
+yunli: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\仙舟「朱明」\Yunli／云璃／雲璃（ウンリ）
+Yunli: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\仙舟「朱明」\Yunli／云璃／雲璃（ウンリ）
+
 # 翁法洛斯
 缇宝: S:\NewGallery\二次元世界\Honkai：Star Rail／崩坏：星穹铁道／崩壊：スターレイル\翁法洛斯\缇宝
 
+
+
+
+################################################################## 崩坏3 ##################################################################
+
+
+# 逐火之蛾
+格蕾修: S:\NewGallery\二次元世界\Honkai Impact／崩坏／崩壊\逐火之蛾\Griseo／格蕾修／グレーシュ
+griseo: S:\NewGallery\二次元世界\Honkai Impact／崩坏／崩壊\逐火之蛾\Griseo／格蕾修／グレーシュ
+Griseo: S:\NewGallery\二次元世界\Honkai Impact／崩坏／崩壊\逐火之蛾\Griseo／格蕾修／グレーシュ
 
 ################################################################## 蔚蓝档案 ##################################################################
 ba: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ
@@ -80,11 +104,25 @@ kokona: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーア
 
 # 百鬼夜行联合学园
 
+## 阴阳部
+和乐千世: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Allied Hyakkiyako Academy／百鬼夜行联合学园／百鬼夜行連合学院\阴阳部\Waraku Chise／和乐千世／和楽（わらく）チセ
+千世: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Allied Hyakkiyako Academy／百鬼夜行联合学园／百鬼夜行連合学院\阴阳部\Waraku Chise／和乐千世／和楽（わらく）チセ
+chise: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Allied Hyakkiyako Academy／百鬼夜行联合学园／百鬼夜行連合学院\阴阳部\Waraku Chise／和乐千世／和楽（わらく）チセ
+Chise: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Allied Hyakkiyako Academy／百鬼夜行联合学园／百鬼夜行連合学院\阴阳部\Waraku Chise／和乐千世／和楽（わらく）チセ
+
+
 ## 花鸟风月部
 箭吹棕榈: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Allied Hyakkiyako Academy／百鬼夜行联合学园／百鬼夜行連合学院\Nature's Beauty Club／花鸟风月部／花鳥風月部\Yabuki Shuro／箭吹棕榈／箭吹シュロ
 
+## 百花缭乱纷争调停委员会
+桐生桔梗: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Allied Hyakkiyako Academy／百鬼夜行联合学园／百鬼夜行連合学院\百花缭乱纷争调停委员会\Kiryū Kikyō／桐生桔梗／桐生（きりゅう）キキョウ
 
+# 海兰德铁道学园
+海兰德: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Highlander Railroad Academy／海兰德铁道学园／ハイランダー鉄道学園
+橘光: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Highlander Railroad Academy／海兰德铁道学园／ハイランダー鉄道学園\CentralControlCenter\Tachibana Hikari & Tachibana Nozomi／橘光 & 橘望／橘（たちばな）ヒカリ & 橘（たちばな）ノゾミ
+橘望: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Highlander Railroad Academy／海兰德铁道学园／ハイランダー鉄道学園\CentralControlCenter\Tachibana Hikari & Tachibana Nozomi／橘光 & 橘望／橘（たちばな）ヒカリ & 橘（たちばな）ノゾミ
 
-
-
-
+################################################################## 鸣潮 ##################################################################
+卡提西娅: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提西娅／カルテジア
+小卡: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提西娅／カルテジア
+卡提: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提西娅／カルテジア
