@@ -6,10 +6,20 @@ Default source path: S:\NewGallery\Unclassified\Launcher
 ys: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん
 
 # 蒙德
-
+klee: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Mondstadt／蒙德／モンド\Klee／可莉／クレー
+Klee: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Mondstadt／蒙德／モンド\Klee／可莉／クレー
+可莉: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Mondstadt／蒙德／モンド\Klee／可莉／クレー
 
 # 稻妻
 稻妻: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Inazuma／稻妻／稲妻（いなずま）
+
+## 珊瑚宫
+心海: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Inazuma／稻妻／稲妻（いなずま）\珊瑚宫\珊瑚宫心海
+珊瑚宫心海: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Inazuma／稻妻／稲妻（いなずま）\珊瑚宫\珊瑚宫心海
+
+# 须弥
+来啦: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Sumeru／须弥／スメール\Layla／莱依拉／レイラ
+莱依拉: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Sumeru／须弥／スメール\Layla／莱依拉／レイラ
 
 # 枫丹
 furina: S:\NewGallery\二次元世界\Genshin Impact／原神／げんしん\Fontaine／枫丹／フォンテーヌ\芙宁娜
@@ -64,6 +74,11 @@ ba: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアー�
 BA: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ
 蔚蓝档案: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ
 
+# 沙勒
+阿洛娜: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\沙勒\阿洛娜
+arona: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\沙勒\阿洛娜
+蓝色恶魔: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\沙勒\阿洛娜
+
 # 阿拜多斯
 星野: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Abydos High School／阿拜多斯／アビドス高等学校／아비도스 고등학교\Takanashi Hoshino／小鸟游星野／小鳥遊（たかなし）ホシノ
 大叔: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Abydos High School／阿拜多斯／アビドス高等学校／아비도스 고등학교\Takanashi Hoshino／小鸟游星野／小鳥遊（たかなし）ホシノ
@@ -89,7 +104,11 @@ Hina: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーア�
 大可爱: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Gehenna Academy／歌赫娜学院／ゲヘナ学園\风纪委员会\Sorasaki Hina／空崎日奈／空崎（そらさき）ヒナ
 
 # 千禧年科技学院
+
+## 游戏开发部
+游戏开发部: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\千禧年科技学院\游戏开发部
 天童爱丽丝: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\千禧年科技学院\游戏开发部\天童爱丽丝
+aris: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\千禧年科技学院\游戏开发部\天童爱丽丝
 
 
 # 山海经高级中学
@@ -123,6 +142,6 @@ Chise: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーア�
 橘望: S:\NewGallery\二次元世界\Blue Archive／蔚蓝档案／ブルーアーカイブ\Highlander Railroad Academy／海兰德铁道学园／ハイランダー鉄道学園\CentralControlCenter\Tachibana Hikari & Tachibana Nozomi／橘光 & 橘望／橘（たちばな）ヒカリ & 橘（たちばな）ノゾミ
 
 ################################################################## 鸣潮 ##################################################################
-卡提西娅: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提西娅／カルテジア
-小卡: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提西娅／カルテジア
-卡提: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提西娅／カルテジア
+卡提希娅: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提希娅／カルテジア
+小卡: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提希娅／カルテジア
+卡提: S:\NewGallery\二次元世界\Wuthering Wave／鸣潮／鳴潮\Cartethyia／卡提希娅／カルテジア
