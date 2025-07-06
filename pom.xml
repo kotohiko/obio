@@ -21,35 +21,27 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- 版本统一管理 -->
         <snakeyaml.version>2.2</snakeyaml.version>
         <slf4j-api.version>2.0.12</slf4j-api.version>
         <logback-classic.version>1.5.13</logback-classic.version>
     </properties>
 
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeyaml.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-api.version}</version>
         </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback-classic.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -72,7 +64,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.mypackage.MyClass</mainClass>
+                            <mainClass>org.jacob.obfo.starter.OneButtonApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -86,5 +78,4 @@
             <url>https://repo.maven.apache.org/maven2/</url>
         </repository>
     </repositories>
-
 </project>

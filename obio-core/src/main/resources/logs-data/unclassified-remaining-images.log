@@ -202,3 +202,7 @@
 2025-07-05 18:19:14 Thread: [Thread-0] (ID: 34) INFO - New files added: 132317590_p0.jpg; Remaining unclassified images: 718
 2025-07-05 18:19:14 Thread: [Thread-0] (ID: 34) INFO - New files added: 132336199_p0.png; Remaining unclassified images: 719
 2025-07-05 18:19:14 Thread: [Thread-0] (ID: 34) INFO - New files added: 113857418_p0.jpg; Remaining unclassified images: 720
+2025-07-05 20:22:50 Thread: [ReadAndMovePool-thread-1] (ID: 36) INFO - File(s) has/have been moved; Remaining unclassified images: 719
+2025-07-05 20:22:57 Thread: [ReadAndMovePool-thread-1] (ID: 37) INFO - File(s) has/have been moved; Remaining unclassified images: 718
+2025-07-05 21:58:13 Thread: [ReadAndMovePool-thread-2] (ID: 37) INFO - File(s) has/have been moved; Remaining unclassified images: 722
+2025-07-05 21:58:13 Thread: [ReadAndMovePool-thread-1] (ID: 36) INFO - File(s) has/have been moved; Remaining unclassified images: 722
