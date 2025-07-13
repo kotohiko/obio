@@ -17,8 +17,11 @@ import java.util.regex.Pattern;
 public final class FileNameParserService {
 
     private static final Pattern PIXIV_MATCHER = Pattern.compile(IFPConstants.PIXIV_PATTERN);
+
     private static final Pattern PIXIV_MATCHER_2 = Pattern.compile(IFPConstants.PIXIV_PATTERN_2);
+
     private final Map<String, Function<String, String>> parserMap;
+
     private final FilenameParser filenameParser;
 
     public FileNameParserService() {

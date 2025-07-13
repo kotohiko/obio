@@ -26,6 +26,9 @@ public class ResManager {
      */
     private static final Logger logger = LoggerFactory.getLogger(ResManager.class);
 
+    private ResManager() {
+    }
+
     /**
      * Loads a resource string based on the message key and replaces placeholders.
      *
@@ -38,7 +41,7 @@ public class ResManager {
         FileInputStream ymlFileStream = null;
         try {
             ymlFileStream = new FileInputStream(ObioCommonConstants.MESSAGES_YAML_PATH);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException _) {
             logger.error(ResManager.loadResString("ResManager_0"));
         }
 

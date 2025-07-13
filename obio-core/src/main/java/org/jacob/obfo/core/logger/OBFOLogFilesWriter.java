@@ -26,6 +26,10 @@ public class OBFOLogFilesWriter {
      */
     private static final Logger logger = LoggerFactory.getLogger(OBFOLogFilesWriter.class);
 
+    private OBFOLogFilesWriter() {
+    }
+
+
     /**
      * Writes a log entry to the specified log file indicating the number of new files added and the
      * remaining unclassified images.
