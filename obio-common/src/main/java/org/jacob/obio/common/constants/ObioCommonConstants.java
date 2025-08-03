@@ -18,5 +18,8 @@ public class ObioCommonConstants {
             = "The operation completed with exception.\n" + SEPARATOR_LINE;
 
     public static final String ILLUSTRATIONS_CONF_YML_PATH
-            = "obio-core/src/main/resources/conf/illustrations-paths-conf.yaml";
+            = "obio-core/src/main/resources/conf/illustration-classification-path-mapping-conf.yaml";
+
+    private ObioCommonConstants() {
+    }
 }
