@@ -6,13 +6,7 @@ import org.jacob.obfo.core.controller.ReadAndMoveController;
 /**
  * Handles {@code open} command.
  */
-public class OpenFolderCmd implements UserCmd {
-
-    private final ReadAndMoveController controller;
-
-    public OpenFolderCmd(ReadAndMoveController controller) {
-        this.controller = controller;
-    }
+public record OpenFolderCmd(ReadAndMoveController controller) implements UserCmd {
 
     @Override
     public boolean matches(String input) {

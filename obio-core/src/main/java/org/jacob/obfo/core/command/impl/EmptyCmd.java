@@ -6,13 +6,7 @@ import org.jacob.obfo.core.controller.ReadAndMoveController;
 /**
  * Handles empty commands.
  */
-public class EmptyCmd implements UserCmd {
-
-    private final ReadAndMoveController controller;
-
-    public EmptyCmd(ReadAndMoveController controller) {
-        this.controller = controller;
-    }
+public record EmptyCmd(ReadAndMoveController controller) implements UserCmd {
 
     @Override
     public boolean matches(String input) {

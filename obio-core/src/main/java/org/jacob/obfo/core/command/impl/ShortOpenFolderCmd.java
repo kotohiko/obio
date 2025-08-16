@@ -12,13 +12,7 @@ import java.util.Map;
  * @author Kotohiko
  * @since 13:40 Jan 05, 2025
  */
-public class ShortOpenFolderCmd implements UserCmd {
-
-    private final ReadAndMoveController controller;
-
-    public ShortOpenFolderCmd(ReadAndMoveController controller) {
-        this.controller = controller;
-    }
+public record ShortOpenFolderCmd(ReadAndMoveController controller) implements UserCmd {
 
     @Override
     public boolean matches(String input) {

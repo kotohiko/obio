@@ -6,13 +6,7 @@ import org.jacob.obfo.core.controller.ReadAndMoveController;
 /**
  * Handles YAML processing commands.
  */
-public class ReadYamlCmd implements UserCmd {
-
-    private final ReadAndMoveController controller;
-
-    public ReadYamlCmd(ReadAndMoveController controller) {
-        this.controller = controller;
-    }
+public record ReadYamlCmd(ReadAndMoveController controller) implements UserCmd {
 
     @Override
     public boolean matches(String input) {
